@@ -1,12 +1,14 @@
-{ "name": "Jesué Junior",
-    "version": "0.1",
-    "description": "Site pessoal",
+{
+    "name": "jesuejunior.com",
+    "version": "0.0.1",
+    "description": "Site pessoal de Jesué Junior",
     "contributors": [ {
-        "name": "Jesué Junior",
-        "email": "jesuesousa@gmail.com" } ],
+        "name": "Jesue Junior",
+        "email": "jesuejunior@live.com" } ],
     "keywords": [ "js", "http", "server" ],
     "dependencies" : {
         "express" : "3.x",
-        "ejs" : "0.8.x"
+        "jade" : "*",
+        "jesuejunior.com" : "*"
         }
 }
