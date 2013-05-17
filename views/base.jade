@@ -1,0 +1,33 @@
+!!! transitional
+html(lang="pt-br")
+    head
+        //meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+        link(type="text/css", rel="stylesheet", href="/css/style.css")
+        link(href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic', rel='stylesheet', type='text/css')
+    body
+        nav#sidebar
+            a#logo
+            ulmenu
+                li
+                    a.menu-link.active(href="/")    Home
+                li
+                    a.menu-link(href="/projetos")   Projetos
+                li
+                    a.menu-link(href="/blog")   Blog
+                li
+                    a.menu-link(href="/about")   Sobre
+                li
+                    a.menu-link(href="/contato")    Contato
+            div.social
+                a.social-link.twitter(target="_blank", href="https://twitter.com/jesuejunior")
+                a.social-link.linkedin(target="_blank", href="http://www.linkedin.com/in/jesuejunior")
+                a.social-link.googleplus(target="_blank", href="https://plus.google.com/u/0/110593412520623457385/posts")
+                a.social-link.github(target="_blank", href="https://github.com/jesuejunior")
+                a.social-link.delicious(target="_blank", href="https://delicious.com/jesuejunior")
+                a.social-link
+        div#content
+            div.block.welcome
+                h1  Bem-vindo!
+                div.block-content
+                    block content
+        b.clear
