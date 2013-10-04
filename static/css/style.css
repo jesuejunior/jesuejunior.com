@@ -1,11 +1,13 @@
 body,html {
-    background:  #fafafa;
+    background: #3f4141;
     color: #333;
     font-family: 'Asap', Arial, Helvetica, Tahoma,  sans-serif;
     font-size: 13px;
     letter-spacing: 0;
     margin: 0; padding: 0;
 }
+
+.bg { background: #eee; }
 button {
 	cursor: pointer;
 	width:auto;
@@ -32,11 +34,15 @@ ul,li {
     list-style: none !important;
     list-style-type: none;
 }
-h1 { margin: 0 0 25px 0; font-size: 2em; }
+h1 {
+    color: #51b6ba;
+    text-transform: uppercase;
+    margin: 0 0 25px 0;
+    font-size: 1.5em; }
 
 p{
-    line-height: 20px;
-    margin: 20px 0 0;
+    line-height: 18px;
+    margin: 15px 0 0;
 }
 .clear {
 	clear: both;
@@ -47,13 +53,17 @@ p{
 	height: 0
 }
 
+
+.wrap { margin: 0 auto; width: 940px;}
+
 /* Sidebar */
 
 #sidebar {
-	background: #3f4141;
-	float: left;
-	width: 145px;
-	margin-left: 80px;
+    background: #3f4141;
+    height: 448px;
+    width: 169px;
+    position: fixed;
+    float: left;
 }
 
 #menu { margin: 20px 0 50px 0; padding: 0;  }
@@ -83,8 +93,8 @@ p{
 	margin: 0.5px;
 	float: left;
 	display: block;
-	height: 45px;
-	width: 47px;
+	height: 55px;
+	width: 55px;
 }
 
 .social-link.twitter {
@@ -112,23 +122,33 @@ p{
 }
 
 #content {
-	float: left;
-	margin: 20px 0 0 30px;
-	width: 600px;
+    float: left;
+    margin: 0 0 0 210px;
+    width: 600px;
+    min-height: 500px;
+    margin-bottom: 60px;
 }
 
 .block {
-	margin-bottom: 25px;
-	background: #f9f9f9;
-	padding: 20px;
-    border-width: 1px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+	padding: 35px;
+
+ /*   border-width: 1px;
     border-style: solid;
-    border-color: #51B6BA;
-	border-radius: 25px;
-	-moz-border-radius: 24px;
-	-webkit-border-radius: 24px;
+    border-color: #51B6BA; */
+
+	/* border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.1); */
 }
-.welcome { height: 300px; }
+.block:hover {
+    background: #f9f9f9;
+}
 
 .blog .block { 
 	background: none;
@@ -142,4 +162,10 @@ p{
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
+}
+
+
+footer {
+    color: #eee;
+    padding: 35px 0;
 }
