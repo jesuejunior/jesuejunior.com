@@ -23,15 +23,20 @@ html(lang="pt-br")
                     a#logo
                     ul#menu
                         li
-                            a.menu-link.active(href="/")    Home
+                            - var ativ = (title == 'Home' ? 'menu-link active' : 'menu-link')
+                            a(class=ativ, href="/")    Home
                         li
-                            a.menu-link(href="/projetos")   Projetos
+                            - var ativ = (title == 'Projetos' ? 'menu-link active' : 'menu-link')
+                            a(class=ativ, href="/projetos")   Projetos
                         li
-                            a.menu-link(href="/blog")   Blog
+                            - var ativ = (title == 'Blog' ? 'menu-link active' : 'menu-link')
+                            a(class=ativ, href="/blog")   Blog
                         li
-                            a.menu-link(href="/about")   Sobre
+                            - var ativ = (title == 'Sobre' ? 'menu-link active' : 'menu-link')
+                            a(class=ativ, href="/about")   Sobre
                         li
-                            a.menu-link(href="/contato")    Contato
+                            - var ativ = (title == 'Contato' ? 'menu-link active' : 'menu-link')
+                            a(class=ativ, href="/contato")    Contato
                     div.social
                         a.social-link.twitter(target="_blank", href="https://twitter.com/jesuejunior")
                         a.social-link.linkedin(target="_blank", href="http://www.linkedin.com/in/jesuejunior")
