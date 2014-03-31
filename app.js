@@ -1,6 +1,7 @@
 
 var express = require('express');
 var app = express();
+//var connect = require('connect');
 
     console.log("Servidor iniciado com sucesso!!!");
 
@@ -9,7 +10,8 @@ app.configure(function(){
     app.set('view engine', 'jade');
     app.set('view options', {pretty: false, layout: false});
     app.use(express.static(__dirname + '/static'));
-    app.use(express.bodyParser());
+    app.use(express.urlencoded());
+    app.use(express.json());
     app.use(express.methodOverride());
 });
 
