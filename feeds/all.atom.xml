@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap.html" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>JJ</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap.html</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap, pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
+&lt;p&gt;No exemplo, criaremos um arquivo em /mnt chamado&amp;nbsp;mem.swap:&lt;/p&gt;
+&lt;p&gt;$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096
+4096 é o tamanho do arquivo/partição.
+Daí seguiremos com a criação do sistema de arquivos no arquivo&amp;nbsp;alvo:&lt;/p&gt;
+&lt;p&gt;$ sudo mkswap /mnt/mem.swap
+E ativamos a nova &lt;span class="caps"&gt;SWAP&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;$ sudo swapon /mnt/mem.swap
+No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja, para que essa &lt;span class="caps"&gt;SWAP&lt;/span&gt; esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&amp;nbsp;assim:&lt;/p&gt;
+&lt;p&gt;$ sudo vim&amp;nbsp;/etc/fstab&lt;/p&gt;
+&lt;p&gt;/mnt/mem.swap swap swap defaults 0 0
+Feito isto basta reiniciar o sistema e testar com o&amp;nbsp;comando:&lt;/p&gt;
+&lt;p&gt;$ free&amp;nbsp;-m&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Modo&amp;nbsp;hardcore?&lt;/p&gt;
+&lt;p&gt;$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096 &amp;amp;&amp;amp;
+sudo mkswap /mnt/mem.swap &amp;amp;&amp;amp;
+sudo swapon /mnt/mem.swap &amp;amp;&amp;amp;
+sudo echo &amp;#8216;/mnt/mem.swap swap swap defaults 0 0&amp;#8217; &amp;gt;&amp;gt;&amp;nbsp;/etc/fstab&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito, caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
+</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>My First Review</title><link href="jesuejunior.com/my-first-review.html" rel="alternate"></link><updated>2010-12-03T10:20:00-02:00</updated><author><name>JJ</name></author><id>tag:,2010-12-03:jesuejunior.com/my-first-review.html</id><summary type="html">&lt;p&gt;Following is a review of my favorite mechanical&amp;nbsp;keyboard.&lt;/p&gt;</summary></entry></feed>
