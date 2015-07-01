@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="swap" />
+    <meta name="tags" content="memoria" />
+    <meta name="tags" content="linux" />
+    <meta name="tags" content="ubuntu" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/criando-um-arquivo-como-memoria-swap.html" rel="bookmark"
+             title="Permalink to Criando um arquivo como memória SWAP">Criando um arquivo como memória <span class="caps">SWAP</span></a></h2>
+     
+      </header>
+      <footer class="">
+        <abbr class="" title="2013-12-19T00:00:00-02:00">
+          Thu 19 December 2013
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jj.html">JJ</a>
+        </address>
+      </footer><!-- /.post-info -->
+      <div class="">
+        <p>Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap, pois o servidor já estava em produção e não tinha mais partição&nbsp;disponível.</p>
+<p>No exemplo, criaremos um arquivo em /mnt chamado&nbsp;mem.swap:</p>
+<p>$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096
+4096 é o tamanho do arquivo/partição.
+Daí seguiremos com a criação do sistema de arquivos no arquivo&nbsp;alvo:</p>
+<p>$ sudo mkswap /mnt/mem.swap
+E ativamos a nova <span class="caps">SWAP</span>:</p>
+<p>$ sudo swapon /mnt/mem.swap
+No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja, para que essa <span class="caps">SWAP</span> esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&nbsp;assim:</p>
+<p>$ sudo vim&nbsp;/etc/fstab</p>
+<p>/mnt/mem.swap swap swap defaults 0 0
+Feito isto basta reiniciar o sistema e testar com o&nbsp;comando:</p>
+<p>$ free&nbsp;-m</p>
+<blockquote>
+<p>Modo&nbsp;hardcore?</p>
+<p>$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096 &amp;&amp;
+sudo mkswap /mnt/mem.swap &amp;&amp;
+sudo swapon /mnt/mem.swap &amp;&amp;
+sudo echo &#8216;/mnt/mem.swap swap swap defaults 0 0&#8217; &gt;&gt;&nbsp;/etc/fstab</p>
+</blockquote>
+<p>E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito, caso queira desfazer no&nbsp;futuro.</p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+</body>
+</html>
