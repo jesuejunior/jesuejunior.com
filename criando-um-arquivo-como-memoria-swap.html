@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
         <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
 
 
@@ -43,36 +44,44 @@
              title="Permalink to Criando um arquivo como memória SWAP">Criando um arquivo como memória <span class="caps">SWAP</span></a></h2>
      
       </header>
-      <footer class="">
+      <div class="info">
         <abbr class="" title="2013-12-19T00:00:00-02:00">
           Thu 19 December 2013
         </abbr>
         <address class="vcard author">
           By               <a class="url fn" href="/author/jj.html">JJ</a>
         </address>
-      </footer><!-- /.post-info -->
+      </div><!-- /.post-info -->
       <div class="">
-        <p>Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap, pois o servidor já estava em produção e não tinha mais partição&nbsp;disponível.</p>
+        <p>Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
+pois o servidor já estava em produção e não tinha mais partição&nbsp;disponível.</p>
 <p>No exemplo, criaremos um arquivo em /mnt chamado&nbsp;mem.swap:</p>
-<p>$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096
-4096 é o tamanho do arquivo/partição.
-Daí seguiremos com a criação do sistema de arquivos no arquivo&nbsp;alvo:</p>
-<p>$ sudo mkswap /mnt/mem.swap
-E ativamos a nova <span class="caps">SWAP</span>:</p>
-<p>$ sudo swapon /mnt/mem.swap
-No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja, para que essa <span class="caps">SWAP</span> esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&nbsp;assim:</p>
-<p>$ sudo vim&nbsp;/etc/fstab</p>
-<p>/mnt/mem.swap swap swap defaults 0 0
-Feito isto basta reiniciar o sistema e testar com o&nbsp;comando:</p>
-<p>$ free&nbsp;-m</p>
-<blockquote>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/mnt/mem.swap <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>4096
+</pre></div>
+<p>4096 é o tamanho do&nbsp;arquivo/partição.</p>
+<p>Daí seguiremos com a criação do sistema de arquivos no arquivo&nbsp;alvo:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkswap /mnt/mem.swap
+</pre></div>
+<p>E ativamos a nova <span class="caps">SWAP</span>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo swapon /mnt/mem.swap
+</pre></div>
+<p>No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja,
+para que essa <span class="caps">SWAP</span> esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&nbsp;assim:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo vim /etc/fstab
+</pre></div>
+<div class="highlight"><pre>/mnt/mem.swap swap swap defaults <span class="m">0</span> 0
+</pre></div>
+<p>Feito isto basta reiniciar o sistema e testar com o&nbsp;comando:</p>
+<div class="highlight"><pre><span class="nv">$ </span>free -m
+</pre></div>
 <p>Modo&nbsp;hardcore?</p>
-<p>$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096 &amp;&amp;
-sudo mkswap /mnt/mem.swap &amp;&amp;
-sudo swapon /mnt/mem.swap &amp;&amp;
-sudo echo &#8216;/mnt/mem.swap swap swap defaults 0 0&#8217; &gt;&gt;&nbsp;/etc/fstab</p>
-</blockquote>
-<p>E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito, caso queira desfazer no&nbsp;futuro.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/mnt/mem.swap <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">4096</span> <span class="o">&amp;&amp;</span>
+sudo mkswap /mnt/mem.swap <span class="o">&amp;&amp;</span>
+sudo swapon /mnt/mem.swap <span class="o">&amp;&amp;</span>
+sudo <span class="nb">echo</span> <span class="s1">&#39;/mnt/mem.swap swap swap defaults 0 0&#39;</span> &gt;&gt; /etc/fstab
+</pre></div>
+<p>E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
+caso queira desfazer no&nbsp;futuro.</p>
 
       </div><!-- /.entry-content -->
     </div>

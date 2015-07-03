@@ -1,23 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all-pt.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap.html" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>JJ</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap.html</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap, pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all-pt.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap.html" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>JJ</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap.html</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
+pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
 &lt;p&gt;No exemplo, criaremos um arquivo em /mnt chamado&amp;nbsp;mem.swap:&lt;/p&gt;
-&lt;p&gt;$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096
-4096 é o tamanho do arquivo/partição.
-Daí seguiremos com a criação do sistema de arquivos no arquivo&amp;nbsp;alvo:&lt;/p&gt;
-&lt;p&gt;$ sudo mkswap /mnt/mem.swap
-E ativamos a nova &lt;span class="caps"&gt;SWAP&lt;/span&gt;:&lt;/p&gt;
-&lt;p&gt;$ sudo swapon /mnt/mem.swap
-No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja, para que essa &lt;span class="caps"&gt;SWAP&lt;/span&gt; esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&amp;nbsp;assim:&lt;/p&gt;
-&lt;p&gt;$ sudo vim&amp;nbsp;/etc/fstab&lt;/p&gt;
-&lt;p&gt;/mnt/mem.swap swap swap defaults 0 0
-Feito isto basta reiniciar o sistema e testar com o&amp;nbsp;comando:&lt;/p&gt;
-&lt;p&gt;$ free&amp;nbsp;-m&lt;/p&gt;
-&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4096
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;4096 é o tamanho do&amp;nbsp;arquivo/partição.&lt;/p&gt;
+&lt;p&gt;Daí seguiremos com a criação do sistema de arquivos no arquivo&amp;nbsp;alvo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkswap /mnt/mem.swap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E ativamos a nova &lt;span class="caps"&gt;SWAP&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo swapon /mnt/mem.swap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja,
+para que essa &lt;span class="caps"&gt;SWAP&lt;/span&gt; esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&amp;nbsp;assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo vim /etc/fstab
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/mnt/mem.swap swap swap defaults &lt;span class="m"&gt;0&lt;/span&gt; 0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Feito isto basta reiniciar o sistema e testar com o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;free -m
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Modo&amp;nbsp;hardcore?&lt;/p&gt;
-&lt;p&gt;$ sudo dd if=/dev/zero of=/mnt/mem.swap bs=1M count=4096 &amp;amp;&amp;amp;
-sudo mkswap /mnt/mem.swap &amp;amp;&amp;amp;
-sudo swapon /mnt/mem.swap &amp;amp;&amp;amp;
-sudo echo &amp;#8216;/mnt/mem.swap swap swap defaults 0 0&amp;#8217; &amp;gt;&amp;gt;&amp;nbsp;/etc/fstab&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito, caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
-</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>My First Review</title><link href="jesuejunior.com/my-first-review.html" rel="alternate"></link><updated>2010-12-03T10:20:00-02:00</updated><author><name>JJ</name></author><id>tag:,2010-12-03:jesuejunior.com/my-first-review.html</id><summary type="html">&lt;p&gt;Following is a review of my favorite mechanical&amp;nbsp;keyboard.&lt;/p&gt;</summary></entry></feed>
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+sudo mkswap /mnt/mem.swap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+sudo swapon /mnt/mem.swap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+sudo &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/mnt/mem.swap swap swap defaults 0 0&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
+caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
+</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>GIT: Usando git stash (Começando a trabalhar em equipe)</title><link href="jesuejunior.com/git-usando-git-stash.html" rel="alternate"></link><updated>2012-10-12T15:42:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/git-usando-git-stash.html</id><summary type="html">&lt;p&gt;O motivo desse post é mostrar a utilidade do&lt;strong&gt;&amp;nbsp;git stash&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Breve relato: Estou desenvolvendo uma ferramenta chamada
+&lt;a class="reference external" href="https://github.com/jesuejunior/m2tool"&gt;m2tool&lt;/a&gt;&amp;nbsp;junto com o &lt;a class="reference external" href="http://www.daltonmatos.com"&gt;Dalton Matos&lt;/a&gt;,
+então em um fim de semana,&amp;nbsp;estávamos&amp;nbsp; conversando e desenvolvendo, como o projeto está bem no começo,&amp;nbsp;o que eu estava
+fazendo ele já precisava e vice-e-versa. Ele fez&amp;nbsp;&lt;em&gt;&amp;nbsp;push&lt;/em&gt;&amp;nbsp;de um novo recurso para a &lt;strong&gt;*branch develop*&lt;/strong&gt;&amp;nbsp;que
+eu precisava para continuar desenvolvendo uma funcionalidade, porem eu não tinha feito &lt;em&gt;commit&lt;/em&gt;&amp;nbsp;das minhas
+alterações até o momento e não poderia fazer , pois estava incompleto e dependia do que eu iria aplicar
+para rodar os&amp;nbsp;testes..&lt;/p&gt;
+&lt;p&gt;O que foi preciso&amp;nbsp;fazer?&lt;/p&gt;
+&lt;p&gt;Usar o git stash para salvar minhas alterações até o momento (tipo
+temp), peguei as alterações que estavam disponiveis na branch develop
+fiz rebase na minha branch e depois voltei de onde havia parado sem
+perder nada e já podendo usar as coisas novas. Isso foi o máximo.&amp;nbsp;hahahaha&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The Stash&lt;/em&gt;, quando você precisa guardar mudanças que ainda não foi
+feito &lt;em&gt;commit&lt;/em&gt;, mas você precisa voltar para ultima revisão da sua
+branch o chamado &amp;quot;&lt;span class="caps"&gt;HEAD&lt;/span&gt;&amp;quot;.&lt;/p&gt;
+&lt;p&gt;E quando você restaura o seu &lt;em&gt;stash&lt;/em&gt;, você consegue continuar
+trabalhando em seu código de onde parou&amp;nbsp;anteriormente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;*Fazendo o Stash*&amp;nbsp;de suas modificações atuais e que ainda não &amp;nbsp;foram&amp;nbsp;comitadas.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash save
+Saved &lt;span class="s2"&gt;&amp;quot;WIP on master: ed1a10e...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Listando *stashes*&amp;nbsp;atuais.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Sim, você pode salvar mais do que um. &lt;em&gt;Stash&lt;/em&gt; funciona como uma pilha e
+a qualquer momento você pode salvar o novo stash e será colocado como
+ultimo na pilha. (Espero que conheça o conceito de&amp;nbsp;pilha)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash list
+stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;: WIP on master: 151f1ab...&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;stash@{1}: WIP on master: ed1a10e...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Perceba a parte &lt;strong&gt;stash&amp;#64;{0}.&lt;/strong&gt; Este é seu &lt;span class="caps"&gt;ID&lt;/span&gt; &lt;em&gt;stash&lt;/em&gt;, é o que você
+precisa saber para restaura-lo posteriormente. Note que temos 2 stashes
+e que o &lt;a class="reference external" href="mailto:stash&amp;#64;{1"&gt;stash&amp;#64;{1&lt;/a&gt;} contem as suas modificações mais&amp;nbsp;recentes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Aplicando um&amp;nbsp;*&amp;quot;stash&amp;quot;*&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Existe duas formas que eu conheço de aplicar um &lt;em&gt;stash&lt;/em&gt;.&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;1º. Simples e facil de entender para quem saca de pilhas.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ou simplesmente assim já que se trata de pilha ele pega o ultimo da
+pilha e&amp;nbsp;aplica.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2º. Facil, porem pode ficar o &lt;em&gt;stash&lt;/em&gt; na listagem mesmo depois de&amp;nbsp;aplicado.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash apply stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Como disse antes, usando o &lt;em&gt;apply&lt;/em&gt; o &lt;em&gt;stash&lt;/em&gt; pode continuar salvo, então
+o que podemos fazer para limpar &lt;em&gt;stashes&lt;/em&gt; que já usamos ou não
+precisaremos mais&amp;nbsp;é:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash drop stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E para limpar todos os &lt;em&gt;stashes&lt;/em&gt; basta&amp;nbsp;executar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash clear
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Se você quer apenas fazer de forma&amp;nbsp;rápida&amp;nbsp;um &lt;em&gt;stash&lt;/em&gt; e que logo apos um
+&lt;em&gt;rebase&lt;/em&gt; ou &lt;em&gt;merge&lt;/em&gt; já o restaurará, pode usar&amp;nbsp;simplesmente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash
+&lt;span class="nv"&gt;$ &lt;/span&gt;git rebase develop
+&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;O que fizemos foi guardar nossas alterações, &lt;em&gt;rebase&lt;/em&gt; em nossa &lt;em&gt;branch&lt;/em&gt;
+com base na &lt;em&gt;develop&lt;/em&gt; e em seguida aplicamos nosso stash para continuar&amp;nbsp;desenvolvendo.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Existem&amp;nbsp;inúmeras&amp;nbsp;maneiras de usar o &lt;em&gt;git stash&lt;/em&gt;, tentei mostrar a
+maneira que me&amp;nbsp;ajudou.&lt;/p&gt;
+&lt;p&gt;A melhor coisa à ser feita é testar bastante e entender o funcionamento
+para só depois colocar em pratica em um trabalho de&amp;nbsp;verdade.&lt;/p&gt;
+&lt;p&gt;Espero que ajude.&amp;nbsp;Obrigado.&lt;/p&gt;
+</summary><category term="Git"></category><category term="Linux"></category></entry><entry><title>Empacotando e desempacotando parâmetros em funções Python</title><link href="jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python.html" rel="alternate"></link><updated>2012-07-07T02:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-07:jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python.html</id><summary type="html">&lt;p&gt;Atualmente estou trabalhando com Python e Django, logo
+quero/preciso me aprofundar na linguagem e conhecer esse universo está
+sendo&amp;nbsp;fantástico&amp;nbsp;e hoje estava lendo e aprendendo sobre como empacotar
+e desempacotar parâmetros, coisa que u não sabia que existia, então
+gostaria de mostrar o funcionamento. :D
+Uma flexibilidade&amp;nbsp;incrivel!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;strong&gt;#Empacotar parâmetros&amp;nbsp;&lt;/strong&gt;
+&lt;span class="caps"&gt;EX&lt;/span&gt;:&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Então estamos usando o &amp;quot;*&amp;quot; para indicar que queremos desempacotar &amp;nbsp;a
+lista &lt;strong&gt;*K*&lt;/strong&gt; utilizando seus valores como parametro para a função
+&lt;strong&gt;*soma*&lt;/strong&gt;, no exemplo, K[0] será atribuido a &lt;strong&gt;*a*&lt;/strong&gt; e K[1] a &lt;strong&gt;*b*&lt;/strong&gt;.
+Esse recurso nos permite armazenar nossos parâmetros em listas e evita
+construções estranhas do tipo &lt;strong&gt;*soma(K[0],&amp;nbsp;K[1])*&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Vou &amp;nbsp;descrever um exemplo para mostrar &lt;strong&gt;*lista*&lt;/strong&gt; de &lt;strong&gt;*lista*&lt;/strong&gt; para
+realizar varias chamadas dentro de um &lt;strong&gt;*for*&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;barra&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+
+&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;-&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;barra&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Observe que mesmo usando o empacotamento de&amp;nbsp;parâmetros, recursos
+como&amp;nbsp;parâmetros&amp;nbsp;opcionais ainda foram&amp;nbsp;possíveis&amp;nbsp;quando &lt;strong&gt;*a*&lt;/strong&gt; contem
+apenas um&amp;nbsp;elemento.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;#Desempacotar&amp;nbsp;parâmetros&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Podemos criar funções que recebem um numero indeterminado de parâmetros
+utilizando listas de&amp;nbsp;parâmetros.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;EX&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
+
+&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Descobri&amp;nbsp;também&amp;nbsp;que podemos usar funções que combinem parâmetros
+obrigatorios e uma lista de&amp;nbsp;parâmetros.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;numeros&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;numeros&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+             &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt;
+
+&lt;span class="n"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Maior: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Max: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Observe que o primeiro parâmetro é &lt;strong&gt;*msg*&lt;/strong&gt;, tornando-o&amp;nbsp;obrigatório.
+Assim &lt;strong&gt;*imprime_maior()*&lt;/strong&gt; retorna erro, pois o parâmetro &lt;strong&gt;*msg*&lt;/strong&gt;
+não foi passado, mas &lt;strong&gt;*imprime_maior(&amp;quot;Max: &amp;quot;)*&lt;/strong&gt; escreve &lt;strong&gt;*None*&lt;/strong&gt;.
+Isso porque numeros é recebida como uma lista, podendo inclusive estar&amp;nbsp;vazia.&lt;/p&gt;
+&lt;p&gt;Bom essa foi a tentativa, espero que ajude&amp;nbsp;alguem.&lt;/p&gt;
+&lt;p&gt;Python é muito&amp;nbsp;muito&amp;nbsp;fantástico!&lt;/p&gt;
+</summary><category term="Python"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian.html" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian.html</id><summary type="html">&lt;p&gt;Certa fez precisei gerenciar alguns serviços no Debian/Ubuntu
+e percebi que havia esquecido, então recorri ao meu caderno highlander
+que estão todas as minhas anotações da época que estava me preparando
+para fazer a prova de certificação, então aqui vai a&amp;nbsp;dica.&lt;/p&gt;
+&lt;p&gt;Onde nome do serviço é o nome do serviço que quer iniciar no boot
+(apache2 por exemplo), &lt;span class="caps"&gt;NN&lt;/span&gt; é o número da sequencia na qual o serviço será
+inicializado (por exemplo, 1, 10, 20 ou 99) e runlevel é em qual
+runlevel deseja que este serviço seja inicializado (aqui você pode
+colocar em todos os &lt;em&gt;runlevel&lt;/em&gt; de boot ou em apenas o que desejar) e não
+esqueça do ponto (&lt;strong&gt;.&lt;/strong&gt;) no final do&amp;nbsp;comando.&lt;/p&gt;
+&lt;p&gt;Administração dos serviços no boot,&amp;nbsp;use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;update-rc.d nome_do_serviço start NN runlevel runlevel
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E esse aqui para os runlevel de saída (desligar ou reiniciar por&amp;nbsp;exemplo):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;update-rc.d nome_do_serviço stop NN runlevel runlevel
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para retirar um serviço do boot o comando&amp;nbsp;é:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;update-rc.d -f nome_do_serviço remove
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Adicionado serviços na inicialização Para colocar um serviço na
+inicialização do Linux podemos utilizar uma ferramenta chamada ntsysv,
+porém é interessante saber como funciona executar esta tarefa manualmente.
+Os serviços do Linux ficam no diretório /etc/rc.d/init.d. Na inicialização os serviços localizados no diretório
+&lt;strong&gt;/etc/rc.d/rc[n].d&lt;/strong&gt; são inicializados ou parados. O [n] é o número correspondente ao run level, ou seja, é só
+adicionar um link do serviço para este diretório com a seguinte&amp;nbsp;nomenclatura:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;S¦K&lt;span class="o"&gt;]&lt;/span&gt;56&lt;span class="o"&gt;[&lt;/span&gt;nomedoserviço&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sendo: [&lt;span class="caps"&gt;SN&lt;/span&gt;]:
+Isto quer dizer se o serviço ou programa deve ser iniciado ou&amp;nbsp;não;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;S&lt;/strong&gt;: start&amp;nbsp;(iniciar);&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;K&lt;/strong&gt;: kill (matar,&amp;nbsp;parar).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;56&lt;/strong&gt;: É o número da fila em que ele deverá ser executado, se o
+número for menor ele será executado antes que os outros serviços;
+[nomedoserviço]: somente para identificação humana, não interfere em&amp;nbsp;nada.&lt;/p&gt;
+&lt;p&gt;Pronto, para inicializar um script primeiro você copia este script
+para o&amp;nbsp;/etc/init.d:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /root/rotina.sh /etc/init.d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Depois crie um link simbólico para o diretório /etc/rc.d/rc.[n]d(para
+qual run level você&amp;nbsp;quiser):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ln -s /etc/rc.d/init.d /etc/rd.c/rc3.d/S24rotina&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pronto, na inicialização em run level 3 o script rotina será&amp;nbsp;executado.&lt;/p&gt;
+&lt;p&gt;Outro método para fazer&amp;nbsp;seria&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# vim /etc/init.d/meuscript&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Olá mundo&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora é só dar a permissão para&amp;nbsp;execução:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# chmod 755 /etc/init.d/meuscript&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Quase pronto, agora é só colocar para inicializar junto com o&amp;nbsp;sistema:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# update-rc.d meuscript defaults&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bom é isso ai, coisa simples mais que pode salvar&amp;nbsp;vidas.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png"&gt;http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Debian"></category></entry></feed>
