@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="Banco de Dados" />
+    <meta name="tags" content="PostgreSQL" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/aprendendo-gerenciar-usuarios-postgres.html" rel="bookmark"
+             title="Permalink to Aprendendo a criar e gerenciar usuários no PostgreSQL(Primeiros Passos)">Aprendendo a criar e gerenciar usuários no PostgreSQL(Primeiros&nbsp;Passos)</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2012-10-12T21:04:00-03:00">
+          Fri 12 October 2012
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p>Confesso que logo de cara quando comecei a usar <span class="caps">PSQL</span> fiquei
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu
+relembrar e deixar o legado.&nbsp;kkkk</p>
+<p>Criando seu 1° super usuário no PostgreSQL.
+Depois de instalado seu <span class="caps">SGBD</span> postgres, como criar seu 1° usuário?
+Qual a senha de root? Qual a senha&nbsp;padrão?</p>
+<p>Esta dica é para iniciantes.
+Simples, na máquina com o banco instalado siga os seguintes passos,
+existem varias maneiras de fazer isso, e essa foi a maneira
+mais&nbsp;básica/simples que eu achei para&nbsp;explicar.</p>
+<p>Logue-se como root, digite &quot;su root&quot; ou &quot;sudo -i&quot; ou &quot;sudo su&quot; (no
+terminal a mensagem padrão deve terminar com #).
+Entre como usuário postgres com o&nbsp;comando:</p>
+<div class="highlight"><pre><span class="c"># su postgres</span>
+</pre></div>
+<p>Conecte ao Shell do postgres (por padrão você se conecta ao <span class="caps">DB</span> postgres)&nbsp;comando:</p>
+<div class="highlight"><pre><span class="nv">$ </span>psql
+</pre></div>
+<p>Agora deve aparecer uma frase de boas vindas (Bem vindo ao psql&#8230;) e
+você está no terminal do posgres, note que o shell mudou antes era
+<strong>root&#64;pc #</strong> agora ficou <strong>postgres=#</strong>
+Isso quer dizer que agora&nbsp;você&nbsp;está no shell do PostgreSQL conectado
+no banco <em>postgres</em>.</p>
+<p>Para criar nosso superuser, digite o&nbsp;comando:</p>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="n">SUPERUSER</span> <span class="n">INHERIT</span> <span class="k">CREATEDB</span> <span class="n">CREATEROLE</span><span class="p">;</span>
+</pre></div>
+<p>Depois temos que alterar a senha, então digite &nbsp;o&nbsp;comando:</p>
+<div class="highlight"><pre><span class="k">ALTER</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="n">PASSWORD</span> <span class="s1">&#39;senha&#39;</span><span class="p">;</span>
+</pre></div>
+<p>Olha que maravilha! Super Usuário&nbsp;criado.</p>
+<p>Comandos&nbsp;básicos, para você que está acostumado com o golfinho, o Mamute
+é&nbsp;bem&nbsp;diferente.</p>
+<div class="highlight"><pre><span class="o">#</span> <span class="n">psql</span>
+<span class="err">\</span><span class="n">l</span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Lista todos os bancos de dados.&quot;</span>
+<span class="err">\</span><span class="n">c</span> <span class="n">nome</span><span class="o">-</span><span class="n">banco</span> <span class="err"> </span><span class="o">=&gt;</span> <span class="s-Name">&quot;Conecta no banco *nome-banco*&quot;</span>
+<span class="err">\</span><span class="n">d</span> <span class="err"> </span><span class="o">=&gt;</span> <span class="s-Name">&quot;Lista as tabelas do banco de dados conectado.&quot;</span>
+<span class="err">\</span><span class="n">d</span> <span class="err"> </span><span class="k">table</span><span class="o">-</span><span class="k">name</span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Descrimina as colunas da tabela.&quot;</span>
+<span class="err">\</span><span class="n">dg</span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Lista usuários existentes, as permissões e grupos que o usuário pertence.&quot;</span>
+<span class="err">\</span><span class="k">password</span> <span class="p">[</span><span class="n">usuario</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Troca a senha do usuário com segurança, ou seja você não vê a senha que foi digitada e não é possível ver através do histórico de comandos&quot;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span><span class="o">-</span><span class="k">name</span><span class="p">;</span><span class="err"> </span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Lista o conteúdo das tabelas. (o.O)&quot;</span>
+</pre></div>
+<p>Poderíamos usar essas opções da mesma forma, mas criando um usuário comum e colocando as permissões mais&nbsp;restritivas.</p>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="n">jesuejunior</span> <span class="k">WITH</span> <span class="n">PASSWORD</span> <span class="s1">&#39;supersecret&#39;</span><span class="p">;</span>
+</pre></div>
+<p>Para conceder a permissão de executar somente Update ou Select ou Insert ou Delete ou&nbsp;Role(dono)</p>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">UPDATE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">INSERT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+</pre></div>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">RULE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+</pre></div>
+<p>E para dar permissão para fazer todas as&nbsp;operações.</p>
+<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="k">public</span>
+</pre></div>
+<p>Partindo do principio que você já está conectado com o usuário&nbsp;postgres.</p>
+<p>Para apagar um&nbsp;usuário:</p>
+<div class="highlight"><pre><span class="nv">$ </span>dropuser jesuejunior
+</pre></div>
+<p>Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras&nbsp;pessoas.</p>
+<p>Em breve estarei postando sobre gerenciar&nbsp;databases.</p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
