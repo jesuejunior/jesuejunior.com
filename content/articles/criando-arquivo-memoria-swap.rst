@@ -1,5 +1,6 @@
 :title: Criando um arquivo como memória SWAP
 :date: 2013-12-19
+:author: jesuejunior
 :tags: swap, memoria, linux, ubuntu
 :category: sysadmin
 :summary: Criando um arquivo como memória SWAP
