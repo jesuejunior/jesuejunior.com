@@ -25,7 +25,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""con    ex
+#DISQUS_SITENAME = ""
 GOOGLE_ANALYTICS = "UA-31167248-1"
 
 STATIC_PATHS = ['extra/favicon.png', 'extra/CNAME', 'extra/robots.txt']

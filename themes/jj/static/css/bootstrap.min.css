@@ -180,7 +180,6 @@ blockquote small{display:block;font-size:12px;font-weight:300;line-height:14px;c
 address{display:block;line-height:14px;margin-bottom:14px;}
 code,pre{padding:0 3px 2px;font-family:Monaco, Andale Mono, Courier New, monospace;font-size:12px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 code{color:#3b6e22;padding:1px 3px;}
-pre{background-color:#f2f2f2;display:block;padding:6.5px;margin:0 0 14px;line-height:14px;font-size:12px;border:1px solid #ccc;border:1px solid rgba(0, 0, 0, 0.15);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;white-space:pre;white-space:pre-wrap;word-wrap:break-word;}
 form{margin-bottom:14px;}
 fieldset{margin-bottom:14px;padding-top:14px;}fieldset legend{display:block;padding-left:150px;font-size:16.5px;line-height:1;color:#333333;*padding:0 0 5px 145px;*line-height:1.5;}
 form .clearfix{margin-bottom:14px;zoom:1;}form .clearfix:before,form .clearfix:after{display:table;content:"";zoom:1;}
