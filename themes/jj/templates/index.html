@@ -10,10 +10,14 @@
         {% for article in articles_page.object_list %}
                 <li>
                     <article class="">
-                        <header> <h2 class=""><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2> </header>
-                        <footer class="">
+                        <header>
+                            <h2 class="">
+                                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+                            </h2>
+                        </header>
+                        <div class="info">
                             <abbr class="" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
-                        </footer>
+                        </div>
                         <div class=""> {{ article.summary }} </div>
                     </article>
                 </li>

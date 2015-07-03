@@ -25,7 +25,7 @@
      {% import 'translations.html' as translations with context %}
      {{ translations.translations_for(article) }}
       </header>
-      <footer class="">
+      <div class="info">
         <abbr class="" title="{{ article.date.isoformat() }}">
           {{ article.locale_date }}
         </abbr>
@@ -41,7 +41,7 @@
             {% endfor %}
         </address>
         {% endif %}
-      </footer><!-- /.post-info -->
+      </div><!-- /.post-info -->
       <div class="">
         {{ article.content }}
       </div><!-- /.entry-content -->
