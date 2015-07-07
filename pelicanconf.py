@@ -21,6 +21,11 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+ARTICLE_PATHS = ['articles']
+ARTICLE_URL = '{slug}'
+STATIC_PATHS = ['img', 'extra/favicon.png', 'extra/CNAME', 'extra/robots.txt']
+
+
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),

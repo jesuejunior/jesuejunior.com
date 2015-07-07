@@ -19,7 +19,7 @@ LANG_EN_FEED_ATOM = TRANSLATION_FEED_ATOM % "en"
 
 FEED_ATOM = 'feeds/atom.xml'
 
-ARTICLE_PATHS = ['articles']
+# ARTICLE_PATHS = ['articles']
 
 DELETE_OUTPUT_DIRECTORY = True
 
@@ -28,7 +28,7 @@ DELETE_OUTPUT_DIRECTORY = True
 #DISQUS_SITENAME = ""
 GOOGLE_ANALYTICS = "UA-31167248-1"
 
-STATIC_PATHS = ['extra/favicon.png', 'extra/CNAME', 'extra/robots.txt']
+
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {
         'path': 'CNAME'
