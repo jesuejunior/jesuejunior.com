@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap.html" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap.html</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
 pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
 &lt;p&gt;No exemplo, criaremos um arquivo em /mnt chamado&amp;nbsp;mem.swap:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4096
@@ -28,7 +28,7 @@ sudo &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/m
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
 caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
-</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL(Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres.html" rel="alternate"></link><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres.html</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
 meio perdido (usava MySQL), então estou escrevendo essa dica para eu
 relembrar e deixar o legado.&amp;nbsp;kkkk&lt;/p&gt;
 &lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
@@ -92,7 +92,7 @@ no banco &lt;em&gt;postgres&lt;/em&gt;.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras&amp;nbsp;pessoas.&lt;/p&gt;
 &lt;p&gt;Em breve estarei postando sobre gerenciar&amp;nbsp;databases.&lt;/p&gt;
-</summary><category term="Banco de Dados"></category><category term="PostgreSQL"></category></entry><entry><title>GIT: Usando git stash (Começando a trabalhar em equipe)</title><link href="jesuejunior.com/git-usando-git-stash.html" rel="alternate"></link><updated>2012-10-12T15:42:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/git-usando-git-stash.html</id><summary type="html">&lt;p&gt;O motivo desse post é mostrar a utilidade do&lt;strong&gt;&amp;nbsp;git stash&lt;/strong&gt;.&lt;/p&gt;
+</summary><category term="Banco de Dados"></category><category term="PostgreSQL"></category></entry><entry><title>GIT: Usando git stash (Começando a trabalhar em equipe)</title><link href="jesuejunior.com/git-usando-git-stash" rel="alternate"></link><updated>2012-10-12T15:42:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/git-usando-git-stash</id><summary type="html">&lt;p&gt;O motivo desse post é mostrar a utilidade do&lt;strong&gt;&amp;nbsp;git stash&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Breve relato: Estou desenvolvendo uma ferramenta chamada
 &lt;a class="reference external" href="https://github.com/jesuejunior/m2tool"&gt;m2tool&lt;/a&gt;&amp;nbsp;junto com o &lt;a class="reference external" href="http://www.daltonmatos.com"&gt;Dalton Matos&lt;/a&gt;,
 então em um fim de semana,&amp;nbsp;estávamos&amp;nbsp; conversando e desenvolvendo, como o projeto está bem no começo,&amp;nbsp;o que eu estava
@@ -162,7 +162,7 @@ maneira que me&amp;nbsp;ajudou.&lt;/p&gt;
 &lt;p&gt;A melhor coisa à ser feita é testar bastante e entender o funcionamento
 para só depois colocar em pratica em um trabalho de&amp;nbsp;verdade.&lt;/p&gt;
 &lt;p&gt;Espero que ajude.&amp;nbsp;Obrigado.&lt;/p&gt;
-</summary><category term="Git"></category><category term="Linux"></category></entry><entry><title>Empacotando e desempacotando parâmetros em funções Python</title><link href="jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python.html" rel="alternate"></link><updated>2012-07-07T02:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-07:jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python.html</id><summary type="html">&lt;p&gt;Atualmente estou trabalhando com Python e Django, logo
+</summary><category term="Git"></category><category term="Linux"></category></entry><entry><title>Empacotando e desempacotando parâmetros em funções Python</title><link href="jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python" rel="alternate"></link><updated>2012-07-07T02:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-07:jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python</id><summary type="html">&lt;p&gt;Atualmente estou trabalhando com Python e Django, logo
 quero/preciso me aprofundar na linguagem e conhecer esse universo está
 sendo&amp;nbsp;fantástico&amp;nbsp;e hoje estava lendo e aprendendo sobre como empacotar
 e desempacotar parâmetros, coisa que u não sabia que existia, então
@@ -227,7 +227,143 @@ não foi passado, mas &lt;strong&gt;*imprime_maior(&amp;quot;Max: &amp;quot;)*&l
 Isso porque numeros é recebida como uma lista, podendo inclusive estar&amp;nbsp;vazia.&lt;/p&gt;
 &lt;p&gt;Bom essa foi a tentativa, espero que ajude&amp;nbsp;alguem.&lt;/p&gt;
 &lt;p&gt;Python é muito&amp;nbsp;muito&amp;nbsp;fantástico!&lt;/p&gt;
-</summary><category term="Python"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian.html" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian.html</id><summary type="html">&lt;p&gt;Certa fez precisei gerenciar alguns serviços no Debian/Ubuntu
+</summary><category term="Python"></category></entry><entry><title>Aprendendo a usar o GitHub (Primeiros passos)</title><link href="jesuejunior.com/aprendendo-github-primeiros-passos" rel="alternate"></link><updated>2012-06-06T20:18:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-06:jesuejunior.com/aprendendo-github-primeiros-passos</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
+guardar seus&amp;nbsp;códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.
+Me interessei sobre o assunto e uso hoje em dia, então resolvi escrever esse post, primeiro para não
+esquecer e depois para ajudar quem estiver começando e precisar ter uma ajuda para aprender sobre versionamento de código e guarda-los.
+É possível guardar código de qualquer linguagem, com opções de repositórios publico(free) ou privados(pago),
+no meu caso como é para aprendizagem e projetos pessoais não vejo problemas usar&amp;nbsp;publicamente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1º Passo&lt;/strong&gt; é criar uma conta no &lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2º Passo&lt;/strong&gt; é instalar o &lt;span class="caps"&gt;GIT&lt;/span&gt; em sua maquina Linux, que depende muito da sua&amp;nbsp;distribuição.&lt;/p&gt;
+&lt;p&gt;Para baseados em&amp;nbsp;Debian/Ubuntu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para&amp;nbsp;Archlinux.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo pacman -S git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para baseados em Red&amp;nbsp;Hat&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo yum install git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configurar o cliente &lt;span class="caps"&gt;GIT&lt;/span&gt;, para vincular os commits para o autor&amp;nbsp;correto&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;SEU NOME AQUI&amp;quot;&lt;/span&gt;
+git config --global user.email email@gmail.com
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para inicializar o repositório &lt;span class="caps"&gt;GIT&lt;/span&gt; vazio existe duas formas [1]&amp;nbsp;[2]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;*[1]*&lt;/strong&gt; - Executando o comando abaixo, que o git vai criar a pasta, caso ela não existir e inicializará como&amp;nbsp;repositório&amp;nbsp;&lt;span class="caps"&gt;GIT&lt;/span&gt;.&amp;nbsp;Ex:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git init python
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;[2] Criar a pasta e depois entrar na pasta e depois inicializar o repositório, ficaria&amp;nbsp;assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir python
+~&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;python
+~&lt;span class="nv"&gt;$ &lt;/span&gt;git init
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Entre em seu repositório e crie o arquivo &lt;span class="caps"&gt;README&lt;/span&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;python/
+vim README
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Escreva um texto inicial, como por exemplo “First commit” e salve o arquivo&amp;nbsp;(:wq)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git status
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Aparecerá a os dados conforme imagem abaixo, mas o que isso quer dizer?
+Bom, a parte importante dessa tela é &lt;em&gt;Untracked files&lt;/em&gt; que mostra os arquivos que o &lt;span class="caps"&gt;GIT&lt;/span&gt;&amp;nbsp;ainda&amp;nbsp;não está gerenciando, ou seja, o &lt;span class="caps"&gt;GIT&lt;/span&gt; não sabe o
+que fazer com ele e não registra nenhuma modificação no&amp;nbsp;arquivo.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus/"&gt;&lt;img alt="image1" src="/img/git/gitstatus.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Então temos que adicionar o(os) arquivo(os) que queremos que o &lt;span class="caps"&gt;GIT&lt;/span&gt; gerencie para&amp;nbsp;nos.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git add README
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Veremos agora o que mudou depois de mandar o &lt;span class="caps"&gt;GIT&lt;/span&gt; gerenciar nosso arquivo &lt;em&gt;&lt;span class="caps"&gt;README&lt;/span&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git status
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora percebemos que o status do nosso arquivo mudou de &lt;strong&gt;Untracked files&lt;/strong&gt; como na imagem anterior para &lt;strong&gt;Changes to be committed&lt;/strong&gt;,
+isso quer dizer que a partir de agora o &lt;span class="caps"&gt;GIT&lt;/span&gt; vai gerenciar o nosso arquivo,&amp;nbsp;ele mostra que voce não fez o &lt;em&gt;commit&lt;/em&gt; para essa modificações entrarem em&amp;nbsp;vigor.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus2/"&gt;&lt;img alt="image2" src="/img/git/gitstatus2.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Fazendo o &lt;em&gt;commit&lt;/em&gt; existem duas maneiras para fazer isso. [3]&amp;nbsp;[4]&lt;/p&gt;
+&lt;p&gt;[3] Podemos apenas digitar o comando e o nosso editor de textos padrão abrirá para voce poder escrever a mensagem que identificará o &lt;em&gt;commit&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git commit
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;[4] Podemos fazer tudo isso em apenas uma etapa da seguinte forma. O &lt;strong&gt;*-m*&lt;/strong&gt; informa para esperar a mensagem de &lt;em&gt;commit&lt;/em&gt; entre aspas por ser uma&amp;nbsp;string.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git commit -m &lt;span class="s1"&gt;&amp;#39;Adicionando arquivo README&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No fim se tudo ocorrer certo, será mostrada uma mensagem conforme&amp;nbsp;imagem.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitcommit/"&gt;&lt;img alt="image3" src="/img/git/gitcommit.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Temos como ver o&amp;nbsp;histórico&amp;nbsp;de &lt;em&gt;commit,*existem&amp;nbsp;inúmeras&amp;nbsp;formas de customizar a&amp;nbsp;visualização&amp;nbsp;do&amp;nbsp;histórico, duas sugestões rápidas
+**&lt;/em&gt;-n* &lt;em&gt;[5]*&lt;/em&gt; e o&amp;nbsp; &lt;strong&gt;*&amp;#8212;committer=&amp;lt;nomedocara&amp;gt;*&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[6]&lt;/strong&gt;, para saber todas as possibilidades pode utilizar o comando de ajuda &lt;em&gt;git log&amp;nbsp;&amp;#8212;help&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;[5]&lt;/strong&gt; - Limita o numero de linhas a ser&amp;nbsp;mostrado&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[6]&lt;/strong&gt; - Mostra apenas os &lt;em&gt;commits&lt;/em&gt; da pessoa que&amp;nbsp;você&amp;nbsp;precisa ver, muito&amp;nbsp;útil&amp;nbsp;para quando se tem mais de um dev fazendo &lt;em&gt;commit&lt;/em&gt;&amp;nbsp;no&amp;nbsp;mesmo&amp;nbsp;projeto.&lt;/p&gt;
+&lt;p&gt;Agora vamos direcionar nosso&amp;nbsp;repositório&amp;nbsp;local &lt;span class="caps"&gt;GIT&lt;/span&gt; para nosso&amp;nbsp;repositório&amp;nbsp;remoto no GItHub, assim poder&amp;nbsp;desfrutar&amp;nbsp;dos recursos
+que o github.com oferece, alem de ter nosso&amp;nbsp;código&amp;nbsp;guardado e exposto para receber ajuda e&amp;nbsp;etc.&lt;/p&gt;
+&lt;p&gt;Onde&amp;nbsp; &lt;strong&gt;jesuejunior&lt;/strong&gt;&amp;nbsp;deve ser o nome de usuario que voce criou no site do github e&amp;nbsp; &lt;strong&gt;python&lt;/strong&gt;&amp;nbsp;é o&amp;nbsp;repositório&amp;nbsp;de
+seu projeto criado, assim&amp;nbsp;você&amp;nbsp;estando dentro de seu&amp;nbsp;repositório&amp;nbsp;local ele vai direcionar seus arquivos&amp;nbsp;devidamente
+commitados&amp;nbsp;através&amp;nbsp;do comando&amp;nbsp; &lt;em&gt;push&lt;/em&gt;&amp;nbsp;que veremos em&amp;nbsp;instantes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote add origin git@github.com:jesuejunior/python
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para ver seu repositório remoto, utilize o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Se tem para adicionar tem que ter como remover, certo? Então para
+remover um repositório remoto, voce precisa saber qual repositório voce
+quer remover, após executar o comando &lt;em&gt;git remote&lt;/em&gt; temos o resultado
+&lt;em&gt;origin&lt;/em&gt;, então para remover é simples, utilize o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote rm origin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pronto foi removido seu&amp;nbsp;repositório&amp;nbsp;remoto (redirecionamento para o&amp;nbsp;github).&lt;/p&gt;
+&lt;p&gt;Ao tentar verificar seu&amp;nbsp;repositório, com o seguinte comando, voce
+receberá uma menssagem de erro, pois não tem sua chave &lt;span class="caps"&gt;SSH&lt;/span&gt;/&lt;span class="caps"&gt;RSA&lt;/span&gt;&amp;nbsp;configurada.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote show origin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Então vamos configura-la.&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Primeiro entre &amp;nbsp;na pasta onde fica gravado suas chaves &lt;span class="caps"&gt;SSH&lt;/span&gt; (rsa)&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/.ssh/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora vamos gerar sua chave &lt;span class="caps"&gt;SSH&lt;/span&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh-keygen -t rsa -b &lt;span class="m"&gt;2048&lt;/span&gt; -f github
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa/"&gt;&lt;img alt="image4" src="/img/git/chave-rsa.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Vai pedir uma senha para sua chave por duas vezes, sugiro &lt;strong&gt;não&lt;/strong&gt;
+colocar a mesma senha do site. Pronto sua chave foi gerada com&amp;nbsp;sucesso.&lt;/p&gt;
+&lt;p&gt;Precisamos agora editar nosso arquivo &lt;em&gt;config&lt;/em&gt;&amp;nbsp; que deve conter o
+seguinte&amp;nbsp;conteúdo.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim ~/.ssh/config
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Host github.com
+Port 443
+HostName ssh.github.com
+IdentityFile ~/.ssh/github
+User git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora copie o conteúdo do&amp;nbsp;github.pub&lt;/p&gt;
+&lt;p&gt;Para exibir o&amp;nbsp;conteúdo&amp;nbsp;da chave em seu terminal execute o comando
+abaixo, nada impede de abrir no seu editor de texto&amp;nbsp;preferido.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cat ~/.ssh/github.pub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Esse é o&amp;nbsp;conteúdo&amp;nbsp;que deve ser copiado para&amp;nbsp;&amp;nbsp;sua pagina do Github &amp;gt;
+Account Settings &amp;gt; &lt;span class="caps"&gt;SSH&lt;/span&gt; Public Keys &amp;gt; Add &lt;span class="caps"&gt;SSH&lt;/span&gt; Key&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa2/"&gt;&lt;img alt="image5" src="/img/git/chave-rsa2.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Vamos verificar se conseguimos acessar nosso repositório no GitHub.com e
+ver se está redirecionado&amp;nbsp;corretamente.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote show origin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://.jesuejunior.com/aprendendo-github-primeiros-passos/remote-show/"&gt;&lt;img alt="image6" src="/img/git/remote-show.png" /&gt;&lt;/a&gt;Agora vamos fazer nosso primeiro envio de arquivos para o
+GitHub&amp;nbsp;através&amp;nbsp;do&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git push origin master
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A partir de agora sempre que fizer modificações nos arquivos,&amp;nbsp;você&amp;nbsp;segue
+a&amp;nbsp;sequencia&amp;nbsp;de comandos &lt;em&gt;status&lt;/em&gt;,&amp;nbsp;&lt;em&gt;add, &amp;nbsp;commit e&amp;nbsp;push.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Para enviar as alterações para o repositório do GitHub a partir da
+segunda vez, use&amp;nbsp;apenas:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git push
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Se este post te ajudou, comente, agradeça e se ainda &amp;nbsp;tem duvida entre
+em&amp;nbsp;contato.&lt;/p&gt;
+&lt;p&gt;Em breve estarei fazendo um post bem legal sobre como trabalhar com
+&lt;strong&gt;*branch*&lt;/strong&gt; utilizando os comandos &lt;strong&gt;*rebase, merge*&lt;/strong&gt; entre&amp;nbsp;outros&lt;/p&gt;
+</summary><category term="Git"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian</id><summary type="html">&lt;p&gt;Certa fez precisei gerenciar alguns serviços no Debian/Ubuntu
 e percebi que havia esquecido, então recorri ao meu caderno highlander
 que estão todas as minhas anotações da época que estava me preparando
 para fazer a prova de certificação, então aqui vai a&amp;nbsp;dica.&lt;/p&gt;

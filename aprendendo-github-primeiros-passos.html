@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="Git" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/aprendendo-github-primeiros-passos" rel="bookmark"
+             title="Permalink to Aprendendo a usar o GitHub (Primeiros passos)">Aprendendo a usar o GitHub (Primeiros&nbsp;passos)</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2012-06-06T20:18:00-03:00">
+          Wed 06 June 2012
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p><a class="reference external" href="https://github.com/">GitHub</a> é uma rede social para&nbsp;códigos, muito interessante,&nbsp;você&nbsp;consegue
+guardar seus&nbsp;códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.
+Me interessei sobre o assunto e uso hoje em dia, então resolvi escrever esse post, primeiro para não
+esquecer e depois para ajudar quem estiver começando e precisar ter uma ajuda para aprender sobre versionamento de código e guarda-los.
+É possível guardar código de qualquer linguagem, com opções de repositórios publico(free) ou privados(pago),
+no meu caso como é para aprendizagem e projetos pessoais não vejo problemas usar&nbsp;publicamente.</p>
+<p><strong>1º Passo</strong> é criar uma conta no <a class="reference external" href="https://github.com/">GitHub</a></p>
+<p><strong>2º Passo</strong> é instalar o <span class="caps">GIT</span> em sua maquina Linux, que depende muito da sua&nbsp;distribuição.</p>
+<p>Para baseados em&nbsp;Debian/Ubuntu.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install git
+</pre></div>
+<p>Para&nbsp;Archlinux.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo pacman -S git
+</pre></div>
+<p>Para baseados em Red&nbsp;Hat</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo yum install git
+</pre></div>
+<p>Configurar o cliente <span class="caps">GIT</span>, para vincular os commits para o autor&nbsp;correto</p>
+<div class="highlight"><pre>git config --global user.name <span class="s2">&quot;SEU NOME AQUI&quot;</span>
+git config --global user.email email@gmail.com
+</pre></div>
+<p>Para inicializar o repositório <span class="caps">GIT</span> vazio existe duas formas [1]&nbsp;[2]</p>
+<p><strong>*[1]*</strong> - Executando o comando abaixo, que o git vai criar a pasta, caso ela não existir e inicializará como&nbsp;repositório&nbsp;<span class="caps">GIT</span>.&nbsp;Ex:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git init python
+</pre></div>
+<p>[2] Criar a pasta e depois entrar na pasta e depois inicializar o repositório, ficaria&nbsp;assim:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>mkdir python
+~<span class="nv">$ </span><span class="nb">cd </span>python
+~<span class="nv">$ </span>git init
+</pre></div>
+<p>Entre em seu repositório e crie o arquivo <span class="caps">README</span></p>
+<div class="highlight"><pre><span class="nb">cd </span>python/
+vim README
+</pre></div>
+<p>Escreva um texto inicial, como por exemplo “First commit” e salve o arquivo&nbsp;(:wq)</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git status
+</pre></div>
+<p>Aparecerá a os dados conforme imagem abaixo, mas o que isso quer dizer?
+Bom, a parte importante dessa tela é <em>Untracked files</em> que mostra os arquivos que o <span class="caps">GIT</span>&nbsp;ainda&nbsp;não está gerenciando, ou seja, o <span class="caps">GIT</span> não sabe o
+que fazer com ele e não registra nenhuma modificação no&nbsp;arquivo.</p>
+<p><a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus/"><img alt="image1" src="/img/git/gitstatus.png" /></a></p>
+<p>Então temos que adicionar o(os) arquivo(os) que queremos que o <span class="caps">GIT</span> gerencie para&nbsp;nos.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git add README
+</pre></div>
+<p>Veremos agora o que mudou depois de mandar o <span class="caps">GIT</span> gerenciar nosso arquivo <em><span class="caps">README</span>.</em></p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git status
+</pre></div>
+<p>Agora percebemos que o status do nosso arquivo mudou de <strong>Untracked files</strong> como na imagem anterior para <strong>Changes to be committed</strong>,
+isso quer dizer que a partir de agora o <span class="caps">GIT</span> vai gerenciar o nosso arquivo,&nbsp;ele mostra que voce não fez o <em>commit</em> para essa modificações entrarem em&nbsp;vigor.</p>
+<p><a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus2/"><img alt="image2" src="/img/git/gitstatus2.png" /></a></p>
+<p>Fazendo o <em>commit</em> existem duas maneiras para fazer isso. [3]&nbsp;[4]</p>
+<p>[3] Podemos apenas digitar o comando e o nosso editor de textos padrão abrirá para voce poder escrever a mensagem que identificará o <em>commit</em>.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git commit
+</pre></div>
+<p>[4] Podemos fazer tudo isso em apenas uma etapa da seguinte forma. O <strong>*-m*</strong> informa para esperar a mensagem de <em>commit</em> entre aspas por ser uma&nbsp;string.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git commit -m <span class="s1">&#39;Adicionando arquivo README&#39;</span>
+</pre></div>
+<p>No fim se tudo ocorrer certo, será mostrada uma mensagem conforme&nbsp;imagem.</p>
+<p><a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitcommit/"><img alt="image3" src="/img/git/gitcommit.png" /></a></p>
+<p>Temos como ver o&nbsp;histórico&nbsp;de <em>commit,*existem&nbsp;inúmeras&nbsp;formas de customizar a&nbsp;visualização&nbsp;do&nbsp;histórico, duas sugestões rápidas
+**</em>-n* <em>[5]*</em> e o&nbsp; <strong>*&#8212;committer=&lt;nomedocara&gt;*</strong></p>
+<p><strong>[6]</strong>, para saber todas as possibilidades pode utilizar o comando de ajuda <em>git log&nbsp;&#8212;help</em></p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git log
+</pre></div>
+<p><strong>[5]</strong> - Limita o numero de linhas a ser&nbsp;mostrado</p>
+<p><strong>[6]</strong> - Mostra apenas os <em>commits</em> da pessoa que&nbsp;você&nbsp;precisa ver, muito&nbsp;útil&nbsp;para quando se tem mais de um dev fazendo <em>commit</em>&nbsp;no&nbsp;mesmo&nbsp;projeto.</p>
+<p>Agora vamos direcionar nosso&nbsp;repositório&nbsp;local <span class="caps">GIT</span> para nosso&nbsp;repositório&nbsp;remoto no GItHub, assim poder&nbsp;desfrutar&nbsp;dos recursos
+que o github.com oferece, alem de ter nosso&nbsp;código&nbsp;guardado e exposto para receber ajuda e&nbsp;etc.</p>
+<p>Onde&nbsp; <strong>jesuejunior</strong>&nbsp;deve ser o nome de usuario que voce criou no site do github e&nbsp; <strong>python</strong>&nbsp;é o&nbsp;repositório&nbsp;de
+seu projeto criado, assim&nbsp;você&nbsp;estando dentro de seu&nbsp;repositório&nbsp;local ele vai direcionar seus arquivos&nbsp;devidamente
+commitados&nbsp;através&nbsp;do comando&nbsp; <em>push</em>&nbsp;que veremos em&nbsp;instantes.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git remote add origin git@github.com:jesuejunior/python
+</pre></div>
+<p>Para ver seu repositório remoto, utilize o&nbsp;comando:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git remote
+</pre></div>
+<p>Se tem para adicionar tem que ter como remover, certo? Então para
+remover um repositório remoto, voce precisa saber qual repositório voce
+quer remover, após executar o comando <em>git remote</em> temos o resultado
+<em>origin</em>, então para remover é simples, utilize o&nbsp;comando:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git remote rm origin
+</pre></div>
+<p>Pronto foi removido seu&nbsp;repositório&nbsp;remoto (redirecionamento para o&nbsp;github).</p>
+<p>Ao tentar verificar seu&nbsp;repositório, com o seguinte comando, voce
+receberá uma menssagem de erro, pois não tem sua chave <span class="caps">SSH</span>/<span class="caps">RSA</span>&nbsp;configurada.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git remote show origin
+</pre></div>
+<div class="line-block">
+<div class="line">Então vamos configura-la.</div>
+<div class="line-block">
+<div class="line">Primeiro entre &nbsp;na pasta onde fica gravado suas chaves <span class="caps">SSH</span> (rsa)</div>
+</div>
+</div>
+<div class="highlight"><pre>~<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh/
+</pre></div>
+<p>Agora vamos gerar sua chave <span class="caps">SSH</span>.</p>
+<div class="highlight"><pre>ssh-keygen -t rsa -b <span class="m">2048</span> -f github
+</pre></div>
+<p><a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa/"><img alt="image4" src="/img/git/chave-rsa.png" /></a></p>
+<p>Vai pedir uma senha para sua chave por duas vezes, sugiro <strong>não</strong>
+colocar a mesma senha do site. Pronto sua chave foi gerada com&nbsp;sucesso.</p>
+<p>Precisamos agora editar nosso arquivo <em>config</em>&nbsp; que deve conter o
+seguinte&nbsp;conteúdo.</p>
+<div class="highlight"><pre>vim ~/.ssh/config
+</pre></div>
+<div class="highlight"><pre>Host github.com
+Port 443
+HostName ssh.github.com
+IdentityFile ~/.ssh/github
+User git
+</pre></div>
+<p>Agora copie o conteúdo do&nbsp;github.pub</p>
+<p>Para exibir o&nbsp;conteúdo&nbsp;da chave em seu terminal execute o comando
+abaixo, nada impede de abrir no seu editor de texto&nbsp;preferido.</p>
+<div class="highlight"><pre>cat ~/.ssh/github.pub
+</pre></div>
+<p>Esse é o&nbsp;conteúdo&nbsp;que deve ser copiado para&nbsp;&nbsp;sua pagina do Github &gt;
+Account Settings &gt; <span class="caps">SSH</span> Public Keys &gt; Add <span class="caps">SSH</span> Key<a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa2/"><img alt="image5" src="/img/git/chave-rsa2.png" /></a></p>
+<p>Vamos verificar se conseguimos acessar nosso repositório no GitHub.com e
+ver se está redirecionado&nbsp;corretamente.</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git remote show origin
+</pre></div>
+<p><a class="reference external" href="http://.jesuejunior.com/aprendendo-github-primeiros-passos/remote-show/"><img alt="image6" src="/img/git/remote-show.png" /></a>Agora vamos fazer nosso primeiro envio de arquivos para o
+GitHub&nbsp;através&nbsp;do&nbsp;comando:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git push origin master
+</pre></div>
+<p>A partir de agora sempre que fizer modificações nos arquivos,&nbsp;você&nbsp;segue
+a&nbsp;sequencia&nbsp;de comandos <em>status</em>,&nbsp;<em>add, &nbsp;commit e&nbsp;push.</em></p>
+<p>Para enviar as alterações para o repositório do GitHub a partir da
+segunda vez, use&nbsp;apenas:</p>
+<div class="highlight"><pre>~<span class="nv">$ </span>git push
+</pre></div>
+<p>Se este post te ajudou, comente, agradeça e se ainda &nbsp;tem duvida entre
+em&nbsp;contato.</p>
+<p>Em breve estarei fazendo um post bem legal sobre como trabalhar com
+<strong>*branch*</strong> utilizando os comandos <strong>*rebase, merge*</strong> entre&nbsp;outros</p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
