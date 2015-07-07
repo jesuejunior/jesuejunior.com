@@ -1,5 +1,5 @@
-Aprendendo a criar e gerenciar usuários no PostgreSQL(Primeiros Passos)
-#######################################################################
+Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)
+########################################################################
 :date: 2012-10-12 21:04
 :author: jesuejunior
 :category: Banco de Dados, Linux, PostgreSQL
