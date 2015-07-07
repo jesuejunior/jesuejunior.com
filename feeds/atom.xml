@@ -227,7 +227,76 @@ não foi passado, mas &lt;strong&gt;*imprime_maior(&amp;quot;Max: &amp;quot;)*&l
 Isso porque numeros é recebida como uma lista, podendo inclusive estar&amp;nbsp;vazia.&lt;/p&gt;
 &lt;p&gt;Bom essa foi a tentativa, espero que ajude&amp;nbsp;alguem.&lt;/p&gt;
 &lt;p&gt;Python é muito&amp;nbsp;muito&amp;nbsp;fantástico!&lt;/p&gt;
-</summary><category term="Python"></category></entry><entry><title>Aprendendo a usar o GitHub (Primeiros passos)</title><link href="jesuejunior.com/aprendendo-github-primeiros-passos" rel="alternate"></link><updated>2012-06-06T20:18:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-06:jesuejunior.com/aprendendo-github-primeiros-passos</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
+</summary><category term="Python"></category></entry><entry><title>Ativando conexões remotas ao PostgreSQL</title><link href="jesuejunior.com/ativando-conexoes-remotas-postgresql" rel="alternate"></link><updated>2012-07-06T22:19:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-06:jesuejunior.com/ativando-conexoes-remotas-postgresql</id><summary type="html">&lt;p&gt;Neste tópico vou &lt;em&gt;tentar&lt;/em&gt; explicar como liberar&amp;nbsp;conexões&amp;nbsp;remotas pela rede a uma base de dados PostgreSQL&amp;nbsp;(9.1).&lt;/p&gt;
+&lt;p&gt;Por padrão o PostgreSQL vem configurado para receber apenas conexões locais (localhost ou 127.0.0.1). Para conectar de outra máquina
+na&amp;nbsp;rede&amp;nbsp;é preciso alterar algumas configurações básicas em 2&amp;nbsp;arquivos.&lt;/p&gt;
+&lt;p&gt;(Linux)&lt;/p&gt;
+&lt;p&gt;São eles:&amp;nbsp; &lt;strong&gt;postgresql.conf&lt;/strong&gt;&amp;nbsp;e&amp;nbsp;&lt;strong&gt;pg_hba.conf&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;No&amp;nbsp; &lt;strong&gt;postgresql.conf&lt;/strong&gt;&amp;nbsp;vamos editar a seguinte&amp;nbsp;linha:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#listen_addresses = ‘localhost’ # what IP address(es) to listen on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Como em todo arquivo de configuração em programas linux, o # na frente
+da linha significa um comentário e com isso desabilita o parâmetro
+seguinte, tomando seu valor default, que no caso é localhost. Descomente
+essa linha e substitua seu valor por *. Assim seu PostgreSQL estará
+apto a ouvir conexões de qualquer &lt;span class="caps"&gt;IP&lt;/span&gt;.Então essa linha ficará da seguinte&amp;nbsp;forma:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;listen_addresses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# what IP address(es) to listen on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Isso não quer dizer que ele estará aberto para qualquer &lt;span class="caps"&gt;IP&lt;/span&gt; da rede. É
+possível criar políticas de&amp;nbsp;acesso&amp;nbsp;através de outro arquivo que
+falaremos a&amp;nbsp;seguir.&lt;/p&gt;
+&lt;p&gt;Liberando as conexões no arquivo&amp;nbsp;&lt;strong&gt;pg_hba.conf&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Este é o arquivo do Postgres responsável pela liberação de usuários,
+hosts e bancos de dados. Nele é possível dizer qual usuário de qual ip
+(ou rede) conectará a qual banco. É possível liberar qualquer usuário
+para conectar a qualquer banco, mas esta é uma regra cautelosa a ser
+seguida pois pode comprometer a segurança do seu&amp;nbsp;servidor&amp;nbsp;de bases de&amp;nbsp;dados.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Por padrão o arquivo vem com a seguinte&amp;nbsp;configuração:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#“local” is for Unix domain socket connections only&lt;/span&gt;
+&lt;span class="nb"&gt;local &lt;/span&gt;all all trust
+&lt;span class="c"&gt;# IPv4 local connections:&lt;/span&gt;
+host all all 127.0.0.1/32 trust
+&lt;span class="c"&gt;# IPv6 local connections:&lt;/span&gt;
+host all all ::1/128 trust
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pode haver alguma variação das configurações padrões de acordo com a
+versão utilizada, mas geralmente é algo que represente essas
+informações. Basicamente elas querem dizer que todas as conexões locais
+podem ser realizadas por qualquer usuário do banco a qualquer banco de&amp;nbsp;dados.&lt;/p&gt;
+&lt;p&gt;Para liberar o acesso remoto basta criar uma nova regra seguindo o
+seguinte&amp;nbsp;padrão:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;host all all 0.0.0.0/0 trust
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Com essa regra qualquer usuário de qualquer &lt;span class="caps"&gt;IP&lt;/span&gt; poderá se conectar a
+qualquer&amp;nbsp;database.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Importante&lt;/strong&gt;: O parâmetro trust quer dizer que não será solicitada
+qualquer senha para conectar ao banco de dados. Então, qualquer pessoa
+com acesso à sua rede poderá se conectar ao servidor PostgreSQL sem
+nenhuma restrição. Se a sua rede for restrita como uma turma de um curso
+ou um ambiente de desenvolvimento interno de empresa não há riscos,
+porém, é necessário possuir um ambiente de rede interno&amp;nbsp;isolado.&lt;/p&gt;
+&lt;p&gt;Este parâmetro é útil quando você ainda não se conectou ao banco para
+criar uma senha de acesso ao usuário postgres (do banco e não do sistema
+operacional). Então você se conecta e reseta a senha do usuário. Logo em
+seguida, altere o parâmetro para md5. Assim, uma senha será solicitada
+ao tentar conectar-se ao servidor&amp;nbsp;Postgre.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Assim ficará a regra de&amp;nbsp;liberação:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;host all all 0.0.0.0/0 md5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;É possível também liberar o acesso apenas a uma rede&amp;nbsp;específica:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;host all all 192.168.0.0/32 md5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Ou também, informar qual usuário poderá&amp;nbsp;conectar:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;host all usuariodobanco 192.168.0.0/32 md5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Também informar qual o banco de dados a ser conectar por este&amp;nbsp;usuário:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;host db userdb 192.168.0.0/32 md5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Na regra acima, o usuário&amp;nbsp;&lt;em&gt;userdb&lt;/em&gt; do banco &amp;nbsp;poderá conectar-se apenas
+ao banco db apenas se estiver dentro da rede&amp;nbsp;192.168.0.0.&lt;/p&gt;
+&lt;p&gt;Essa é a dica, precisei muito disso e quebrei a cabeça um pouco então
+fica guardado agora, espero que possa&amp;nbsp;ajudar&amp;nbsp;alguém.&lt;/p&gt;
+</summary><category term="PostgreSQL"></category></entry><entry><title>Aprendendo a usar o GitHub (Primeiros passos)</title><link href="jesuejunior.com/aprendendo-github-primeiros-passos" rel="alternate"></link><updated>2012-06-06T20:18:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-06:jesuejunior.com/aprendendo-github-primeiros-passos</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
 guardar seus&amp;nbsp;códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.
 Me interessei sobre o assunto e uso hoje em dia, então resolvi escrever esse post, primeiro para não
 esquecer e depois para ajudar quem estiver começando e precisar ter uma ajuda para aprender sobre versionamento de código e guarda-los.
@@ -420,4 +489,35 @@ qual run level você&amp;nbsp;quiser):&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom é isso ai, coisa simples mais que pode salvar&amp;nbsp;vidas.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png"&gt;http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png&lt;/a&gt;&lt;/p&gt;
-</summary><category term="Debian"></category></entry></feed>
+</summary><category term="Debian"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-05-26T16:31:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
+sábio me ensinou e eu pesquisei mais algumas&amp;nbsp;informações.&lt;/p&gt;
+&lt;p&gt;A partir da versão 2.6 o Python traz um recurso diferente para formatar&amp;nbsp;strings.&lt;/p&gt;
+&lt;p&gt;Diz o manual que a partir da versão 3.0 a formatação usando o método %
+será descontinuado, por isso resolvi criar esse post tanto para ajudar
+quem não sabe quanto para eu lembrar&amp;nbsp;posteriormente.&lt;/p&gt;
+&lt;p&gt;Se você é iniciante em Python assim como eu, tente começar a mudar logo
+para o método do str.format(). (Muito&amp;nbsp;pratico)&lt;/p&gt;
+&lt;p&gt;#A mudança é simples. Portanto, vamos aos&amp;nbsp;exemplos:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jesué&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sobrenome&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Junior&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;idade&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;# Campo&amp;nbsp;simples.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome é &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# &amp;#39;s&amp;#39; de string&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome é {nome}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;# 2 campos mudando o nome da substituicao (“n” e “s”). Descobri esse&amp;nbsp;recentemente.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome completo é &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sobrenome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome completo é {n} {s}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sobrenome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;# Numero com 2 algarismos e zero à&amp;nbsp;esquerda.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;minha idade é &lt;/span&gt;&lt;span class="si"&gt;%02d&lt;/span&gt;&lt;span class="s"&gt; anos&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;minha idade é {0:02d} anos&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;# Argumento&amp;nbsp;posicional.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;eu sou {0} e eu tenho {1} anos&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Eu, comecei agora e já adotei o format, porque eu posso nomear os campos&amp;nbsp;livremente.&lt;/p&gt;
+&lt;p&gt;Lembrete: Ele só pode ser usado a partir do python&amp;nbsp;2.6.&lt;/p&gt;
+&lt;p&gt;Qualquer duvida leia maiores informações no&amp;nbsp;manual.&lt;/p&gt;
+</summary><category term="Python"></category></entry></feed>

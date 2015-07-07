@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="Python" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/formatacao-de-string-python" rel="bookmark"
+             title="Permalink to Formatação de string Python">Formatação de string&nbsp;Python</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2012-05-26T16:31:00-03:00">
+          Sat 26 May 2012
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p>Estou aprendendo Python e estou gostando, aqui vai um método que um
+sábio me ensinou e eu pesquisei mais algumas&nbsp;informações.</p>
+<p>A partir da versão 2.6 o Python traz um recurso diferente para formatar&nbsp;strings.</p>
+<p>Diz o manual que a partir da versão 3.0 a formatação usando o método %
+será descontinuado, por isso resolvi criar esse post tanto para ajudar
+quem não sabe quanto para eu lembrar&nbsp;posteriormente.</p>
+<p>Se você é iniciante em Python assim como eu, tente começar a mudar logo
+para o método do str.format(). (Muito&nbsp;pratico)</p>
+<p>#A mudança é simples. Portanto, vamos aos&nbsp;exemplos:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">nome</span> <span class="o">=</span> <span class="s">&#39;Jesué&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sobrenome</span> <span class="o">=</span> <span class="s">&#39;Junior&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">idade</span> <span class="o">=</span> <span class="mi">23</span>
+</pre></div>
+<p># Campo&nbsp;simples.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;meu nome é </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nome</span><span class="p">)</span> <span class="c"># &#39;s&#39; de string</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;meu nome é {nome}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nome</span><span class="o">=</span><span class="n">nome</span><span class="p">)</span>
+</pre></div>
+<p># 2 campos mudando o nome da substituicao (“n” e “s”). Descobri esse&nbsp;recentemente.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;meu nome completo é </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nome</span><span class="p">,</span> <span class="n">sobrenome</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;meu nome completo é {n} {s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">nome</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">sobrenome</span><span class="p">)</span>
+</pre></div>
+<p># Numero com 2 algarismos e zero à&nbsp;esquerda.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;minha idade é </span><span class="si">%02d</span><span class="s"> anos&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idade</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;minha idade é {0:02d} anos&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idade</span><span class="p">)</span>
+</pre></div>
+<p># Argumento&nbsp;posicional.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="s">&quot;eu sou {0} e eu tenho {1} anos&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span> <span class="n">idade</span><span class="p">)</span>
+</pre></div>
+<p>Eu, comecei agora e já adotei o format, porque eu posso nomear os campos&nbsp;livremente.</p>
+<p>Lembrete: Ele só pode ser usado a partir do python&nbsp;2.6.</p>
+<p>Qualquer duvida leia maiores informações no&nbsp;manual.</p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
