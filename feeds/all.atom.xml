@@ -28,7 +28,83 @@ sudo &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/m
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
 caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
-</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>Colocando Upstart para gerenciar o Supervisor</title><link href="jesuejunior.com/colocando-upstart-gerenciar-supervisor" rel="alternate"></link><updated>2013-12-14T03:22:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-14:jesuejunior.com/colocando-upstart-gerenciar-supervisor</id><summary type="html">&lt;p&gt;Depois de um tempo afastado do Blog, estou &amp;nbsp;organizando melhor o uso do
+meu tempo, ou seja, em breve estarei criando mais posts que inclusive já
+tenho alguns em&amp;nbsp;rascunho.&lt;/p&gt;
+&lt;p&gt;Hoje faço parte de uma equipe de devOps. Então cada vez utilizo mais
+desenvolvimento para resolver problemas de deploy, escalabilidade entre
+outros. Baseado nisso, recentemente implementei na receita do Chef para
+o &lt;a class="reference external" href="http://upstart.ubuntu.com/"&gt;Upstart&lt;/a&gt; controlar o &lt;a class="reference external" href="http://supervisord.org/"&gt;Supervisord&lt;/a&gt;.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&amp;nbsp;Mas o que é o&amp;nbsp;Supervisord?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Supervisor é um sistema client /server que permite que seus usuários
+possam monitorar e controlar um número de processos que podem ser grupos
+de&amp;nbsp;processos.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Mas o que é o&amp;nbsp;Upstart?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Upstart é daemon de&amp;nbsp;substituição ao /sbin/init &amp;nbsp;que lida com a
+inicialização de tarefas e serviços durante o boot, impedindo-os durante
+o desligamento e supervisionando-os enquanto o sistema está funcionando.
+E como ele está no nível init (embutido no kernel), seu processo
+dificilmente ficará desligado. Por exemplo, caso seu processo apresente
+erro e feche o upstart vai tentar reinicia-lo e caso não consiga, vai
+continuar tentando no intervalo de tempo&amp;nbsp;pré-configurado.&lt;/p&gt;
+&lt;p&gt;Pois bem, aqui vou mostrar como implementar manualmente o que já é de
+muita ajuda se você precisar de algo controlando um grupo de processos e
+não deixando-os&amp;nbsp;morrerem.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Estou assumindo que o sistema operacional é baseado em&amp;nbsp;Debian&lt;/p&gt;
+&lt;div class="section" id="parando-e-removendo-o-supervisord-do-boot"&gt;
+&lt;h2&gt;Parando e removendo o supervisorD do&amp;nbsp;boot&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/supervisord stop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-rc.d -f supervisor remove
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Este ultimo comando remove o arquivo &lt;strong&gt;/etc/init.d/supervisord&lt;/strong&gt; e caso
+queira voltar ao modo antigo de troque o &lt;em&gt;remove&lt;/em&gt; por &lt;em&gt;enable.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="criando-um-script-upstart"&gt;
+&lt;h2&gt;Criando um script&amp;nbsp;Upstart&lt;/h2&gt;
+&lt;p&gt;Crie um arquivo &amp;nbsp;&lt;strong&gt;/etc/init/supervisor.conf&lt;/strong&gt;. &amp;nbsp;Com o seguinte&amp;nbsp;conteudo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;description &lt;span class="s2"&gt;&amp;quot;supervisor&amp;quot;&lt;/span&gt;
+
+start on runlevel &lt;span class="o"&gt;[&lt;/span&gt;2345&lt;span class="o"&gt;]&lt;/span&gt;
+
+stop on runlevel &lt;span class="o"&gt;[&lt;/span&gt;!2345&lt;span class="o"&gt;]&lt;/span&gt;
+
+respawn
+
+&lt;span class="nb"&gt;exec&lt;/span&gt; /usr/local/bin/supervisord --nodaemon --configuration /etc/supervisord.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Perceba que nós estamos usando o mesmo &lt;em&gt;supervisord&lt;/em&gt;, logo não há nada
+para mudar aqui.&amp;nbsp;hehehe&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usando-supervisord-com-upstart"&gt;
+&lt;h2&gt;usando supervisord com&amp;nbsp;upstart&lt;/h2&gt;
+&lt;p&gt;Nós podemos iniciar e parar o &lt;strong&gt;supervisord&lt;/strong&gt; com os comandos padrões do
+&lt;strong&gt;Upstart&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo stop supervisor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo start supervisor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para verificar o status do&amp;nbsp;&lt;em&gt;supervisor,&amp;nbsp;faça:&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;initctl list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;initctl status supervisor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="here-we-go"&gt;
+&lt;h2&gt;&lt;span class="caps"&gt;HERE&lt;/span&gt; &lt;span class="caps"&gt;WE&lt;/span&gt; &lt;span class="caps"&gt;GO&lt;/span&gt;!&lt;/h2&gt;
+&lt;p&gt;Confirmando que o supervisor está sendo executado, os comandos para
+gerencia-lo não mudam em nada, continuamos a ter o &amp;nbsp;&lt;strong&gt;supervisorctl&lt;/strong&gt;&amp;nbsp; e
+podemos ver os processos que ele está controlando, pois continuamos
+usando o mesmo arquivo de configuração padrão que fica em
+&lt;em&gt;/etc/supervisord.conf.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Então é isso, qualquer duvida não deixe de postar nos comentários, será
+um prazer&amp;nbsp;ajudar.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="Linux"></category><category term="supervisord"></category><category term="ubuntu"></category><category term="upstart"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
 meio perdido (usava MySQL), então estou escrevendo essa dica para eu
 relembrar e deixar o legado.&amp;nbsp;kkkk&lt;/p&gt;
 &lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
@@ -432,7 +508,55 @@ segunda vez, use&amp;nbsp;apenas:&lt;/p&gt;
 em&amp;nbsp;contato.&lt;/p&gt;
 &lt;p&gt;Em breve estarei fazendo um post bem legal sobre como trabalhar com
 &lt;strong&gt;*branch*&lt;/strong&gt; utilizando os comandos &lt;strong&gt;*rebase, merge*&lt;/strong&gt; entre&amp;nbsp;outros&lt;/p&gt;
-</summary><category term="Git"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian</id><summary type="html">&lt;p&gt;Certa fez precisei gerenciar alguns serviços no Debian/Ubuntu
+</summary><category term="Git"></category></entry><entry><title>Instalando e configurando : PHP 5.3.6 no Debian</title><link href="jesuejunior.com/instalando-configurando-php-debian" rel="alternate"></link><updated>2012-06-03T21:44:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-03:jesuejunior.com/instalando-configurando-php-debian</id><summary type="html">&lt;p&gt;Fala pessoal,&amp;nbsp;certa vez tive a missão de instalar o Moodle (&lt;a class="reference external" href="http://moodle.org"&gt;http://moodle.org&lt;/a&gt;), o qual tem um requisito que me complicou um pouco,
+mas consegui resolve e estou aqui passando a&amp;nbsp;informação.&lt;/p&gt;
+&lt;p&gt;Requisitos para instalação do moodle: &lt;em&gt;&lt;span class="caps"&gt;PHP&lt;/span&gt; 5.3.2, MySQL 5.0.25 or Postgres 8.3 or &lt;span class="caps"&gt;MSSQL&lt;/span&gt; 2005 or Oracle&amp;nbsp;10.2.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Um dos nossos servidores roda Debian 6 e nos repositórios padrões(Debian) o &lt;span class="caps"&gt;PHP&lt;/span&gt; padrão é o 5.2, então precisei fazer algumas
+pesquisas e estou escrevendo aqui a solução que tomei e para não esquecer caso eu precise novamente, nunca se&amp;nbsp;sabe.&lt;/p&gt;
+&lt;p&gt;#Adicionar os repositórios para instalar o &lt;span class="caps"&gt;PHP5&lt;/span&gt;.3&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim /etc/apt/sources.list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Adicione as linhas abaixo referente aos&amp;nbsp;repositórios:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;deb http://php53.dotdeb.org oldstable all
+deb-src http://php53.dotdeb.org oldstable all
+deb http://ftp.br.debian.org/debian/ oldstable main
+deb-src http://ftp.br.debian.org/debian/ oldstable main
+deb http://security.debian.org/ oldstable/updates main
+deb-src http://security.debian.org/ oldstable/updates main
+deb http://volatile.debian.org/debian-volatile oldstable/volatile main
+deb-src http://volatile.debian.org/debian-volatile oldstable/volatile main
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Instalando as&amp;nbsp;chaves&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget http://www.dotdeb.org/dotdeb.gpg &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; cat dotdeb.gpg &lt;span class="p"&gt;|&lt;/span&gt; apt-key add -
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Atualizando o Debian Lenny com os novos&amp;nbsp;repositorios&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Configurando o locale do &lt;span class="caps"&gt;DEBIAN&lt;/span&gt; para&amp;nbsp;Latin1&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim /etc/default/locale
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#deixe igual&amp;nbsp;a:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pt_BR&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pt_BR:pt:en&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Execute o seguinte&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pt_BR pt_BR.ISO-8859-1&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/locale.alias
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Verificando os locales&amp;nbsp;definido&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;locale -a
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Deve ficar&amp;nbsp;assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C
+POSIX
+pt_BR
+pt_BR.iso88591
+pt_BR.utf8
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;#Instalando &lt;span class="caps"&gt;PHP5&lt;/span&gt; com suporte ao MySQL e&amp;nbsp;Apache2&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;apt-get install apache2 php5-mysql php5 libapache2-mod-php5 php5-cli php5-common
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Espero que possa ajudar&amp;nbsp;alguém, qualquer duvida não deixe de entrar em contato que tentarei&amp;nbsp;ajudar.&lt;/p&gt;
+</summary><category term="Debian"></category><category term="PHP"></category><category term="ubuntu"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian</id><summary type="html">&lt;p&gt;Certa fez precisei gerenciar alguns serviços no Debian/Ubuntu
 e percebi que havia esquecido, então recorri ao meu caderno highlander
 que estão todas as minhas anotações da época que estava me preparando
 para fazer a prova de certificação, então aqui vai a&amp;nbsp;dica.&lt;/p&gt;
@@ -489,7 +613,23 @@ qual run level você&amp;nbsp;quiser):&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom é isso ai, coisa simples mais que pode salvar&amp;nbsp;vidas.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png"&gt;http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png&lt;/a&gt;&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-05-26T16:31:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
+</summary><category term="Debian"></category></entry><entry><title>Instalando o Opera no Debian 6</title><link href="jesuejunior.com/instalando-o-opera-no-debian-6" rel="alternate"></link><updated>2012-05-25T23:30:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-o-opera-no-debian-6</id><summary type="html">&lt;p&gt;Certa fez precisei instalar o Opera no Debian , que é a
+distribuição que adotei &amp;nbsp;para alguns dos servidores do trabalho, &amp;nbsp;porem
+apenas um cliente usa com interface&amp;nbsp;gráfica,&amp;nbsp;então vou postar a dica
+para eu não esquecer quando precisar&amp;nbsp;novamente.&lt;/p&gt;
+&lt;p&gt;Instala através do repositório do próprio Opera para o&amp;nbsp;debian…&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo vim /etc/apt/sources.list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Adiciona a linha no&amp;nbsp;final:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;deb http://deb.opera.com/opera/ lenny non-free
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;salva e&amp;nbsp;saia:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget -O - http://deb.opera.com/archive.key &lt;span class="p"&gt;|&lt;/span&gt; apt-key add -
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install opera
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pronto! Agora é só&amp;nbsp;testar.&lt;/p&gt;
+</summary><category term="Debian"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-01-26T16:31:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-01-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
 sábio me ensinou e eu pesquisei mais algumas&amp;nbsp;informações.&lt;/p&gt;
 &lt;p&gt;A partir da versão 2.6 o Python traz um recurso diferente para formatar&amp;nbsp;strings.&lt;/p&gt;
 &lt;p&gt;Diz o manual que a partir da versão 3.0 a formatação usando o método %
