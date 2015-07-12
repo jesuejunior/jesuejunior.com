@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-        <title>Jesué Junior - Tags</title>
+          <title>Jesué Junior</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
         <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
         <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="fedora" />
+
 </head>
 
 <body>
@@ -28,26 +33,44 @@
                     <a class="social-link"></a>
                 </div>
             </nav>
-    <h1>Tags for Jesué Junior</h1>        <li><a href="/tag/banco-de-dados.html">Banco de Dados</a> (1)</li>
-        <li><a href="/tag/chef.html">chef</a> (2)</li>
-        <li><a href="/tag/chef-client.html">chef-client</a> (1)</li>
-        <li><a href="/tag/chef-server.html">chef-server</a> (1)</li>
-        <li><a href="/tag/continuos-deploy.html">Continuos Deploy</a> (1)</li>
-        <li><a href="/tag/debian.html">Debian</a> (4)</li>
-        <li><a href="/tag/fedora.html">fedora</a> (2)</li>
-        <li><a href="/tag/git.html">Git</a> (2)</li>
-        <li><a href="/tag/linux.html">Linux</a> (4)</li>
-        <li><a href="/tag/memoria.html">memoria</a> (1)</li>
-        <li><a href="/tag/no-ip.html">no-ip</a> (1)</li>
-        <li><a href="/tag/opensource.html">opensource</a> (1)</li>
-        <li><a href="/tag/opscode.html">opscode</a> (1)</li>
-        <li><a href="/tag/php.html">PHP</a> (1)</li>
-        <li><a href="/tag/postgresql.html">PostgreSQL</a> (2)</li>
-        <li><a href="/tag/python.html">Python</a> (2)</li>
-        <li><a href="/tag/supervisord.html">supervisord</a> (1)</li>
-        <li><a href="/tag/swap.html">swap</a> (1)</li>
-        <li><a href="/tag/ubuntu.html">ubuntu</a> (4)</li>
-        <li><a href="/tag/upstart.html">upstart</a> (1)</li>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/instalando-skype-fedora" rel="bookmark"
+             title="Permalink to Instalando o Skype no Fedora 15 64 bits">Instalando o Skype no Fedora 15 64&nbsp;bits</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2012-05-25T03:52:00-03:00">
+          Fri 25 May 2012
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p>Bom esse é meu primeiro post, estou migrando do Ubuntu (Unity) para o
+Fedora 15 (<span class="caps">GNOME</span> 3) e estou enfrentando alguns problemas basicos, já esperados.
+E nessa jornada irei postando aqui, para eu lembrar posteriormente e talvez ajudar&nbsp;alguem.</p>
+<p>Como no site do Skype não tem a versão nativa 64bits em <span class="caps">RPM</span>, só a 32
+bits, criei esse ‘howto’ de como instalar o comunicador no Fedora 64&nbsp;bits:</p>
+<p>1 – Instale as dependências&nbsp;necessárias:</p>
+<div class="highlight"><pre>yum install glibc.i686 alsa-lib.i686 libXv.i686 libXScrnSaver.i686
+qt.i686 qt-x11.i686 alsa-plugins-pulseaudio.i686 libv4l.i686 -y
+</pre></div>
+<p>2 – Baixe o pacote <span class="caps">RPM</span> 32bits no site do&nbsp;Skype:</p>
+<div class="highlight"><pre>wget http://download.skype.com/linux/skype-2.2.0.35-fedora.i586.rpm
+</pre></div>
+<p>3 – Agora instale o pacote usando o yum, com o&nbsp;comando:</p>
+<div class="highlight"><pre>yum --nogpgcheck localinstall skype-2.2.0.35-fedora.i586.rpm
+</pre></div>
+<p>Para utilizar é só ir ao menu <span class="caps">ATIVIDADES</span> &gt; <span class="caps">APLICATIVOS</span> &gt; <span class="caps">SKYPE</span>.</p>
+<p>Espero que possa&nbsp;ajudar!</p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
             <b class="clear"></b>
         </div>
     </div>

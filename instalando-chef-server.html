@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="chef" />
+    <meta name="tags" content="Linux" />
+    <meta name="tags" content="opensource" />
+    <meta name="tags" content="opscode" />
+    <meta name="tags" content="ubuntu" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/instalando-chef-server" rel="bookmark"
+             title="Permalink to Instalando Chef Server Opensource">Instalando Chef Server&nbsp;Opensource</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2013-12-31T19:54:00-02:00">
+          Tue 31 December 2013
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p>Instalando o Chef server opensource (<a class="reference external" href="http://www.getchef.com/">OpsCode</a>)
+Estarei criando um servidor do chef para gerenciar deploy do cloudfish(link) e com isso estou escrevendo esse&nbsp;tutorial.</p>
+<div class="section" id="cenario">
+<h2><em>Cenário</em></h2>
+<p>Estou usando uma instancia de <span class="caps">512MB</span> com Ubuntu 12.04 do Digital&nbsp;Ocean.</p>
+<p>Ainda não criei usuários, então estou executando como root, depois todas as configurações serão feitas pelo&nbsp;chef.</p>
+<p>Primeiro passo é baixar o arquivo para a distribuição que no caso é ubuntu, no presente momento a versão mais atual é a&nbsp;11.0.10-1.</p>
+<p>Logo o arquivo a ser baixado&nbsp;será:</p>
+<p><a class="reference external" href="https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb">chef-server_11.0.10-1.ubuntu.12.04_amd64.deb</a></p>
+<p>Você pode sempre encontrar a versão mais atual na aba <em>server</em>&nbsp;do&nbsp;link:</p>
+<p><a class="reference external" href="http://www.getchef.com/chef/install/">http://www.getchef.com/chef/install/</a></p>
+<p>Baixando o arquivo com todas as configurações do&nbsp;chef-server.</p>
+<div class="highlight"><pre><span class="c"># wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb</span>
+</pre></div>
+<p>Agora vamos executar a&nbsp;instalação.</p>
+<div class="highlight"><pre><span class="c"># dpkg -i chef-server_11.0.10-1.ubuntu.12.04_amd64.deb</span>
+</pre></div>
+<p>Pronto seu Chef server está instalado, vamos&nbsp;configura-lo.</p>
+<p>Mas primeiro, <em>o grande segredo que me fez escrever esse post</em>&nbsp;para uma instalação bem&nbsp;sucedida.</p>
+<p>Para o Chef server é necessário que o hostname e hosts seja o seu <span class="caps">FQDN</span> ou&nbsp;seja:</p>
+<div class="highlight"><pre><span class="c"># vim /etc/hosts</span>
+</pre></div>
+<p>Deixe as linhas de seu arquivo parecida com&nbsp;essas.</p>
+<div class="highlight"><pre>127.0.0.1 localhost chef
+127.0.0.2 chef.jesuejunior.com chef
+
+<span class="c"># The following lines are desirable for IPv6 capable hosts</span>
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</pre></div>
+<p>E mudaremos o hostname da mesma&nbsp;forma.</p>
+<div class="highlight"><pre><span class="c"># vim /etc/hostname</span>
+</pre></div>
+<p>Verifique o nome do seu servidor e/ou altere, caso seja&nbsp;necessário.</p>
+<div class="highlight"><pre>chef.jesuejunior.com
+</pre></div>
+<p>Após a instalação ser concluída com sucesso e ter feito o <em>segredo do sucesso</em>, precisamos executar o comando para
+instalar/configurar as dependências do&nbsp;chef-server.</p>
+<div class="highlight"><pre><span class="c"># chef-server-ctl reconfigure</span>
+</pre></div>
+<p><span class="caps">OBS</span>: Essa instalação precisa de muita memória, na primeira tentativa apareceu esse&nbsp;erro:</p>
+<div class="highlight"><pre><span class="s2">&quot;FATAL: Errno::ENOMEM: Cannot allocate memory - fork(2)&quot;</span>
+</pre></div>
+<p>Mas não se desespere, no meu caso precisei usar uma instancia com poucos recursos e esse erro se da por falta de memória, por padrão as instancias do
+<em>Digital Ocean</em>  não vem com o <span class="caps">SWAP</span> habilitada, então siga esse tutorial (<a class="reference external" href="http://www.jesuejunior.com/criando-um-arquivo-como-memoria-swap">aqui</a>)
+para habilitar um swap dentro de um arquivo em&nbsp;disco.</p>
+<p>Depois de ter criado um pouco mais de <em>memória</em> para o processo,  execute o comando novamente, sua instalação vai exibir a seguinte&nbsp;mensagem:</p>
+<p><a class="reference external" href="/img/chef/prompt-install-chef-server.png"><img alt="image1" src="/img/chef/prompt-install-chef-server.png" /></a></p>
+<p>Já comecei a redigir o próximo post que será a parte da configuração de repositório para adicionar cookbooks, roles e sua chave para acessar o
+server, configurar seu knife.rb, ou seja a configuração para quem vai trabalhar com o&nbsp;chef.</p>
+<p>Espero que possa ser útil, qualquer duvida não deixe de&nbsp;perguntar.</p>
+</div>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>

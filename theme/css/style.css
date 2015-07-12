@@ -24,6 +24,7 @@ img, button {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+    max-width: 730px;
 }
 input { margin: 0; }
 

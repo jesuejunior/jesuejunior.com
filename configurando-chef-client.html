@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="chef" />
+    <meta name="tags" content="chef-client" />
+    <meta name="tags" content="chef-server" />
+    <meta name="tags" content="Continuos Deploy" />
+
+</head>
+
+<body>
+    <div class="bg">
+        <div class="wrap">
+            <nav id="sidebar">
+                <a href="/" id="logo"></a>
+                <ul id="menu">
+                    <li> <a class="menu-link" href="/pages/about.html">About</a></li>
+                    <li> <a class="menu-link" href="/pages/projects.html">Projects</a></li>
+                </ul>
+
+                <div class="social">
+                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                    <a class="social-link"></a>
+                </div>
+            </nav>
+<div id="content" class="">
+    <div class="block welcome">
+      <header>
+        <h2 class="entry-title">
+          <a href="/configurando-chef-client" rel="bookmark"
+             title="Permalink to Instalando e configurando Chef Client(knife)">Instalando e configurando Chef&nbsp;Client(knife)</a></h2>
+     
+      </header>
+      <div class="info">
+        <abbr class="" title="2014-02-25T00:08:00-03:00">
+          Tue 25 February 2014
+        </abbr>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="">
+        <p>O Chef, resolvi  escrever o post que havia&nbsp;prometido.</p>
+<p>Acreditando fortemente que você já passou por
+<a class="reference external" href="http://jesuejunior.com/instalando-chef-server">aqui</a> e já tem
+o Chef Server&nbsp;instalado.</p>
+<p><strong>Sugestão 1:</strong> Instale o&nbsp;tmux vim curl wget com o comando abaixo ou
+equivalente a sua&nbsp;distribuição.</p>
+<div class="highlight"><pre><span class="nv">$ </span>apt-get install tmux vim curl wget
+</pre></div>
+<p><strong>Instalando e configurando sua&nbsp;workstation.</strong></p>
+<p>Embora uso Macbook(<span class="caps">OSX</span>) estarei fazendo toda a configuração de um
+Ubuntu, peço que fiquem atento aos paths caso seu equipamento de
+trabalho seja um&nbsp;Mac.</p>
+<p>Download do <em>Chef Omnibus installer</em> e já passando no pipeline para a&nbsp;instalação:</p>
+<div class="highlight"><pre><span class="nv">$ </span>curl -O -L http://www.opscode.com/chef/install.sh <span class="p">|</span> sudo sh install.sh
+</pre></div>
+<p>A parte legal do comando acima é que ele descobre sua distribuição e
+instala o <em>chef-client</em> de acordo com o gerenciador de pacotes (<span class="caps">RPM</span> -
+<span class="caps">RHEL</span> e <span class="caps">DEB</span>&nbsp;-Debian).</p>
+<p>Criei uma pasta chamada <em>code</em> e depois trabalho de dentro da mesma, ou&nbsp;seja:</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir code <span class="o">&amp;&amp;</span> <span class="nb">cd </span>code
+</pre></div>
+<p>Agora vamos clonar o repositório base do <em>Chef</em>.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/opscode/chef-repo.git chef
+</pre></div>
+<p>Agora podemos ir acessar nosso <em>Chef Server</em> no browser, com o endereço
+<span class="caps">FQDN</span> que você já tem configurado, no meu caso ficou
+[<span class="caps">STRIKEOUT</span>:https://chef2.cloudfish.in.]</p>
+<p>Agora precisamos re-gerar as chave privada&nbsp;<em>chef-validator.</em></p>
+<p>No menu, vá em &nbsp;<strong>Clients &gt; chef-validator &gt; Edit,</strong> Marque a
+opção<strong>&nbsp;Regenerate Private Key</strong>, e clique em <strong>Save Client.</strong>&nbsp;Agora
+copie a nova chave privada para <em>~/code/chef/.chef/chef-validator.pem</em>
+na sua&nbsp;maquina.</p>
+<p><strong>Sugestão 2:</strong> Não colocar suas permissões de de acesso/execução
+(knife.rb e *.pem) no <em>repositório, geralmente o que eu faço e todos
+amigos que trabalham comigo é, cada um coloca na sua home ~/.chef/,</em> mas
+isso fica a&nbsp;critério&nbsp;de organização, e não esqueça que fazendo isso as
+configurações dentro do seu&nbsp;knife.rb mudaram<em>.</em></p>
+<p>Agora vamos criar um usuário que fará o gerenciamento do&nbsp;chef.</p>
+<p>Clique na Aba&nbsp;<strong>Users &gt; Create,</strong> marque a opção <strong>Admin,</strong> preencha
+<em>username</em> e <em>senha</em> eu estou criando um usuário chamado <strong>*jj*</strong>&nbsp;para o
+exemplo, fique atento a isso e depois&nbsp;clique em <strong>Create&nbsp;User.</strong></p>
+<p>Vamos copiar a chave privada do nosso novo usuário, clique &nbsp;em Users &gt;
+edit &gt; do usuário <strong>*jj*</strong>, irá aparecer &nbsp;a sua chave publica e privada,
+copie a privada para&nbsp;~/code/chef/.chef/jj.pem.</p>
+<p><span class="caps">OBS</span>: Note que você é advertido, pois a chave privada só pode ser
+acessada uma única vez, like <span class="caps">AWS</span>.</p>
+<p>Finalmente, abra seu terminal e vamos rodar o <strong>*knife
+configure.*</strong>&nbsp;Preencha os campos a seguir conforme sua necessidade,
+segue uma imagem para ilustrar e tirar supostas duvidas que possa&nbsp;surgir.</p>
+<div class="highlight"><pre><span class="nv">$ </span>knife configure
+</pre></div>
+<p><a class="reference external" href="/img/chef/command_knife_configure.jpg"><img alt="image0" src="/img/chef/command_knife_configure.jpg" /></a></p>
+<p>Neste ponto que e a configuração do knife conecta com a interface do
+nosso servidor Chef Open Source que você já tem instalado anteriormente.
+Para testar vamos rodar um comandos basicos para listar a lista de
+clientes cadastrados e a lista de&nbsp;nodes(servidores).</p>
+<p><a class="reference external" href="http://jesuejunior.com/img/chef/knife-list.png"><img alt="image2" src="/img/chef/knife-list.png" /></a></p>
+<p>Não se esqueça que você precisa está no seu repositório para quando for
+usar o comando <em>knife</em> para conectar no seu Chef server. ë planamente
+possível se conectar em vários Chef server, pois o que manda é onde está
+o seu <em>.chef/knife.rb</em> e suas chaves. A principio seria necessário
+apenas ter outro clone do repositório base e gerar os arquivos de
+configuração, assim quando fosse executar os comandos você entraria no
+diretório/repositório responsável por cuidar de tal&nbsp;servidor.</p>
+<p>Referência
+<a class="reference external" href="http://docs.opscode.com/chef/install_workstation.html">Install Chef 11.x on a&nbsp;Workstation</a></p>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+            <b class="clear"></b>
+        </div>
+    </div>
+    <footer>
+        <div class="wrap">
+            <span>Desenvolvido por JJ</span>
+        </div>
+    </footer>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>

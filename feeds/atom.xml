@@ -1,5 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2013-12-19T00:00:00-02:00</updated><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2014-02-25T00:08:00-03:00</updated><entry><title>Instalando e configurando Chef Client(knife)</title><link href="jesuejunior.com/configurando-chef-client" rel="alternate"></link><updated>2014-02-25T00:08:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2014-02-25:jesuejunior.com/configurando-chef-client</id><summary type="html">&lt;p&gt;O Chef, resolvi  escrever o post que havia&amp;nbsp;prometido.&lt;/p&gt;
+&lt;p&gt;Acreditando fortemente que você já passou por
+&lt;a class="reference external" href="http://jesuejunior.com/instalando-chef-server"&gt;aqui&lt;/a&gt; e já tem
+o Chef Server&amp;nbsp;instalado.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sugestão 1:&lt;/strong&gt; Instale o&amp;nbsp;tmux vim curl wget com o comando abaixo ou
+equivalente a sua&amp;nbsp;distribuição.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;apt-get install tmux vim curl wget
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Instalando e configurando sua&amp;nbsp;workstation.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Embora uso Macbook(&lt;span class="caps"&gt;OSX&lt;/span&gt;) estarei fazendo toda a configuração de um
+Ubuntu, peço que fiquem atento aos paths caso seu equipamento de
+trabalho seja um&amp;nbsp;Mac.&lt;/p&gt;
+&lt;p&gt;Download do &lt;em&gt;Chef Omnibus installer&lt;/em&gt; e já passando no pipeline para a&amp;nbsp;instalação:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;curl -O -L http://www.opscode.com/chef/install.sh &lt;span class="p"&gt;|&lt;/span&gt; sudo sh install.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A parte legal do comando acima é que ele descobre sua distribuição e
+instala o &lt;em&gt;chef-client&lt;/em&gt; de acordo com o gerenciador de pacotes (&lt;span class="caps"&gt;RPM&lt;/span&gt; -
+&lt;span class="caps"&gt;RHEL&lt;/span&gt; e &lt;span class="caps"&gt;DEB&lt;/span&gt;&amp;nbsp;-Debian).&lt;/p&gt;
+&lt;p&gt;Criei uma pasta chamada &lt;em&gt;code&lt;/em&gt; e depois trabalho de dentro da mesma, ou&amp;nbsp;seja:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir code &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd &lt;/span&gt;code
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora vamos clonar o repositório base do &lt;em&gt;Chef&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone https://github.com/opscode/chef-repo.git chef
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora podemos ir acessar nosso &lt;em&gt;Chef Server&lt;/em&gt; no browser, com o endereço
+&lt;span class="caps"&gt;FQDN&lt;/span&gt; que você já tem configurado, no meu caso ficou
+[&lt;span class="caps"&gt;STRIKEOUT&lt;/span&gt;:https://chef2.cloudfish.in.]&lt;/p&gt;
+&lt;p&gt;Agora precisamos re-gerar as chave privada&amp;nbsp;&lt;em&gt;chef-validator.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;No menu, vá em &amp;nbsp;&lt;strong&gt;Clients &amp;gt; chef-validator &amp;gt; Edit,&lt;/strong&gt; Marque a
+opção&lt;strong&gt;&amp;nbsp;Regenerate Private Key&lt;/strong&gt;, e clique em &lt;strong&gt;Save Client.&lt;/strong&gt;&amp;nbsp;Agora
+copie a nova chave privada para &lt;em&gt;~/code/chef/.chef/chef-validator.pem&lt;/em&gt;
+na sua&amp;nbsp;maquina.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sugestão 2:&lt;/strong&gt; Não colocar suas permissões de de acesso/execução
+(knife.rb e *.pem) no &lt;em&gt;repositório, geralmente o que eu faço e todos
+amigos que trabalham comigo é, cada um coloca na sua home ~/.chef/,&lt;/em&gt; mas
+isso fica a&amp;nbsp;critério&amp;nbsp;de organização, e não esqueça que fazendo isso as
+configurações dentro do seu&amp;nbsp;knife.rb mudaram&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Agora vamos criar um usuário que fará o gerenciamento do&amp;nbsp;chef.&lt;/p&gt;
+&lt;p&gt;Clique na Aba&amp;nbsp;&lt;strong&gt;Users &amp;gt; Create,&lt;/strong&gt; marque a opção &lt;strong&gt;Admin,&lt;/strong&gt; preencha
+&lt;em&gt;username&lt;/em&gt; e &lt;em&gt;senha&lt;/em&gt; eu estou criando um usuário chamado &lt;strong&gt;*jj*&lt;/strong&gt;&amp;nbsp;para o
+exemplo, fique atento a isso e depois&amp;nbsp;clique em &lt;strong&gt;Create&amp;nbsp;User.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Vamos copiar a chave privada do nosso novo usuário, clique &amp;nbsp;em Users &amp;gt;
+edit &amp;gt; do usuário &lt;strong&gt;*jj*&lt;/strong&gt;, irá aparecer &amp;nbsp;a sua chave publica e privada,
+copie a privada para&amp;nbsp;~/code/chef/.chef/jj.pem.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Note que você é advertido, pois a chave privada só pode ser
+acessada uma única vez, like &lt;span class="caps"&gt;AWS&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Finalmente, abra seu terminal e vamos rodar o &lt;strong&gt;*knife
+configure.*&lt;/strong&gt;&amp;nbsp;Preencha os campos a seguir conforme sua necessidade,
+segue uma imagem para ilustrar e tirar supostas duvidas que possa&amp;nbsp;surgir.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;knife configure
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="/img/chef/command_knife_configure.jpg"&gt;&lt;img alt="image0" src="/img/chef/command_knife_configure.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Neste ponto que e a configuração do knife conecta com a interface do
+nosso servidor Chef Open Source que você já tem instalado anteriormente.
+Para testar vamos rodar um comandos basicos para listar a lista de
+clientes cadastrados e a lista de&amp;nbsp;nodes(servidores).&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/img/chef/knife-list.png"&gt;&lt;img alt="image2" src="/img/chef/knife-list.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Não se esqueça que você precisa está no seu repositório para quando for
+usar o comando &lt;em&gt;knife&lt;/em&gt; para conectar no seu Chef server. ë planamente
+possível se conectar em vários Chef server, pois o que manda é onde está
+o seu &lt;em&gt;.chef/knife.rb&lt;/em&gt; e suas chaves. A principio seria necessário
+apenas ter outro clone do repositório base e gerar os arquivos de
+configuração, assim quando fosse executar os comandos você entraria no
+diretório/repositório responsável por cuidar de tal&amp;nbsp;servidor.&lt;/p&gt;
+&lt;p&gt;Referência
+&lt;a class="reference external" href="http://docs.opscode.com/chef/install_workstation.html"&gt;Install Chef 11.x on a&amp;nbsp;Workstation&lt;/a&gt;&lt;/p&gt;
+</summary><category term="chef"></category><category term="chef-client"></category><category term="chef-server"></category><category term="Continuos Deploy"></category></entry><entry><title>Instalando Chef Server Opensource</title><link href="jesuejunior.com/instalando-chef-server" rel="alternate"></link><updated>2013-12-31T19:54:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-31:jesuejunior.com/instalando-chef-server</id><summary type="html">&lt;p&gt;Instalando o Chef server opensource (&lt;a class="reference external" href="http://www.getchef.com/"&gt;OpsCode&lt;/a&gt;)
+Estarei criando um servidor do chef para gerenciar deploy do cloudfish(link) e com isso estou escrevendo esse&amp;nbsp;tutorial.&lt;/p&gt;
+&lt;div class="section" id="cenario"&gt;
+&lt;h2&gt;&lt;em&gt;Cenário&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;Estou usando uma instancia de &lt;span class="caps"&gt;512MB&lt;/span&gt; com Ubuntu 12.04 do Digital&amp;nbsp;Ocean.&lt;/p&gt;
+&lt;p&gt;Ainda não criei usuários, então estou executando como root, depois todas as configurações serão feitas pelo&amp;nbsp;chef.&lt;/p&gt;
+&lt;p&gt;Primeiro passo é baixar o arquivo para a distribuição que no caso é ubuntu, no presente momento a versão mais atual é a&amp;nbsp;11.0.10-1.&lt;/p&gt;
+&lt;p&gt;Logo o arquivo a ser baixado&amp;nbsp;será:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb"&gt;chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Você pode sempre encontrar a versão mais atual na aba &lt;em&gt;server&lt;/em&gt;&amp;nbsp;do&amp;nbsp;link:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.getchef.com/chef/install/"&gt;http://www.getchef.com/chef/install/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Baixando o arquivo com todas as configurações do&amp;nbsp;chef-server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora vamos executar a&amp;nbsp;instalação.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dpkg -i chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pronto seu Chef server está instalado, vamos&amp;nbsp;configura-lo.&lt;/p&gt;
+&lt;p&gt;Mas primeiro, &lt;em&gt;o grande segredo que me fez escrever esse post&lt;/em&gt;&amp;nbsp;para uma instalação bem&amp;nbsp;sucedida.&lt;/p&gt;
+&lt;p&gt;Para o Chef server é necessário que o hostname e hosts seja o seu &lt;span class="caps"&gt;FQDN&lt;/span&gt; ou&amp;nbsp;seja:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# vim /etc/hosts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Deixe as linhas de seu arquivo parecida com&amp;nbsp;essas.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;127.0.0.1 localhost chef
+127.0.0.2 chef.jesuejunior.com chef
+
+&lt;span class="c"&gt;# The following lines are desirable for IPv6 capable hosts&lt;/span&gt;
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E mudaremos o hostname da mesma&amp;nbsp;forma.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# vim /etc/hostname&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Verifique o nome do seu servidor e/ou altere, caso seja&amp;nbsp;necessário.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;chef.jesuejunior.com
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Após a instalação ser concluída com sucesso e ter feito o &lt;em&gt;segredo do sucesso&lt;/em&gt;, precisamos executar o comando para
+instalar/configurar as dependências do&amp;nbsp;chef-server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# chef-server-ctl reconfigure&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Essa instalação precisa de muita memória, na primeira tentativa apareceu esse&amp;nbsp;erro:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s2"&gt;&amp;quot;FATAL: Errno::ENOMEM: Cannot allocate memory - fork(2)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mas não se desespere, no meu caso precisei usar uma instancia com poucos recursos e esse erro se da por falta de memória, por padrão as instancias do
+&lt;em&gt;Digital Ocean&lt;/em&gt;  não vem com o &lt;span class="caps"&gt;SWAP&lt;/span&gt; habilitada, então siga esse tutorial (&lt;a class="reference external" href="http://www.jesuejunior.com/criando-um-arquivo-como-memoria-swap"&gt;aqui&lt;/a&gt;)
+para habilitar um swap dentro de um arquivo em&amp;nbsp;disco.&lt;/p&gt;
+&lt;p&gt;Depois de ter criado um pouco mais de &lt;em&gt;memória&lt;/em&gt; para o processo,  execute o comando novamente, sua instalação vai exibir a seguinte&amp;nbsp;mensagem:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/img/chef/prompt-install-chef-server.png"&gt;&lt;img alt="image1" src="/img/chef/prompt-install-chef-server.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Já comecei a redigir o próximo post que será a parte da configuração de repositório para adicionar cookbooks, roles e sua chave para acessar o
+server, configurar seu knife.rb, ou seja a configuração para quem vai trabalhar com o&amp;nbsp;chef.&lt;/p&gt;
+&lt;p&gt;Espero que possa ser útil, qualquer duvida não deixe de&amp;nbsp;perguntar.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="chef"></category><category term="Linux"></category><category term="opensource"></category><category term="opscode"></category><category term="ubuntu"></category></entry><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
 pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
 &lt;p&gt;No exemplo, criaremos um arquivo em /mnt chamado&amp;nbsp;mem.swap:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4096
@@ -613,7 +734,104 @@ qual run level você&amp;nbsp;quiser):&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom é isso ai, coisa simples mais que pode salvar&amp;nbsp;vidas.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png"&gt;http://blog.jesuejunior.com/wp-content/uploads/2012/06/debian_ferramentas.png&lt;/a&gt;&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Instalando o Opera no Debian 6</title><link href="jesuejunior.com/instalando-o-opera-no-debian-6" rel="alternate"></link><updated>2012-05-25T23:30:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-o-opera-no-debian-6</id><summary type="html">&lt;p&gt;Certa fez precisei instalar o Opera no Debian , que é a
+</summary><category term="Debian"></category></entry><entry><title>Instalando e configurando o no-ip no Ubuntu</title><link href="jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu" rel="alternate"></link><updated>2012-05-30T22:57:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-30:jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu</id><summary type="html">&lt;p&gt;A distribuição usada foi a Ubuntu 10.04 Server. Todos os comandos foram
+dados como root. Baixando e descompactando o cliente para Linux do site
+oficial do no-ip: &lt;a class="reference external" href="http://www.no-ip.com"&gt;http://www.no-ip.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Baixando o cliente no-ip com os&amp;nbsp;comandos:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~# wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Descompacte o&amp;nbsp;arquivo:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~# tar -zvxf noip-duc-linux.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Entre no diretorio onde estão os&amp;nbsp;arquivos:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~# &lt;span class="nb"&gt;cd &lt;/span&gt;no-ip
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Para instalar execute o&amp;nbsp;comando:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~# make &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Após o termino da instalação, será apresentada na tela algumas&amp;nbsp;perguntas:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Please enter the login/email string &lt;span class="k"&gt;for&lt;/span&gt; no-ip.com: &lt;span class="s2"&gt;&amp;quot;login/email cadastrado no site no-ip.com.&amp;quot;&lt;/span&gt;
+Please enter the password &lt;span class="k"&gt;for&lt;/span&gt; user &lt;span class="sb"&gt;`&lt;/span&gt;seu login/email será apresentado  aqui&lt;span class="sb"&gt;`&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;digite sua senha.&amp;quot;&lt;/span&gt;
+Please enter a update interval: &lt;span class="o"&gt;[&lt;/span&gt;30&lt;span class="o"&gt;]&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;intervalo de atualização em minutos&amp;quot;&lt;/span&gt;
+Do you wish to run something at successful update?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Colocando para carregar no&amp;nbsp;boot.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Para que o cliente no-ip seja carregado cada vez que você ligar a
+máquina, siga estes passos. Dentro da pasta noip criada anteriormente,&amp;nbsp;digite:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp noip-2.1.1/debian.noip2.sh /etc/init.d/&lt;/span&gt;
+&lt;span class="c"&gt;# chmod +x /etc/init.d/debian.noip2.sh&lt;/span&gt;
+&lt;span class="c"&gt;# ln -s /etc/init.d/debian.noip2.sh /etc/rc2.d/S20noip&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Está assim terminada a instalação e configuração do cliente no-ip.
+Espero que este guia seja útil a alguém. Aqui segue todo o os comandos
+digitados e as opções conforme saída dos&amp;nbsp;comandos:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;root@backup01:/home/ubuntu# &lt;span class="nb"&gt;cd &lt;/span&gt;noip
+root@backup01:/home/ubuntu/noip# make &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
+gcc -Wall -g -Dlinux -DPREFIX&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;/usr/local&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt; noip2.c -o noip2
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d /usr/local/bin &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; mkdir -p /usr/local/bin&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d /usr/local/etc &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; mkdir -p /usr/local/etc&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+cp noip2 /usr/local/bin/noip2
+/usr/local/bin/noip2 -C -c /tmp/no-ip2.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Auto configuration &lt;span class="k"&gt;for&lt;/span&gt; Linux client of no-ip.com. Please enter the
+login/email string &lt;span class="k"&gt;for&lt;/span&gt; no-ip.com **user@gmail.com** Please enter the
+password &lt;span class="k"&gt;for&lt;/span&gt; user &lt;span class="s1"&gt;&amp;#39;user@gmail.com&amp;#39;&lt;/span&gt; ********** &lt;span class="m"&gt;2&lt;/span&gt; hosts are registered to this account.
+Do you wish to have them all updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **N**
+Do you wish to have host &lt;span class="o"&gt;[&lt;/span&gt;backup01.no-ip.info&lt;span class="o"&gt;]&lt;/span&gt; updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **y&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;**
+Do you wish to have host &lt;span class="o"&gt;[&lt;/span&gt;server02.no-ip.info&lt;span class="o"&gt;]&lt;/span&gt; updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **N&lt;span class="o"&gt;[&lt;/span&gt;2&lt;span class="o"&gt;]&lt;/span&gt;**
+Please enter an update interval:&lt;span class="o"&gt;[&lt;/span&gt;30&lt;span class="o"&gt;]&lt;/span&gt; **15**
+Do you wish to run something at successful update?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **y**
+Please enter the script/program name **backup01   &lt;span class="o"&gt;[&lt;/span&gt;3&lt;span class="o"&gt;]&lt;/span&gt;**
+New configuration file &lt;span class="s1"&gt;&amp;#39;/tmp/no-ip2.conf&amp;#39;&lt;/span&gt; created.
+mv /tmp/no-ip2.conf /usr/local/etc/no-ip2.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;[1]&lt;/strong&gt;&amp;nbsp;- Coloque &lt;span class="caps"&gt;YES&lt;/span&gt; para ser o dominio a ser usado por este&amp;nbsp;computador.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[2]&lt;/strong&gt;&amp;nbsp;- Deixe &lt;span class="caps"&gt;NO&lt;/span&gt; para usar apenas um dos&amp;nbsp;domínio&amp;nbsp;se&amp;nbsp;você&amp;nbsp;tiver mais faça o&amp;nbsp;mesmo&amp;nbsp;para os outros. No meu caso eu tinha mais de um host&amp;nbsp;associado&amp;nbsp;ao&amp;nbsp;mesmo&amp;nbsp;login.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[3]&lt;/strong&gt;&amp;nbsp;- Aqui é apenas o nome do script que vai ser gerado e para depois voce colocar na inicialização do &lt;span class="caps"&gt;S.O.&lt;/span&gt;&lt;/p&gt;
+</summary><category term="Debian"></category><category term="no-ip"></category></entry><entry><title>Habilitando SSH no Fedora 15/16</title><link href="jesuejunior.com/habilitando-ssh-no-fedora" rel="alternate"></link><updated>2012-05-26T21:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-26:jesuejunior.com/habilitando-ssh-no-fedora</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt; é um protocolo de rede que permite que dados sejam trocados
+através de um canal seguro entre dois dispositivos de rede. Partindo do
+principio que você tenha uma nova instalação do Fedora 15, com a super
+área de trabalho &lt;strong&gt;&lt;span class="caps"&gt;GNOME&lt;/span&gt; 3&lt;/strong&gt;, e precisa descobrir como ativar o &lt;strong&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt;&lt;/strong&gt;.
+Este artigo é simplesmente uma maneira de utilizar essa ferramenta
+primordial para um linux user ou sysadmin. Para executar alguns dos
+comandos que você precisa ter a senha da conta&amp;nbsp;root.&lt;/p&gt;
+&lt;p&gt;Habilitando &lt;strong&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt; Daemon&lt;/strong&gt;
+Primeiro de tudo, vamos nos certificar de que o daemon ssh está em  execução.
+Abra o terminal e&amp;nbsp;digite:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo su
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl start sshd.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora que o serviço foi iniciado, precisamos coloca-lo para iniciar
+junto ao boot do sistema, para caso reinicie a maquina o &lt;span class="caps"&gt;SSH&lt;/span&gt; funcione&amp;nbsp;normalmente.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl enable sshd.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Após executar o comando, aparecerá a mensagem. Isso quer dizer que&amp;nbsp;funcionou!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;em&gt;sshd.service is not a native service, redirecting to&amp;nbsp;/sbin/chkconfig.&lt;/em&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;em&gt;Executing /sbin/chkconfig sshd&amp;nbsp;on&lt;/em&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Verificando as configurações do Firewall
+Por padrão a porta 22 vem aberta no firewall, mas é interessante verificar para não termos surpresas quando precisar-mos usar &lt;span class="caps"&gt;SSH&lt;/span&gt;.
+Abra o system-config-firewall. Você pode acessar da seguinte forma também,&amp;nbsp;acesse&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Atividades &amp;gt; Aplicativos &amp;gt;&amp;nbsp;Firewall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/img/firewall_fedora.png"&gt;&lt;img alt="image1" src="/img/firewall_fedora.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Testando a conexão, abra gnome-terminal e&amp;nbsp;digite:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh user@hostname
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para conectar meu usuário é “jr” e meu computador (&lt;span class="caps"&gt;IP&lt;/span&gt;) 192.168.0.10.
+Então digitamos o seguinte comando no terminal: ssh &lt;a class="reference external" href="mailto:jr&amp;#64;192.168.0.10"&gt;jr&amp;#64;192.168.0.10&lt;/a&gt;. O
+terminal exibirá uma mensagem de&amp;nbsp;‘warning’:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;The authenticity of host ’192.168.0.10 &lt;span class="o"&gt;(&lt;/span&gt;192.168.0.10&lt;span class="o"&gt;)&lt;/span&gt;’ can’t be established.
+RSA key fingerprint is &lt;span class="o"&gt;[&lt;/span&gt;some long identification number in 2-digit sequence&lt;span class="o"&gt;]&lt;/span&gt;
+Are you sure you want to &lt;span class="k"&gt;continue&lt;/span&gt; connecting &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;?
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Digite “yes”, Após digite a senha para o usuário “jr” e você estará conectado via &lt;span class="caps"&gt;SSH&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Então é&amp;nbsp;isso.&lt;/p&gt;
+</summary><category term="fedora"></category></entry><entry><title>Instalando o Opera no Debian 6</title><link href="jesuejunior.com/instalando-o-opera-no-debian-6" rel="alternate"></link><updated>2012-05-25T23:30:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-o-opera-no-debian-6</id><summary type="html">&lt;p&gt;Certa fez precisei instalar o Opera no Debian , que é a
 distribuição que adotei &amp;nbsp;para alguns dos servidores do trabalho, &amp;nbsp;porem
 apenas um cliente usa com interface&amp;nbsp;gráfica,&amp;nbsp;então vou postar a dica
 para eu não esquecer quando precisar&amp;nbsp;novamente.&lt;/p&gt;
@@ -629,7 +847,24 @@ para eu não esquecer quando precisar&amp;nbsp;novamente.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install opera
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pronto! Agora é só&amp;nbsp;testar.&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-01-26T16:31:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-01-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
+</summary><category term="Debian"></category></entry><entry><title>Instalando o Skype no Fedora 15 64 bits</title><link href="jesuejunior.com/instalando-skype-fedora" rel="alternate"></link><updated>2012-05-25T03:52:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-skype-fedora</id><summary type="html">&lt;p&gt;Bom esse é meu primeiro post, estou migrando do Ubuntu (Unity) para o
+Fedora 15 (&lt;span class="caps"&gt;GNOME&lt;/span&gt; 3) e estou enfrentando alguns problemas basicos, já esperados.
+E nessa jornada irei postando aqui, para eu lembrar posteriormente e talvez ajudar&amp;nbsp;alguem.&lt;/p&gt;
+&lt;p&gt;Como no site do Skype não tem a versão nativa 64bits em &lt;span class="caps"&gt;RPM&lt;/span&gt;, só a 32
+bits, criei esse ‘howto’ de como instalar o comunicador no Fedora 64&amp;nbsp;bits:&lt;/p&gt;
+&lt;p&gt;1 – Instale as dependências&amp;nbsp;necessárias:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum install glibc.i686 alsa-lib.i686 libXv.i686 libXScrnSaver.i686
+qt.i686 qt-x11.i686 alsa-plugins-pulseaudio.i686 libv4l.i686 -y
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2 – Baixe o pacote &lt;span class="caps"&gt;RPM&lt;/span&gt; 32bits no site do&amp;nbsp;Skype:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget http://download.skype.com/linux/skype-2.2.0.35-fedora.i586.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;3 – Agora instale o pacote usando o yum, com o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum --nogpgcheck localinstall skype-2.2.0.35-fedora.i586.rpm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para utilizar é só ir ao menu &lt;span class="caps"&gt;ATIVIDADES&lt;/span&gt; &amp;gt; &lt;span class="caps"&gt;APLICATIVOS&lt;/span&gt; &amp;gt; &lt;span class="caps"&gt;SKYPE&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Espero que possa&amp;nbsp;ajudar!&lt;/p&gt;
+</summary><category term="fedora"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-01-26T16:31:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-01-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
 sábio me ensinou e eu pesquisei mais algumas&amp;nbsp;informações.&lt;/p&gt;
 &lt;p&gt;A partir da versão 2.6 o Python traz um recurso diferente para formatar&amp;nbsp;strings.&lt;/p&gt;
 &lt;p&gt;Diz o manual que a partir da versão 3.0 a formatação usando o método %
