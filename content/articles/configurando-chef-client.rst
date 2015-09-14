@@ -8,11 +8,9 @@
 O Chef, resolvi  escrever o post que havia prometido.
 
 Acreditando fortemente que você já passou por
-`aqui <http://jesuejunior.com/instalando-chef-server>`__ e já tem
-o Chef Server instalado.
+`aqui <http://jesuejunior.com/instalando-chef-server>`__ e já tem o Chef Server instalado.
 
-**Sugestão 1:** Instale o tmux vim curl wget com o comando abaixo ou
-equivalente a sua distribuição.
+**Sugestão 1:** Instale o tmux vim curl wget com o comando abaixo ou equivalente a sua distribuição.
 
 .. code-block:: shell
 
@@ -73,8 +71,7 @@ Vamos copiar a chave privada do nosso novo usuário, clique  em Users >
 edit > do usuário ***jj***, irá aparecer  a sua chave publica e privada,
 copie a privada para ~/code/chef/.chef/jj.pem.
 
-OBS: Note que você é advertido, pois a chave privada só pode ser
-acessada uma única vez, like AWS.
+OBS: Note que você é advertido, pois a chave privada só pode ser acessada uma única vez, like AWS.
 
 Finalmente, abra seu terminal e vamos rodar o ***knife
 configure.*** Preencha os campos a seguir conforme sua necessidade,

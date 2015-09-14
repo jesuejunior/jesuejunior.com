@@ -3,16 +3,15 @@ Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)
 :date: 2012-10-12 21:04
 :author: jesuejunior
 :category: Banco de Dados, Linux, PostgreSQL
-:tags: Banco de Dados, PostgreSQL
+:tags: Banco de Dados, PostgreSQL, psql, postgre, usuario, gerenciar, aprender, db
 :slug: aprendendo-gerenciar-usuarios-postgres
 
 Confesso que logo de cara quando comecei a usar PSQL fiquei
-meio perdido (usava MySQL), então estou escrevendo essa dica para eu
-relembrar e deixar o legado. kkkk
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu relembrar.
 
 Criando seu 1° super usuário no PostgreSQL.
 Depois de instalado seu SGBD postgres, como criar seu 1° usuário?
-Qual a senha de root? Qual a senha padrão?
+Qual a senha de root(postgres)? Qual a senha padrão?
 
 Esta dica é para iniciantes.
 Simples, na máquina com o banco instalado siga os seguintes passos,
@@ -25,14 +24,14 @@ Entre como usuário postgres com o comando:
 
 .. code-block:: shell
 
-    # su postgres
+    ~# su postgres
 
 Conecte ao Shell do postgres (por padrão você se conecta ao DB postgres)
 comando:
 
 .. code-block:: shell
 
-    $ psql
+    ~$ psql
 
 Agora deve aparecer uma frase de boas vindas (Bem vindo ao psql...) e
 você está no terminal do posgres, note que o shell mudou antes era
@@ -42,15 +41,15 @@ no banco *postgres*.
 
 Para criar nosso superuser, digite o comando:
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    CREATE USER nomedousuario SUPERUSER INHERIT CREATEDB CREATEROLE;
+    postgres=# CREATE USER nomedousuario SUPERUSER INHERIT CREATEDB CREATEROLE;
 
 Depois temos que alterar a senha, então digite  o comando:
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    ALTER USER nomedousuario PASSWORD 'senha';
+    postgres=# ALTER USER nomedousuario PASSWORD 'senha';
 
 Olha que maravilha! Super Usuário criado.
 
@@ -70,45 +69,45 @@ Comandos básicos, para você que está acostumado com o golfinho, o Mamute
 
 Poderíamos usar essas opções da mesma forma, mas criando um usuário comum e colocando as permissões mais restritivas.
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    CREATE USER jesuejunior WITH PASSWORD 'supersecret';
+    postgres=# CREATE USER jesuejunior WITH PASSWORD 'supersecret';
 
 Para conceder a permissão de executar somente Update ou Select ou Insert ou Delete ou Role(dono)
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT UPDATE ON nomedatabela to jesuejunior
+    postgres=# GRANT UPDATE ON nomedatabela to jesuejunior
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT SELECT ON nomedatabela to jesuejunior
+    postgres=# GRANT SELECT ON nomedatabela to jesuejunior
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT INSERT ON nomedatabela to jesuejunior
+    postgres=# GRANT INSERT ON nomedatabela to jesuejunior
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT DELETE ON nomedatabela to jesuejunior
+    postgres=# GRANT DELETE ON nomedatabela to jesuejunior
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT RULE ON nomedatabela to jesuejunior
+    postgres=# GRANT RULE ON nomedatabela to jesuejunior
 
 E para dar permissão para fazer todas as operações.
 
-.. code-block:: sql
+.. code-block:: postgres
 
-    GRANT ALL PRIVILEGES ON nomedatabela to public
+    postgres=# GRANT ALL PRIVILEGES ON nomedatabela to public
 
 Partindo do principio que você já está conectado com o usuário postgres.
 
 Para apagar um usuário:
 
-.. code-block:: shell
+.. code-block:: postgres
 
-    $ dropuser jesuejunior
+    postgres=# dropuser jesuejunior
 
 Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras pessoas.
 
