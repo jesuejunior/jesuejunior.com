@@ -108,6 +108,10 @@ p{
 	width: 55px;
 }
 
+.social-link.codeschool {
+	background: url("../img/social-icons/codeschool.png") center no-repeat #489FB0;
+}
+
 .social-link.twitter {
 	background: url("../img/social-icons/twitter.png") center no-repeat #1db4ec;
 }
