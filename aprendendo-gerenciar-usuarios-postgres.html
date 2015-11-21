@@ -12,6 +12,12 @@
 
     <meta name="tags" content="Banco de Dados" />
     <meta name="tags" content="PostgreSQL" />
+    <meta name="tags" content="psql" />
+    <meta name="tags" content="postgre" />
+    <meta name="tags" content="usuario" />
+    <meta name="tags" content="gerenciar" />
+    <meta name="tags" content="aprender" />
+    <meta name="tags" content="db" />
 
 </head>
 
@@ -31,7 +37,7 @@
                     <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
                     <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
                     <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
-                    <a class="social-link"></a>
+                    <a target="_blank" href="https://www.codeschool.com/users/jesuejunior" class="social-link codeschool"></a>
                 </div>
             </nav>
 <div id="content" class="">
@@ -52,11 +58,10 @@
       </div><!-- /.post-info -->
       <div class="">
         <p>Confesso que logo de cara quando comecei a usar <span class="caps">PSQL</span> fiquei
-meio perdido (usava MySQL), então estou escrevendo essa dica para eu
-relembrar e deixar o legado.&nbsp;kkkk</p>
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu&nbsp;relembrar.</p>
 <p>Criando seu 1° super usuário no PostgreSQL.
 Depois de instalado seu <span class="caps">SGBD</span> postgres, como criar seu 1° usuário?
-Qual a senha de root? Qual a senha&nbsp;padrão?</p>
+Qual a senha de root(postgres)? Qual a senha&nbsp;padrão?</p>
 <p>Esta dica é para iniciantes.
 Simples, na máquina com o banco instalado siga os seguintes passos,
 existem varias maneiras de fazer isso, e essa foi a maneira
@@ -64,10 +69,10 @@ mais&nbsp;básica/simples que eu achei para&nbsp;explicar.</p>
 <p>Logue-se como root, digite &quot;su root&quot; ou &quot;sudo -i&quot; ou &quot;sudo su&quot; (no
 terminal a mensagem padrão deve terminar com #).
 Entre como usuário postgres com o&nbsp;comando:</p>
-<div class="highlight"><pre><span class="c"># su postgres</span>
+<div class="highlight"><pre>~# su postgres
 </pre></div>
 <p>Conecte ao Shell do postgres (por padrão você se conecta ao <span class="caps">DB</span> postgres)&nbsp;comando:</p>
-<div class="highlight"><pre><span class="nv">$ </span>psql
+<div class="highlight"><pre>~<span class="nv">$ </span>psql
 </pre></div>
 <p>Agora deve aparecer uma frase de boas vindas (Bem vindo ao psql&#8230;) e
 você está no terminal do posgres, note que o shell mudou antes era
@@ -75,10 +80,10 @@ você está no terminal do posgres, note que o shell mudou antes era
 Isso quer dizer que agora&nbsp;você&nbsp;está no shell do PostgreSQL conectado
 no banco <em>postgres</em>.</p>
 <p>Para criar nosso superuser, digite o&nbsp;comando:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="n">SUPERUSER</span> <span class="n">INHERIT</span> <span class="k">CREATEDB</span> <span class="n">CREATEROLE</span><span class="p">;</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="n">SUPERUSER</span> <span class="k">INHERIT</span> <span class="n">CREATEDB</span> <span class="n">CREATEROLE</span><span class="p">;</span>
 </pre></div>
 <p>Depois temos que alterar a senha, então digite &nbsp;o&nbsp;comando:</p>
-<div class="highlight"><pre><span class="k">ALTER</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="n">PASSWORD</span> <span class="s1">&#39;senha&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">ALTER</span> <span class="k">USER</span> <span class="n">nomedousuario</span> <span class="k">PASSWORD</span> <span class="s1">&#39;senha&#39;</span><span class="p">;</span>
 </pre></div>
 <p>Olha que maravilha! Super Usuário&nbsp;criado.</p>
 <p>Comandos&nbsp;básicos, para você que está acostumado com o golfinho, o Mamute
@@ -93,25 +98,25 @@ no banco <em>postgres</em>.</p>
 <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span><span class="o">-</span><span class="k">name</span><span class="p">;</span><span class="err"> </span> <span class="o">=&gt;</span> <span class="s-Name">&quot;Lista o conteúdo das tabelas. (o.O)&quot;</span>
 </pre></div>
 <p>Poderíamos usar essas opções da mesma forma, mas criando um usuário comum e colocando as permissões mais&nbsp;restritivas.</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="n">jesuejunior</span> <span class="k">WITH</span> <span class="n">PASSWORD</span> <span class="s1">&#39;supersecret&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">jesuejunior</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="s1">&#39;supersecret&#39;</span><span class="p">;</span>
 </pre></div>
 <p>Para conceder a permissão de executar somente Update ou Select ou Insert ou Delete ou&nbsp;Role(dono)</p>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">UPDATE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">UPDATE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
 </pre></div>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
 </pre></div>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">INSERT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">INSERT</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
 </pre></div>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">DELETE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
 </pre></div>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">RULE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">RULE</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">jesuejunior</span>
 </pre></div>
 <p>E para dar permissão para fazer todas as&nbsp;operações.</p>
-<div class="highlight"><pre><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="k">public</span>
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">nomedatabela</span> <span class="k">to</span> <span class="n">public</span>
 </pre></div>
 <p>Partindo do principio que você já está conectado com o usuário&nbsp;postgres.</p>
 <p>Para apagar um&nbsp;usuário:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dropuser jesuejunior
+<div class="highlight"><pre><span class="n">postgres</span><span class="o">=#</span> <span class="n">dropuser</span> <span class="n">jesuejunior</span>
 </pre></div>
 <p>Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras&nbsp;pessoas.</p>
 <p>Em breve estarei postando sobre gerenciar&nbsp;databases.</p>
