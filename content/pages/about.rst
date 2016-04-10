@@ -1,13 +1,21 @@
 :title: About
 :author: Jesué Junior
 :lang: pt
-:translation: false
+:translation: true
 
-Estudante de engenharia da computação com ênfase em software,
-interessado em Python, Ruby (disse RUBY e não Ruby on Rails), Javascript
-e tudo que for aperfeiçoar algum processo. Atualmente desenvolvendo o
-http://cloudfish.in.
+Olá, eu sou Jesué Junior ou JJ.
 
-Commiter official da comunidade do Chef (http://getchef.com/).
+Esse é meu blog/site e aqui você vai encontar conteúdo relacionado com desenvolvimento 
+de software, robótica, IA, infrastreutura(IaaC) e DevOps.
 
-Em construção...
+Estudante de engenharia da computação, interessado em Python, Docker,
+Robotica, opensource e apaixonado por automatização.
+
+Atualmente trabalhando como Software Engineer @ Muxi e escrevendo TCC para fechar a universidade.
+
+Commiter official da comunidade do `Chef <http://getchef.com/>`_.
+
+Para ter mais informações fique a vontade para clicar nos ícones ao lado.
+
+Tentando manter a rotina de escrever/documentar tudo que for possível do dia-a-dia, então se tiver
+sugestões de posts, por favor me envie um email.
