@@ -40,6 +40,22 @@ DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["sitemap", "backreftranslate"]
+
+SITEMAP = {
+        'format': 'xml',
+        'priorities': {
+            'articles': 0.5,
+            'indexes': 0.5,
+            'pages': 0.5
+        },
+        'changefreqs': {
+            'articles': 'weekly',
+            'indexes': 'daily',
+            'pages': 'monthly'
+        }
+}
 
 TYPOGRIFY = True
 
