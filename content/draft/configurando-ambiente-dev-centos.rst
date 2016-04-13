@@ -1,25 +1,24 @@
-:title: Configurando um ambiente de desenvolvimento para Python com CentOS
+:title: Configurando um ambiente de desenvolvimento com CentOS
 :author: jesuejunior
 :lang: pt
 :translation: true
 
-Recentemente fui convidado para um novo desafio, mas quando cheguei lá eu vi que era um mega
-desafio. 
+Vou tentar deixar um passo a passo para deixar um CentOS pronto para desenvolvimento.
 
+Itens que você terá instalado: vim, tmux, zsh, docker, docker-compose, virtualenv
 
 Fazendo um update inicial.
 
 .. code-block:: shell
 
     $ sudo yum update -y
+    
 Começando a instalação das dependencias para ter um bom ambiente de desenvolvimento.
 
 .. code-block:: shell
 
     $ sudo yum -y install gcc kernel-devel kernel-headers make bzip2 cmake epel-release
     tmux dkms perl python-devel mysql-devel net-tools htop vim zsh git python-pip
-
-
 
 .. code-block:: shell
 
@@ -28,6 +27,9 @@ Começando a instalação das dependencias para ter um bom ambiente de desenvolv
 .. code-block:: shell
 
     $ sudo pip install virtualenvwrapper docker-compose ansible
+
+
+Adicionando o repositório do docker.
 
 .. code-block:: shell
 
@@ -40,7 +42,6 @@ Começando a instalação das dependencias para ter um bom ambiente de desenvolv
     gpgkey=https://yum.dockerproject.org/gpg
     EOF
 
-
  Instalando e configurando o docker.
 
 .. code-block:: shell
@@ -52,15 +53,19 @@ Começando a instalação das dependencias para ter um bom ambiente de desenvolv
     sudo service docker start && \
     sudo chkconfig docker on 
 
-  Clonando o repositorio que tem umas configurações iradas que eu cultivo.
+OBS: 
+
+  Clonando o repositório(dotfiles) que tem umas configurações iradas que eu cultivo.
 
 .. code-block:: shell
 
-    $ git clone https://github.com/jesuejunior/dotfiles.git --recursive 
+    $ git clone https://github.com/jesuejunior/dotfiles.git --recursive
 
 .. code-block:: shell
 
     $ cd dotfiles
+
+Aqui vamos executar um script que fará algumas instalações e configurações essenciais. 
 
 .. code-block:: shell
 
@@ -104,7 +109,6 @@ Instalando python 3.5
     $ ./configure
     $ make
     $ sudo make install
-
 
 
 .. code-block:: shell
