@@ -5,7 +5,7 @@
 
 Vou tentar deixar um passo a passo para deixar um CentOS pronto para desenvolvimento.
 
-Itens que você terá instalado: vim, tmux, zsh, docker, docker-compose, virtualenv
+Ao fim, você terá instalado: vim, tmux, zsh, docker, docker-compose, virtualenv(smart) e ansible
 
 Fazendo um update inicial.
 
@@ -13,21 +13,29 @@ Fazendo um update inicial.
 
     $ sudo yum update -y
     
-Começando a instalação das dependencias para ter um bom ambiente de desenvolvimento.
+Começando a instalação das dependencias do centOS.
 
 .. code-block:: shell
 
     $ sudo yum -y install gcc kernel-devel kernel-headers make bzip2 cmake epel-release
-    tmux dkms perl python-devel mysql-devel net-tools htop vim zsh git python-pip
+    tmux dkms python-devel mysql-devel net-tools htop vim zsh git python-pip
+
+
+Aproveitando e já fazendo upgrade do `PIP`.
 
 .. code-block:: shell
 
     $ sudo pip install --upgrade pip
 
+
+Vamos instalar alguns pacotes essenciais via `PIP`como root.
+
 .. code-block:: shell
 
     $ sudo pip install virtualenvwrapper docker-compose ansible
 
+
+Iniciando a instalação e configuração do docker.
 
 Adicionando o repositório do docker.
 
@@ -42,20 +50,22 @@ Adicionando o repositório do docker.
     gpgkey=https://yum.dockerproject.org/gpg
     EOF
 
- Instalando e configurando o docker.
+ Isso mesmo, vamos precisar realizar algumas configurações e já deixar o docker iniciando no boot do centOS.
+
+ OBS: Note que tem um `vagrant` ali, pois estou fazendo essas configurações dentro de uma VM Vagrant.
 
 .. code-block:: shell
 
-    $ sudo yum update && \
-    sudo groupadd docker && \
-    sudo yum install -y docker-engine && \
-    sudo usermod -aG docker vagrant && \
-    sudo service docker start && \
-    sudo chkconfig docker on 
+    $ sudo yum update && \ #Validando a adição do repositório.
+    sudo groupadd docker && \ #Criando um grupo docker
+    sudo yum install -y docker-engine && \ #Instalando o docker
+    sudo usermod -aG docker vagrant && \ #Adicionando o usuário vagrant no grupo do docker para que possa executar o docker sem ser root
+    sudo service docker start && \ #Iniciando o serviço do docker.
+    sudo chkconfig docker on #Colocando o docker para ser iniciado no boot
 
-OBS: 
 
-  Clonando o repositório(dotfiles) que tem umas configurações iradas que eu cultivo.
+
+Clonando o repositório(dotfiles) que tem umas configurações iradas que eu _cultivo_.
 
 .. code-block:: shell
 
