@@ -107,15 +107,16 @@ body,html {
 }
 
 .social {
-	margin-top: 20px;
+	margin: 20px 0 0 12px;
+
 }
 
 .social .social-link {
 	background: #484b4b;
-	margin: 0.5px;
+	margin: 2px;
 	float: left;
 	display: block;
-	height: 55px;
+	height: 50px;
 	width: 55px;
 }
 
