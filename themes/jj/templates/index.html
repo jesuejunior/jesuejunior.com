@@ -1,29 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-<div id="content">
-    <div class="block welcome">
-        {% block content_title %}
-        <h1>All articles</h1>
-        {% endblock %}
+<div class="content pure-u-1 pure-u-md-3-4">
+    <div>
+        <div class="posts">
+            {% block content_title %}
+            <h1 class="content-subhead">Todos os artigos</h1>
+            {% endblock %}
 
-        <ol id="">
-        {% for article in articles_page.object_list %}
-                <li>
-                    <article class="">
-                        <header>
-                            <h2 class="">
-                                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
-                            </h2>
-                        </header>
-                        <div class="info">
-                            <abbr class="" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
-                        </div>
-                        <div class=""> {{ article.summary }} </div>
-                    </article>
-                </li>
-        {% endfor %}
-        </ol>
-        {% include 'pagination.html' %}
+            {% for article in articles_page.object_list %}
+            <section class="post">
+                    <header class="post-header">
+                        <img class="post-avatar" alt="Jesue Junior" height="48" width="48" src="img/jj.png">
+
+                        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"><h2 class="post-title">{{ article.title }}</h2></a>
+
+                        <p class="post-meta">
+                            Em <abbr class="" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
+                            &nbsp
+                            {% for tag in article.tags %}
+                                <a class="post-category post-category-pure" href="#">{{ tag }}</a>
+                              {% endfor %}
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            {{ article.summary }}
+                        </p>
+                    </div>
+                </section>
+
+            {% endfor %}
+
+            {% include 'pagination.html' %}
+        </div>
     </div>
 </div><!-- /#content -->
 {% endblock content %}

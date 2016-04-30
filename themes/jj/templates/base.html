@@ -4,10 +4,31 @@
         {% block head %}
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link type="text/css" rel="stylesheet" href="{{SITEURL}}/theme/css/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="{{SITEURL}}/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="{{SITEURL}}/theme/css/pure/pure-min.css" />
         <link type="text/css" rel="stylesheet" href="{{SITEURL}}/theme/css/pygments.css" />
-        <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic|Asap:400,700,400italic' rel='stylesheet' type='text/css'>
+
+        <!-- import grid responsive -->
+        <!--[if lte IE 8]>
+
+        <link rel="stylesheet" href="{SITEURL}}/theme/css/pure/grids-responsive-old-ie-min.css">
+
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/pure/grids-responsive-min.css">
+
+        <!--<![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/pure/blog-old-ie.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/pure/blog.css">
+        <!--<![endif]-->
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600,600italic,700italic' rel='stylesheet' type='text/css'>
         {% if FEED_ALL_ATOM %}
         <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
         {% endif %}
@@ -36,47 +57,47 @@
 </head>
 
 <body>
-    <div class="bg">
-        <div class="wrap">
-            <nav id="sidebar">
-                <a href="{{ SITEURL }}/" id="logo"></a>
-                <ul id="menu">
-                    <li><a class="menu-link" href="/">Articles</a></li>
-                {% for title, link in MENUITEMS %}
-                    <li><a class="menu-link" href="{{ link }}">{{ title }}</a></li>
-                {% endfor %}
-                {% if DISPLAY_PAGES_ON_MENU %}
-                  {% for p in PAGES %}
-                    <li> <a class="{% if p == page %}active {% endif %}menu-link" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                  {% endfor %}
-                {% else %}
-                  {% if DISPLAY_CATEGORIES_ON_MENU %}
-                    {% for cat, null in categories %}
-                      <li><a class="{% if cat == category %} active {% endif %} menu-link" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-5">
+            <a href="{{ SITEURL }}/" class="logo"></a>
+            <div class="header">
+                <nav id="nav">
+                    <ul class="nav-list" >
+                        <li class="nav-item"><a class="pure-button" href="/">Artigos</a></li>
+                    {% for title, link in MENUITEMS %}
+                        <li class="nav-item"><a class="pure-button" href="{{ link }}">{{ title }}</a></li>
                     {% endfor %}
-                  {% endif %}
-                {% endif %}
-                </ul>
-
-                <div class="social">
-                    <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
-                    <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
-                    <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
-                    <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
-                    <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
-                    <a target="_blank" href="https://www.codeschool.com/users/jesuejunior" class="social-link codeschool"></a>
-                </div>
-            </nav>
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                      {% for p in PAGES %}
+                        <li class="nav-item"> <a class="{% if p == page %}active {% endif %} pure-button" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                      {% endfor %}
+                    {% else %}
+                      {% if DISPLAY_CATEGORIES_ON_MENU %}
+                        {% for cat, null in categories %}
+                          <li class="nav-item"><a class="{% if cat == category %} active {% endif %} pure-button" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endif %}
+                    </ul>
+{#                <div class="pure-u-1 pure-u-md-1-5">#}
+                    <div class="social">
+                        <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                        <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                        <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+                        <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                        <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                        <a target="_blank" href="https://www.codeschool.com/users/jesuejunior" class="social-link codeschool"></a>
+                    </div>
+                </nav>
+{#                </div>#}
+            </div>
+        </div>
         {% block content %}
         {% endblock %}
-            <b class="clear"></b>
-        </div>
-    </div>
-    <footer>
-        <div class="wrap">
+        <div class="footer">
             <span>Desenvolvido por JJ</span>
         </div>
-    </footer>
+        </div>
     {% include 'analytics.html' %}
 </body>
 </html>
