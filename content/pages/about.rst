@@ -1,4 +1,4 @@
-:title: About
+:title: Sobre
 :author: Jesué Junior
 :lang: pt
 :translation: true
