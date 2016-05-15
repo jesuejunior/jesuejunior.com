@@ -1,19 +1,28 @@
 :title: Configurando um ambiente de desenvolvimento com CentOS
 :author: jesuejunior
+:date: 2016-04-14 12:22
 :lang: pt
 :translation: true
+:tags: centos, linux, vagrant, devops
 
-Vou tentar deixar um passo a passo para deixar um CentOS pronto para desenvolvimento.
+Recentemente comecei em um novo desafio profissional e o primeiro **desafio** foi ter que trabalhar em uma estação
+*Windows*, porém com todas as ferramentas que se sairiam melhor no universo Linux, como por exemplo Python,
+Mongo, RabbitMQ e etc.
 
-Ao fim, você terá instalado: vim, tmux, zsh, docker, docker-compose, virtualenv(smart) e ansible
+Então uma possivel *solução* ou *mitigação* era usar Vagrant(VirtualBox), mesmo já sabendo que haveria problemas
+que poderiam impactar-me no futuro. Assumi o risco. :)
 
-Fazendo um update inicial.
+Vou tentar deixar um passo a passo de como deixar um CentOS pronto para desenvolvimento.
+
+Ao fim, você terá instalado: *vim, tmux, htop, zsh, docker, docker-compose, virtualenv(wrapper) e etc*
+
+Primeiro, faremos um update do sistema operacional.
 
 .. code-block:: shell
 
     $ sudo yum update -y
     
-Começando a instalação das dependencias do centOS.
+Vamos começar instalando algumas dependências do centOS.
 
 .. code-block:: shell
 
@@ -21,14 +30,14 @@ Começando a instalação das dependencias do centOS.
     tmux dkms python-devel mysql-devel net-tools htop vim zsh git python-pip
 
 
-Aproveitando e já fazendo upgrade do `PIP`.
+Aproveite a faça upgrade do *PIP*.
 
 .. code-block:: shell
 
     $ sudo pip install --upgrade pip
 
 
-Vamos instalar alguns pacotes essenciais via `PIP`como root.
+Vamos instalar alguns pacotes essenciais via *PIP* como root.
 
 .. code-block:: shell
 
@@ -37,7 +46,7 @@ Vamos instalar alguns pacotes essenciais via `PIP`como root.
 
 Iniciando a instalação e configuração do docker.
 
-Adicionando o repositório do docker.
+Adicionando o repositório do docker para *YUM*.
 
 .. code-block:: shell
 
@@ -50,9 +59,10 @@ Adicionando o repositório do docker.
     gpgkey=https://yum.dockerproject.org/gpg
     EOF
 
- Isso mesmo, vamos precisar realizar algumas configurações e já deixar o docker iniciando no boot do centOS.
+Pronto, agora que já temos o repositório do docker configurado, vamos realizar algumas configurações adicionais
+e já deixar o docker-engine iniciando no boot do centOS.
 
- OBS: Note que tem um `vagrant` ali, pois estou fazendo essas configurações dentro de uma VM Vagrant.
+OBS: Note que existe um *vagrant*, esse é o usuário padrão utilizado pelo *Vagrant* [1]_.
 
 .. code-block:: shell
 
@@ -64,24 +74,27 @@ Adicionando o repositório do docker.
     sudo chkconfig docker on #Colocando o docker para ser iniciado no boot
 
 
-
-Clonando o repositório(dotfiles) que tem umas configurações iradas que eu _cultivo_.
+Clonando o repositório(dotfiles) que tem umas configurações iradas que eu *cultivo*.
 
 .. code-block:: shell
 
-    $ git clone https://github.com/jesuejunior/dotfiles.git --recursive
+    $ cd ~ && git clone https://github.com/jesuejunior/dotfiles.git --recursive
 
 .. code-block:: shell
 
     $ cd dotfiles
 
-Aqui vamos executar um script que fará algumas instalações e configurações essenciais. 
+Vamos executar um script que fará algumas instalações e configurações essenciais que podem ser verificadas no github.
 
 .. code-block:: shell
 
     $ bash bootstrap.sh
 
-Instalando python 3.5
+
+Bônus
+^^^^^
+
+Instalando python 3.5 no CentOS
 
 .. code-block:: shell
 
@@ -104,48 +117,26 @@ Instalando python 3.5
     $ sudo make install
 
 
-.. code-block:: shell
-
-    $ sudo yum-builddep python
-
-.. code-block:: shell
-
-    $ curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
-
-.. code-block:: shell
-
-    $ tar xf Python-3.5.0.tgz
-    $ cd Python-3.5.0
-    $ ./configure
-    $ make
-    $ sudo make install
-
-
-.. code-block:: shell
-
-    $ sudo yum-builddep python
-
-.. code-block:: shell
-
-    $ curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
-
-.. code-block:: shell
-
-    $ tar xf Python-3.5.0.tgz
-    $ cd Python-3.5.0
-    $ ./configure
-    $ make
-    $ sudo make install
-
 Confirmando a versão do python 3
 
 .. code-block:: shell
 
     $ python3 --version
 
+Apagando arquivos pós instalação do Python 3
 
-Limpando os caches do centos após as isntalações
+.. code-block:: shell
+
+    $ cd ..
+    $ rm -rf Python-3.5.0*
+
+Limpando os caches do centos após as instalações
 
 .. code-block:: shell
 
     $ sudo yum clean all
+
+Referências
++++++++++++
+
+.. [1] -> https://www.vagrantup.com/
