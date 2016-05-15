@@ -46,7 +46,7 @@ h3 {
     text-transform: uppercase;
 }
 .brand-tagline {
-    font-weight: 300;
+    font-weight: 400;
     color: rgb(176, 202, 219);
 }
 
@@ -103,9 +103,9 @@ h3 {
     margin-left: 1em;
 }
 .post-description {
-    font-family: Georgia, "Cambria", serif;
+    /*font-family: Georgia, "Cambria", serif;*/
     color: #444;
-    line-height: 1.8em;
+    line-height: 1.4em;
 }
 .post-meta {
     color: #999;
@@ -159,7 +159,7 @@ h3 {
 @media (min-width: 48em) {
     .content {
         padding: 2em 3em 0;
-        margin-left: 25%;
+        margin-left: 24%;
     }
 
     .header {
