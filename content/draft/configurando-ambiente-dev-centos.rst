@@ -5,30 +5,29 @@
 :translation: true
 :tags: centos, linux, vagrant, devops
 
-Recentemente comecei em um novo desafio profissional e o primeiro **desafio** foi ter que trabalhar em uma estação
-*Windows*, porém com todas as ferramentas que se sairiam melhor no universo Linux, como por exemplo Python,
-Mongo, RabbitMQ e etc.
+Precisei trabalhar em uma estação *Windows*, porém com todas as ferramentas que funcionam melhor no Linux, 
+como por exemplo Python, Mongo, RabbitMQ e etc.
 
-Então uma possivel *solução* ou *mitigação* era usar Vagrant(VirtualBox), mesmo já sabendo que haveria problemas
-que poderiam impactar-me no futuro. Assumi o risco. :)
+Então uma possível *solução* ou *mitigação* era usar Vagrant(VirtualBox), mas existem outras 
+soluções, eu optei por vagrant pois já conhecia e já havia usado anteriormente. :)
 
-Vou tentar deixar um passo a passo de como deixar um CentOS pronto para desenvolvimento.
+Vou tentar deixar um passo a passo de como deixar um _CentOS 7_ pronto para desenvolvimento.
 
-Ao fim, você terá instalado: *vim, tmux, htop, zsh, docker, docker-compose, virtualenv(wrapper) e etc*
+Ao fim, você terá instalado: *vim(dev IDE), tmux, htop, zsh, docker, docker-compose, virtualenv(wrapper)*
+e um conjunto completo de ferramentas para desenvolvimento.
 
-Primeiro, faremos um update do sistema operacional.
-
-.. code-block:: shell
-
-    $ sudo yum update -y
-    
-Vamos começar instalando algumas dependências do centOS.
+Clonando o repositório(dotfiles) onde vou guardando configurações basicas do dia-a-dia para uma possível troca de PC.
+Se notar que esse repositório já existe a bastante tempo e vou evoluindo a medida que vou precisando de mais configurações básicas.
 
 .. code-block:: shell
 
-    $ sudo yum -y install gcc kernel-devel kernel-headers make bzip2 cmake epel-release
-    tmux dkms python-devel mysql-devel net-tools htop vim zsh git python-pip
+    $ cd ~ && git clone https://github.com/jesuejunior/dotfiles.git --recursive
 
+Vamos executar um script que fará algumas instalações e configurações essenciais que podem ser verificadas no github.
+
+.. code-block:: shell
+
+    $ cd dotfiles && bash bootstrap.sh
 
 Aproveite a faça upgrade do *PIP*.
 
@@ -36,8 +35,7 @@ Aproveite a faça upgrade do *PIP*.
 
     $ sudo pip install --upgrade pip
 
-
-Vamos instalar alguns pacotes essenciais via *PIP* como root.
+Vamos instalar alguns pacotes essenciais via *PIP* como _root_.
 
 .. code-block:: shell
 
@@ -73,62 +71,16 @@ OBS: Note que existe um *vagrant*, esse é o usuário padrão utilizado pelo *Va
     sudo service docker start && \ #Iniciando o serviço do docker.
     sudo chkconfig docker on #Colocando o docker para ser iniciado no boot
 
-
-Clonando o repositório(dotfiles) que tem umas configurações iradas que eu *cultivo*.
-
-.. code-block:: shell
-
-    $ cd ~ && git clone https://github.com/jesuejunior/dotfiles.git --recursive
-
-.. code-block:: shell
-
-    $ cd dotfiles
-
-Vamos executar um script que fará algumas instalações e configurações essenciais que podem ser verificadas no github.
-
-.. code-block:: shell
-
-    $ bash bootstrap.sh
-
-
 Bônus
 ^^^^^
 
-Instalando python 3.5 no CentOS
-
-.. code-block:: shell
-
-    $ sudo yum install yum-utils
-
-.. code-block:: shell
-
-    $ sudo yum-builddep python
-
-.. code-block:: shell
-
-    $ curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
-
-.. code-block:: shell
-
-    $ tar xf Python-3.5.0.tgz
-    $ cd Python-3.5.0
-    $ ./configure
-    $ make
-    $ sudo make install
-
+Esse script(bootstrap) já instala o python 3.5.0, porem fique a vontade para altera-lo.
 
 Confirmando a versão do python 3
 
 .. code-block:: shell
 
     $ python3 --version
-
-Apagando arquivos pós instalação do Python 3
-
-.. code-block:: shell
-
-    $ cd ..
-    $ rm -rf Python-3.5.0*
 
 Limpando os caches do centos após as instalações
 
