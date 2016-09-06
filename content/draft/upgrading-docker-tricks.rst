@@ -1,0 +1,63 @@
+
+
+
+Basic file from https://github.com/docker/docker/releases/tag/v1.12.1
+
+.. code-block:: shell
+
+  [Unit]
+  Description=Docker Application Container Engine
+  Documentation=https://docs.docker.com
+  After=network.target
+  
+  [Service]
+  Type=notify
+  # the default is not to use systemd for cgroups because the delegate issues still
+  # exists and systemd currently does not support the cgroup feature set required
+  # for containers run by docker
+  ExecStart=/usr/bin/dockerd
+  ExecReload=/bin/kill -s HUP $MAINPID
+  # Having non-zero Limit*s causes performance problems due to accounting overhead
+  # in the kernel. We recommend using cgroups to do container-local accounting.
+  LimitNOFILE=infinity
+  LimitNPROC=infinity
+  LimitCORE=infinity
+  # Uncomment TasksMax if your systemd version supports it.
+  # Only systemd 226 and above support this version.
+  #TasksMax=infinity
+  TimeoutStartSec=0
+  # set delegate yes so that systemd does not reset the cgroups of docker containers
+  Delegate=yes
+  # kill only the docker process, not all processes in the cgroup
+  KillMode=process
+  
+  [Install]
+  WantedBy=multi-user.target
+
+
+To work commandline and remote access
+
+.. code-block:: shell
+
+  [Unit]
+  Description=Docker Application Container Engine
+  Documentation=https://docs.docker.com
+  After=network.target
+  
+  [Service]
+  Type=notify
+  ExecStart=/usr/bin/dockerd -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2376 -s overlay
+  TimeoutStartSec=0
+  ExecReload=/bin/kill -s HUP $MAINPID
+  LimitNOFILE=infinity
+  LimitNPROC=infinity
+  LimitCORE=infinity
+  #TasksMax=infinity
+  # set delegate yes so that systemd does not reset the cgroups of docker containers
+  Delegate=yes
+  # kill only the docker process, not all processes in the cgroup
+  KillMode=process
+  
+  [Install]
+  WantedBy=multi-user.target
+  
