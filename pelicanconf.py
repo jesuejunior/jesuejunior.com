@@ -12,7 +12,7 @@ THEME = 'themes/jj'
 
 TIMEZONE = 'America/Sao_Paulo'
 
-DEFAULT_LANG = u'pt'
+DEFAULT_LANG = u'pt-br'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -23,7 +23,7 @@ AUTHOR_FEED_RSS = None
 
 ARTICLE_PATHS = ['articles']
 ARTICLE_URL = '{slug}'
-STATIC_PATHS = ['img', 'extra/favicon.png', 'extra/CNAME', 'extra/robots.txt']
+STATIC_PATHS = ['img', 'extra/favicon.ico', 'extra/CNAME', 'extra/robots.txt']
 
 
 # Blogroll
