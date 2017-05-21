@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-          <title>Jesué Junior</title>
+        <title>Projetos</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="icon" href="/extra/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="/extra/favicon.ico" type="image/x-icon"/>
@@ -30,14 +30,6 @@
         <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
 
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600,600italic,700italic' rel='stylesheet' type='text/css'>
-
-
-
-    <meta name="tags" content="swap" />
-    <meta name="tags" content="memoria" />
-    <meta name="tags" content="linux" />
-    <meta name="tags" content="ubuntu" />
-
 </head>
 
 <body>
@@ -49,7 +41,7 @@
                     <ul class="nav-list" >
                         <li class="nav-item"><a class="pure-button" href="/">Artigos</a></li>
                         <li class="nav-item"> <a class=" pure-button" href="/pages/sobre-pt.html">Sobre</a></li>
-                        <li class="nav-item"> <a class=" pure-button" href="/pages/projetos-pt.html">Projetos</a></li>
+                        <li class="nav-item"> <a class="active  pure-button" href="/pages/projetos-pt.html">Projetos</a></li>
                     </ul>
                 </nav>
 
@@ -69,53 +61,23 @@
             </div>
         </div>
 <div class="content pure-u-1 pure-u-md-3-4">
-    <div class="">
-      <header>
-        <h2 class="">
-          <a href="/criando-um-arquivo-como-memoria-swap" rel="bookmark"
-             title="Permalink to Criando um arquivo como memória SWAP">Criando um arquivo como memória <span class="caps">SWAP</span></a></h2>
-     
-      </header>
-      <div class="">
-        <abbr class="" title="2013-12-19T00:00:00-02:00">
-          Thu 19 December 2013
-        </abbr>
-        <address class="">
-          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
-        </address>
-      </div><!-- /.post-info -->
-      <div class="post-description">
-        <p>Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
-pois o servidor já estava em produção e não tinha mais partição&nbsp;disponível.</p>
-<p>No exemplo, criaremos um arquivo em /mnt chamado&nbsp;mem.swap:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/mnt/mem.swap <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>4096
-</pre></div>
-<p>4096 é o tamanho do&nbsp;arquivo/partição.</p>
-<p>Daí seguiremos com a criação do sistema de arquivos no arquivo&nbsp;alvo:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkswap /mnt/mem.swap
-</pre></div>
-<p>E ativamos a nova <span class="caps">SWAP</span>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo swapon /mnt/mem.swap
-</pre></div>
-<p>No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja,
-para que essa <span class="caps">SWAP</span> esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&nbsp;assim:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo vim /etc/fstab
-</pre></div>
-<div class="highlight"><pre>/mnt/mem.swap swap swap defaults <span class="m">0</span> 0
-</pre></div>
-<p>Feito isto basta reiniciar o sistema e testar com o&nbsp;comando:</p>
-<div class="highlight"><pre><span class="nv">$ </span>free -m
-</pre></div>
-<p>Modo&nbsp;hardcore?</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/mnt/mem.swap <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">4096</span> <span class="o">&amp;&amp;</span>
-sudo mkswap /mnt/mem.swap <span class="o">&amp;&amp;</span>
-sudo swapon /mnt/mem.swap <span class="o">&amp;&amp;</span>
-sudo <span class="nb">echo</span> <span class="s1">&#39;/mnt/mem.swap swap swap defaults 0 0&#39;</span> &gt;&gt; /etc/fstab
-</pre></div>
-<p>E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
-caso queira desfazer no&nbsp;futuro.</p>
+    <div>
+        <div class="post">
+            <header class="post-header">
+                <img class="post-avatar" alt="" height="48" width="48" src="/theme/img/jj.jpg">
 
-      </div><!-- /.entry-content -->
+                <h2 class="post-title">Projetos</h2>
+            </header>
+            <div class="post-description">
+                
+
+                <p>Olá!</p>
+<p>GitHub: <a class="reference external" href="https://github.com/jesuejunior">https://github.com/jesuejunior</a></p>
+<p>Em&nbsp;breve&#8230;</p>
+
+
+            </div>
+        </div>
     </div>
 </div>
         <div class="footer">

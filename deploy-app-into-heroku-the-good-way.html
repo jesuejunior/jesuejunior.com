@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+          <title>Jesué Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" href="/extra/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/extra/favicon.ico" type="image/x-icon"/>
+        <link type="text/css" rel="stylesheet" href="/theme/css/pure/pure-min.css" />
+        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+
+        <!-- import grid responsive -->
+        <!--[if lte IE 8]>
+
+        <link rel="stylesheet" href="{SITEURL}}/theme/css/pure/grids-responsive-old-ie-min.css">
+
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <link type="text/css" rel="stylesheet" href="/theme/css/pure/grids-responsive-min.css">
+
+        <!--<![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <!--[if lte IE 8]>
+        <link type="text/css" rel="stylesheet" href="/theme/css/pure/blog-old-ie.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+        <link type="text/css" rel="stylesheet" href="/theme/css/pure/blog.css">
+        <!--<![endif]-->
+        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600,600italic,700italic' rel='stylesheet' type='text/css'>
+
+
+
+    <meta name="tags" content="Heroku" />
+    <meta name="tags" content="Django" />
+    <meta name="tags" content="Web" />
+    <meta name="tags" content="DevOps" />
+    <meta name="tags" content="PostgreSQL" />
+    <meta name="tags" content="Deploy" />
+
+</head>
+
+<body>
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-5">
+            <a href="/" class="logo"></a>
+            <div class="header">
+                <nav id="nav">
+                    <ul class="nav-list" >
+                        <li class="nav-item"><a class="pure-button" href="/">Artigos</a></li>
+                        <li class="nav-item"> <a class=" pure-button" href="/pages/sobre-pt.html">Sobre</a></li>
+                        <li class="nav-item"> <a class=" pure-button" href="/pages/projetos-pt.html">Projetos</a></li>
+                    </ul>
+                </nav>
+
+                <div class="pure-u-1 pure-u-md-1-1">
+                    <div class="social">
+                        <div class="pure-u-1 pure-u-md-1-1">
+                            <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
+                            <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                            <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
+
+                            <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                            <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
+                            <a target="_blank" href="https://www.codeschool.com/users/jesuejunior" class="social-link codeschool"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="content pure-u-1 pure-u-md-3-4">
+    <div class="">
+      <header>
+        <h2 class="">
+          <a href="/deploy-app-into-heroku-the-good-way" rel="bookmark"
+             title="Permalink to Migrando Django app para o heroku (Tips and Tricks)">Migrando Django app para o heroku (Tips and&nbsp;Tricks)</a></h2>
+     
+      </header>
+      <div class="">
+        <abbr class="" title="2016-12-12T00:00:00-02:00">
+          Mon 12 December 2016
+        </abbr>
+        <address class="">
+          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="post-description">
+        <div class="section" id="cenario">
+<h2>Cenário</h2>
+<p>Faz um bom tempo que tenho alguns servidores na <a class="reference external" href="http://www.digitalocean.com">Digital Ocean</a> , tenho um em específico que está
+com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
+docker e sem docker.&nbsp;:)</p>
+<p>Percebi que tinham algumas apps nesse servidor que eu poderia migrar para um serviço <em>gratuito</em>
+ou até mesmo desligar. Um forte candidato para as migrações seria o heroku, <span class="caps">AWS</span> Free Tier ou <span class="caps">GCP</span> Free.
+Eu já havia trabalhado há um tempo atrás com o heroku e sabia que seria bem simples fazer essa migração,
+pois as minhas aplicações já eram baseadas no <a class="reference external" href="https://12factor.net">12factor</a>, então seria tranquilo e
+diferente do <span class="caps">AWS</span> Free Tier ou <span class="caps">GCP</span> Free Tier, a aplicação ficará ativa sem cobranças mesmo depois de 1 ano.&nbsp;:)</p>
+<p>O droplet&nbsp;escolhido.</p>
+<p><img alt="image0" class="align-middle" src="/img/heroku/do-panel-11m.png" /></p>
+</div>
+<div class="section" id="a-aplicacao">
+<h2>A&nbsp;Aplicação</h2>
+<p>Está aplicação web que desenvolvi para um amigo é basicamente um registro de blocos de granito
+para exportações, bem simples, vincula uma identificação de nota fiscal ao código gerado para
+o bloco a ser exportado. Uma Aplicação muito simples usando Django, PostgreSQL e&nbsp;Bootstrap.</p>
+<p>Algumas telas responsivas para utilizar via&nbsp;celular.</p>
+<p><img alt="image2" class="align-middle" src="/img/heroku/stone_app.png" /></p>
+</div>
+<div class="section" id="o-deploy">
+<h2>O&nbsp;deploy</h2>
+<p>Construí um docker-compose.yml que tem todas as configurações necessárias e o provisionamento da
+instância é executado via ansible, onde é instalado o Docker Engine e algumas configurações&nbsp;adicionais.</p>
+<p><strong>docker-compose.yml</strong></p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">stone</span><span class="p-Indicator">:</span>
+<span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jesuejunior/stone</span>
+<span class="l-Scalar-Plain">environment</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">MEMCACHED_HOST</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">memcached</span>
+    <span class="l-Scalar-Plain">DATABASE_HOST</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgres</span>
+<span class="l-Scalar-Plain">env_file</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">stone.env</span>
+<span class="l-Scalar-Plain">links</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">memcached:memcached</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgres:postgres</span>
+
+<span class="l-Scalar-Plain">nginx</span><span class="p-Indicator">:</span>
+<span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jesuejunior/nginx:latest</span>
+<span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="s">&quot;80:80&quot;</span>
+<span class="l-Scalar-Plain">expose</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">80</span>
+<span class="l-Scalar-Plain">links</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">stone:app</span>
+<span class="l-Scalar-Plain">volumes</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/stone/static/collect:/app/static:rw</span>
+
+<span class="l-Scalar-Plain">postgres</span><span class="p-Indicator">:</span>
+<span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgres:9</span>
+<span class="l-Scalar-Plain">env_file</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">stone.env</span>
+<span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="s">&quot;5432:5432&quot;</span>
+<span class="l-Scalar-Plain">volumes</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/opt/postgresql/data:/var/lib/postgresql/data:rw</span>
+
+<span class="l-Scalar-Plain">memcached</span><span class="p-Indicator">:</span>
+<span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">memcached</span>
+<span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="s">&quot;11211:11211&quot;</span>
+<span class="l-Scalar-Plain">expose</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">11211</span>
+</pre></div>
+<div class="section" id="resultado">
+<h3>Resultado</h3>
+<p><img alt="image1" class="align-middle" src="/img/heroku/docker-compose-do.png" /></p>
+</div>
+</div>
+<div class="section" id="porque-heroku">
+<h2>Porque&nbsp;Heroku?</h2>
+<p>Heroku é uma plataforma bastante madura que chegou apenas para resolver um problema específico,
+conseguir fazer deploy de aplicações Ruby de forma simples e permiti-las escalar de forma&nbsp;simples.</p>
+<p>Mas a plataforma evoluiu muito! Para saber mais como funciona hoje recomendo a leitura de <a href="https://devcenter.heroku.com/articles/how-heroku-works" target="_blank"> How Heroku Works </a>.</p>
+<p>Com a constante criação e evolução de startups muito pequenas que muitas vezes têm apenas 1
+desenvolverdor, a velocidade e simplicidade do Heroku se mostra a frente de um leve custo
+adicional.
+Se você precisa fazer um deploy para demonstrar algo novo, ou se você não quer perder tempo configurando
+a infraestrutura, eliminar a necessidade de equipe de&nbsp;infraestrututra.</p>
+<p>É possivel fazer a maioria das ações via web, acompanhar sua aplicação com métricas, logs e etc.
+A facilidade para conseguir fazer um deploy e/ou escalar uma aplicação ou um banco de dados, é
+surpreendente, alguns detalhes mudaram bastante, como a forma de <em>ligar</em> a aplicação ao banco de
+dados(<span class="caps">PGSQL</span>) ou ao&nbsp;cache(Redis).</p>
+<p>A plataforma é executada dentro sobre a <span class="caps">AWS</span> e você acaba pagando alguns centavos a mais pela
+comodidade, nada mais justo,&nbsp;certo?</p>
+<p>Então você pode criar sua conta sem precisar adicionar o cartão de crédito diretamente no site do
+<a class="reference external" href="https://www.heroku.com/">heroku</a>.</p>
+<p>Vamos por a mão na&nbsp;massa!</p>
+</div>
+<div class="section" id="instalando-o-heroku-toolbelt">
+<h2>Instalando o heroku&nbsp;toolbelt</h2>
+<p>O que é o <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli">toolbelt</a>&nbsp;?</p>
+<p>Simples, é o gerenciador do heroku via command-line, com ele você conseguirá gerenciar toda a suas
+aplicações, serviços e opções que podem ou não estar disponíveis na versão web, de forma que com o
+<span class="caps">CLI</span> você consegue automatizar tarefas de deploy, auto-scaling e&nbsp;etc.</p>
+<p>Instalar no macOS é tão simples quanto no linux se você usa o <em>brew</em>.</p>
+<div class="highlight"><pre>&gt; brew install heroku
+</pre></div>
+<p>E pronto! Agora é só efetuar o login com sua conta previamente criada e seguir o&nbsp;step-by-step.</p>
+<div class="highlight"><pre>&gt; heroku login
+</pre></div>
+</div>
+<div class="section" id="escolher-a-versao-do-python">
+<h2>Escolher a versão do&nbsp;python</h2>
+<p>O Heroku tem disponibilidade em usar as duas versões do Python, que são 2 e&nbsp;3.</p>
+<p>Para definir a versão é necessário adicionar o arquivo <em>runtime.txt</em> com o seguinte conteúdo e
+no mesmo diretório que seu <em>Procfile</em>.</p>
+<div class="highlight"><pre>&gt; cat runtime.txt
+python-3.6.1
+</pre></div>
+<p>Por default o Heroku assume o python 2, mas se quiser usar  Python 3 basta trocar a versão no
+arquivo <em>runtime.txt</em>.</p>
+</div>
+<div class="section" id="configurar-as-variaveis-de-ambiente">
+<h2>Configurar as variaveis de&nbsp;ambiente</h2>
+<p>Conforme mostrado no docker-compose eu já tinha um arquivo de variáveis de ambiente. Então via
+terminal consegui configurar com o seguinte&nbsp;comando:</p>
+<div class="highlight"><pre>cat stone.env <span class="p">|</span> awk <span class="s1">&#39;{print}&#39;</span> <span class="nv">ORS</span><span class="o">=</span><span class="s1">&#39; &#39;</span> <span class="p">|</span> xargs heroku config:set
+</pre></div>
+<div class="section" id="id1">
+<h3>Resultado</h3>
+<p><img alt="image3" class="align-middle" src="/img/heroku/config-env.png" /></p>
+<p>Mas se você preferir, existe a possibilidade de ser configurado via painel conforme imagem acima.
+E ao executar uma alteração via painel imediatamente será refletida na sua&nbsp;aplicação.</p>
+</div>
+</div>
+<div class="section" id="fazendo-o-sync-do-banco">
+<h2>Fazendo o sync do&nbsp;banco</h2>
+<p>Essa parte eu fiz um pouco diferente, mas gostaria de deixar a dica para casos que precisamos
+colocar a aplicação do zero e executar o primeiro <em>migrate</em>.</p>
+<p>Como sabemos o <em>Django</em> tem uma <em>feature</em> de migração de banco de dados muito precisa e concisa,
+sempre que mudamos nosso <em>model</em>, precisamos gerar o que chamamos de <em>migration</em>, dessa forma
+faremos nosso banco de dados refletir as novas alterações que&nbsp;precisamos.</p>
+<p>No meu caso como tenho apenas uma aplicação, não precisei passar o nome como parâmetro, ou seja, o
+comando a ser executado é o&nbsp;seguinte:</p>
+<div class="highlight"><pre><span class="nv">$ </span>heroku run python manage.py syncdb
+</pre></div>
+<p>Output:</p>
+<div class="highlight"><pre>Running python manage.py syncdb on ⬢ stoneblock... up, run.7008 <span class="o">(</span>Free<span class="o">)</span>
+...
+</pre></div>
+<p>E pronto, suas tabelas e colunas estão criadas de acordo com sua&nbsp;aplicação.</p>
+<p>Nota: <em>No meu caso eu simplesmente fiz dump e restore, falo um pouco de como conectar no PostgreSQL do
+Heroku a partir do computador local final deste&nbsp;post.</em></p>
+<p>Agora vamos criar um superuser&nbsp;inicial.</p>
+<div class="highlight"><pre>You have installed Django<span class="s1">&#39;s auth system, and don&#39;</span>t have any superusers defined.
+Would you like to create one now? <span class="o">(</span>yes/no<span class="o">)</span>: yes
+Username <span class="o">(</span>leave blank to use <span class="s1">&#39;u13302&#39;</span><span class="o">)</span>: joaozinho
+Email address: stone@gmail.com
+Password:
+Password <span class="o">(</span>again<span class="o">)</span>:
+Superuser created successfully.
+</pre></div>
+<p>É muito simples, não muda muito de quando se está trabalhando localmente e é isso que&nbsp;impresiona.</p>
+</div>
+<div class="section" id="adicionando-dominio-customizado">
+<h2>Adicionando domínio&nbsp;customizado.</h2>
+<p>Claro que queremos uma url própria! Mas nesse ponto o Heroku exige que configuremos o cartão de
+crédito, então entramos no painel e adicionamos o cartão, eles vão verificar se o cartão é valido
+cobrando $1, mas pode ficar tranquilo, pois eles estornam o valor.&nbsp;:D</p>
+<div class="highlight"><pre>&gt; heroku <span class="nb">help </span>domains:add
+Usage: heroku domains:add HOSTNAME
+
+add domain to an app
+
+-a, --app APP       <span class="c"># app to run command against</span>
+-r, --remote REMOTE <span class="c"># git remote of app to run command against</span>
+--wait
+</pre></div>
+<p>A mensagem é igual tanto no terminal quanto via web, não tem para onde&nbsp;correr.</p>
+<div class="highlight"><pre>&gt; heroku domains:add stone.sixcodes.com
+Adding stone.sixcodes.com to ⬢ stoneblock... !
+▸    Please verify your account in order to add domains <span class="o">(</span>please enter a credit card<span class="o">)</span> For more information,
+see https://devcenter.heroku.com/categories/billing Verify now at https://heroku.com/verify
+</pre></div>
+<p>Aqui você pode visualizar quando eles exigem <a href="https://devcenter.heroku.com/articles/account-verification#when-is-verification-required" target="_blank"> cartão de crédito </a>.
+Após adicionar o cartão de&nbsp;crédito</p>
+<div class="highlight"><pre>&gt; heroku domains:add stone.sixcodes.com
+Adding stone.sixcodes.com to ⬢ stoneblock... <span class="k">done</span>
+▸    Configure your app<span class="s1">&#39;s DNS provider to point to the DNS Target stone.sixcodes.com.herokudns.com.</span>
+<span class="s1">▸    For help, see https://devcenter.heroku.com/articles/custom-domains</span>
+
+<span class="s1">The domain stone.sixcodes.com has been enqueued for addition</span>
+<span class="s1">▸    Run heroku domains:wait &#39;</span>stone.sixcodes.com<span class="err">&#39;</span> to <span class="nb">wait </span><span class="k">for</span> completion
+</pre></div>
+<p>E então seu domínio estará&nbsp;pronto</p>
+<div class="highlight"><pre>&gt; heroku domains:wait stone.sixcodes.com                                                                                                                                          master <span class="o">[</span>+       5<span class="o">]</span> <span class="o">[</span>9c9eb1e<span class="o">]</span> <span class="o">(</span>!<span class="o">)</span>
+Waiting <span class="k">for</span> stone.sixcodes.com... <span class="k">done</span>
+</pre></div>
+</div>
+<div class="section" id="conectando-no-postgresql-de-fora-do-heroku">
+<h2>Conectando no PostgreSQL de fora do&nbsp;Heroku</h2>
+<p>Como havia falado anteriormente, precisei acessar o PostgreSQL diretamente do meu notebook, eis
+que temos uma parte chata que ninguém te conta. Para conseguir conectar no PostgreSQL(heroku),
+você precisa adicionar a seguinte querystring a sua string de conexão, desta forma permitindo a&nbsp;conexão:</p>
+<div class="highlight"><pre>?ssl<span class="o">=</span><span class="nb">true</span><span class="p">&amp;</span><span class="nv">sslfactory</span><span class="o">=</span>org.postgresql.ssl.NonValidatingFactory
+</pre></div>
+<p>Bom é isso que gostaria de compartilhar. Dúvidas e sugestões, estou a&nbsp;disposição.</p>
+</div>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+        <div class="footer">
+            <span>Desenvolvido por JJ</span>
+        </div>
+        </div>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2016-12-12T00:00:00-02:00</updated><entry><title>Migrando Django app para o heroku (Tips and Tricks)</title><link href="jesuejunior.com/deploy-app-into-heroku-the-good-way" rel="alternate"></link><updated>2016-12-12T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2016-12-12:jesuejunior.com/deploy-app-into-heroku-the-good-way</id><summary type="html">&lt;div class="section" id="cenario"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all-pt-br.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2016-12-12T00:00:00-02:00</updated><entry><title>Migrando Django app para o heroku (Tips and Tricks)</title><link href="jesuejunior.com/deploy-app-into-heroku-the-good-way" rel="alternate"></link><updated>2016-12-12T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2016-12-12:jesuejunior.com/deploy-app-into-heroku-the-good-way</id><summary type="html">&lt;div class="section" id="cenario"&gt;
 &lt;h2&gt;Cenário&lt;/h2&gt;
 &lt;p&gt;Faz um bom tempo que tenho alguns servidores na &lt;a class="reference external" href="http://www.digitalocean.com"&gt;Digital Ocean&lt;/a&gt; , tenho um em específico que está
 com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
@@ -872,55 +872,7 @@ pt_BR.utf8
 &lt;div class="highlight"&gt;&lt;pre&gt;apt-get install apache2 php5-mysql php5 libapache2-mod-php5 php5-cli php5-common
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Espero que possa ajudar&amp;nbsp;alguém, qualquer duvida não deixe de entrar em contato que tentarei&amp;nbsp;ajudar.&lt;/p&gt;
-</summary><category term="Debian"></category><category term="PHP"></category><category term="ubuntu"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian-pt.html" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian-pt.html</id><summary type="html">&lt;p&gt;Estou sempre precisando gerenciar alguns serviços no Debian/Ubuntu e percebi que havia esquecido, então aqui vai a&amp;nbsp;dica.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;nome do serviço&lt;/strong&gt; é o nome_do_servico que quer iniciar no boot (apache2 por&amp;nbsp;exemplo).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;span class="caps"&gt;NN&lt;/span&gt;&lt;/strong&gt; é o número da sequencia na qual o serviço será inicializado (por exemplo, 1, 10, 20 ou&amp;nbsp;99).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;runlevel&lt;/strong&gt; é em qual runlevel deseja que este serviço seja inicializado (aqui você pode colocar em todos os &lt;em&gt;runlevel&lt;/em&gt;
-de boot ou em apenas o que desejar) e não esqueça do ponto (&lt;strong&gt;.&lt;/strong&gt;) no final do&amp;nbsp;comando.&lt;/p&gt;
-&lt;p&gt;Administração dos serviços no boot,&amp;nbsp;use:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d nome_do_servico start NN runlevel runlevel
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E esse aqui para os runlevel de saída (desligar ou reiniciar por&amp;nbsp;exemplo):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d nome_do_serviço stop NN runlevel runlevel
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Para retirar um serviço do boot o comando&amp;nbsp;é:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d -f nome_do_serviço remove
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Adicionado serviços na inicialização.
-Para colocar um serviço na inicialização do Linux podemos utilizar uma ferramenta
-chamada ntsysv, porém é interessante saber como funciona executar esta tarefa manualmente.
-Os serviços do Linux ficam no diretório &lt;strong&gt;/etc/rc.d/init.d&lt;/strong&gt;. Na inicialização os serviços localizados no diretório
-&lt;strong&gt;/etc/rc.d/rc[n].d&lt;/strong&gt; são inicializados ou parados. O &lt;strong&gt;[n]&lt;/strong&gt; é o número correspondente ao run level, ou seja, é só
-adicionar um link do serviço para este diretório com a seguinte&amp;nbsp;nomenclatura:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;S¦K&lt;span class="o"&gt;]&lt;/span&gt;56&lt;span class="o"&gt;[&lt;/span&gt;nomedoserviço&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sendo: [&lt;span class="caps"&gt;SN&lt;/span&gt;]:
-Isto quer dizer se o serviço ou programa deve ser iniciado ou&amp;nbsp;não;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;S&lt;/strong&gt;: start&amp;nbsp;(iniciar);&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;K&lt;/strong&gt;: kill (matar,&amp;nbsp;parar).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;56&lt;/strong&gt;: É o número da fila em que ele deverá ser executado, se o número for menor ele será executado antes que os outros&amp;nbsp;serviços;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[nomedoserviço]&lt;/strong&gt;: somente para identificação humana, não interfere em&amp;nbsp;nada.&lt;/p&gt;
-&lt;p&gt;Pronto, para inicializar um script primeiro você copia este script para o &lt;strong&gt;/etc/init.d&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# cp /root/rotina.sh /etc/init.d
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Depois crie um link simbólico para o diretório &lt;strong&gt;/etc/rc.d/rc.[n]d&lt;/strong&gt; (para qual run level você&amp;nbsp;quiser):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# ln -s /etc/rc.d/init.d /etc/rd.c/rc3.d/S24rotina
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pronto, na inicialização em run level 3 o script rotina será&amp;nbsp;executado.&lt;/p&gt;
-&lt;p&gt;Outro método para&amp;nbsp;fazer:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# vim /etc/init.d/meuscript
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Olá mundo&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora é só dar a permissão para&amp;nbsp;execução:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/meuscript
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Quase pronto, agora é só colocar para inicializar junto com o&amp;nbsp;sistema:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d meuscript defaults
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Bom é isso ai, coisa&amp;nbsp;simples.&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Instalando e configurando o no-ip no Ubuntu</title><link href="jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu" rel="alternate"></link><updated>2012-05-30T22:57:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-30:jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu</id><summary type="html">&lt;p&gt;A distribuição usada foi a Ubuntu 10.04 Server. Todos os comandos foram
+</summary><category term="Debian"></category><category term="PHP"></category><category term="ubuntu"></category></entry><entry><title>Instalando e configurando o no-ip no Ubuntu</title><link href="jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu" rel="alternate"></link><updated>2012-05-30T22:57:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-30:jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu</id><summary type="html">&lt;p&gt;A distribuição usada foi a Ubuntu 10.04 Server. Todos os comandos foram
 dados como root. Baixando e descompactando o cliente para Linux do site
 oficial do no-ip: &lt;a class="reference external" href="http://www.no-ip.com"&gt;http://www.no-ip.com&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Baixando o cliente no-ip com os&amp;nbsp;comandos:&lt;/strong&gt;&lt;/p&gt;

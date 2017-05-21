@@ -5,43 +5,50 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pages/sobre.html</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<loc>/pages/sobre-pt.html</loc>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pages/projetos.html</loc>
-<lastmod>2016-05-15T01:07:27-00:00</lastmod>
+<loc>/pages/projetos-pt.html</loc>
+<lastmod>2017-05-21T15:12:42-00:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/deploy-app-into-heroku-the-good-way</loc>
+<lastmod>2016-12-12T00:00:00-02:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -116,7 +123,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/administrar-servicos-no-debian</loc>
+<loc>/administrar-servicos-no-debian-pt.html</loc>
 <lastmod>2012-06-02T20:40:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
@@ -228,6 +235,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/category/heroku-django-web-app-deploy-postgresql.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/category/linux.html</loc>
 <lastmod>2012-06-06T20:18:00-03:06</lastmod>
 <changefreq>daily</changefreq>
@@ -277,6 +291,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/web.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/git.html</loc>
 <lastmod>2012-10-12T15:42:00-03:06</lastmod>
 <changefreq>daily</changefreq>
@@ -286,6 +307,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/fedora.html</loc>
 <lastmod>2012-05-26T21:34:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/devops.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/heroku.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -314,6 +349,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/supervisord.html</loc>
 <lastmod>2013-12-14T03:22:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/deploy.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -390,7 +432,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/postgresql.html</loc>
-<lastmod>2012-10-12T21:04:00-03:06</lastmod>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -417,6 +459,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/django.html</loc>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/no-ip.html</loc>
 <lastmod>2012-05-30T22:57:00-03:06</lastmod>
 <changefreq>daily</changefreq>
@@ -432,7 +481,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/jesuejunior.html</loc>
-<lastmod>2014-02-25T00:08:00-03:06</lastmod>
+<lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
