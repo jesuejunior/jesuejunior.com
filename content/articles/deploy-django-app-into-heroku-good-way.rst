@@ -7,6 +7,7 @@ Migrando Django app para o heroku (Tips and Tricks)
 :slug: deploy-app-into-heroku-the-good-way
 :lang: pt-br
 :translation: true
+:status: published
 
 Cenário
 -------

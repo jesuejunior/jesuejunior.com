@@ -5,6 +5,7 @@ Ativando conexões remotas ao PostgreSQL
 :category: Banco de Dados, PostgreSQL
 :tags: PostgreSQL
 :slug: ativando-conexoes-remotas-postgresql
+:status: published
 
 Neste tópico vou *tentar* explicar como liberar conexões remotas pela rede a uma base de dados PostgreSQL (9.1).
 
