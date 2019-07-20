@@ -5,7 +5,7 @@ Aprendendo a usar o GitHub (Primeiros passos)
 :category: Linux
 :tags: Git
 :slug: aprendendo-github-primeiros-passos
-
+:status: published
 
 `GitHub <https://github.com/>`__ é uma rede social para códigos, muito interessante, você consegue
 guardar seus códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.

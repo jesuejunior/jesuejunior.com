@@ -10,27 +10,16 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
+# If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = 'jesuejunior.com'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
-TRANSLATION_FEED_ATOM = 'feeds/all-%s.atom.xml'
-LANG_EN_FEED_ATOM = TRANSLATION_FEED_ATOM % "en"
-
-FEED_ATOM = 'feeds/atom.xml'
-
-# ARTICLE_PATHS = ['articles']
+CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-GOOGLE_ANALYTICS = "UA-31167248-1"
-
-
-EXTRA_PATH_METADATA = {
-    'extra/CNAME': {
-        'path': 'CNAME'
-    }
-}
+#GOOGLE_ANALYTICS = ""

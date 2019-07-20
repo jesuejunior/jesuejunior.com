@@ -5,6 +5,7 @@ Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)
 :category: Banco de Dados, Linux, PostgreSQL
 :tags: Banco de Dados, PostgreSQL, psql, postgre, usuario, gerenciar, aprender, db
 :slug: aprendendo-gerenciar-usuarios-postgres
+:status: published
 
 Confesso que logo de cara quando comecei a usar PSQL fiquei
 meio perdido (usava MySQL), então estou escrevendo essa dica para eu relembrar.
