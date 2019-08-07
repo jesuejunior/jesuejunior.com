@@ -4,196 +4,196 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>jesuejunior.com/</loc>
-<lastmod>2019-08-07T12:02:49-00:00</lastmod>
+<loc>/</loc>
+<lastmod>2019-08-07T12:04:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/archives.html</loc>
-<lastmod>2019-08-07T12:02:49-00:00</lastmod>
+<loc>/archives.html</loc>
+<lastmod>2019-08-07T12:04:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tags.html</loc>
-<lastmod>2019-08-07T12:02:49-00:00</lastmod>
+<loc>/tags.html</loc>
+<lastmod>2019-08-07T12:04:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/categories.html</loc>
-<lastmod>2019-08-07T12:02:49-00:00</lastmod>
+<loc>/categories.html</loc>
+<lastmod>2019-08-07T12:04:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/pages/sobre.html</loc>
-<lastmod>2019-08-07T12:02:49-00:00</lastmod>
+<loc>/pages/sobre.html</loc>
+<lastmod>2019-08-07T12:04:37-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/deploy-app-into-heroku-the-good-way</loc>
+<loc>/deploy-app-into-heroku-the-good-way</loc>
 <lastmod>2016-12-12T00:00:00-02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</loc>
+<loc>/aprendendo-gerenciar-usuarios-postgres</loc>
 <lastmod>2012-10-12T21:04:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/ativando-conexoes-remotas-postgresql</loc>
+<loc>/ativando-conexoes-remotas-postgresql</loc>
 <lastmod>2012-07-06T22:19:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/aprendendo-github-primeiros-passos</loc>
+<loc>/aprendendo-github-primeiros-passos</loc>
 <lastmod>2012-06-06T20:18:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/banco-de-dados-linux-postgresql.html</loc>
+<loc>/category/banco-de-dados-linux-postgresql.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/banco-de-dados-postgresql.html</loc>
+<loc>/category/banco-de-dados-postgresql.html</loc>
 <lastmod>2012-07-06T22:19:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/heroku-django-web-app-deploy-postgresql.html</loc>
+<loc>/category/heroku-django-web-app-deploy-postgresql.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/linux.html</loc>
+<loc>/category/linux.html</loc>
 <lastmod>2012-06-06T20:18:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/heroku.html</loc>
+<loc>/tag/heroku.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/django.html</loc>
+<loc>/tag/django.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/web.html</loc>
+<loc>/tag/web.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/devops.html</loc>
+<loc>/tag/devops.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/postgresql.html</loc>
+<loc>/tag/postgresql.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/deploy.html</loc>
+<loc>/tag/deploy.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/banco-de-dados.html</loc>
+<loc>/tag/banco-de-dados.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/psql.html</loc>
+<loc>/tag/psql.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/postgre.html</loc>
+<loc>/tag/postgre.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/usuario.html</loc>
+<loc>/tag/usuario.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/gerenciar.html</loc>
+<loc>/tag/gerenciar.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/aprender.html</loc>
+<loc>/tag/aprender.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/db.html</loc>
+<loc>/tag/db.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/git.html</loc>
+<loc>/tag/git.html</loc>
 <lastmod>2012-06-06T20:18:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/author/jesuejunior.html</loc>
+<loc>/author/jesuejunior.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
