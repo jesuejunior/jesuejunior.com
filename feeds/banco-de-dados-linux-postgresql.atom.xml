@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesue Junior - Banco de Dados, Linux, PostgreSQL</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/banco-de-dados-linux-postgresql.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2012-10-12T21:04:00-03:00</updated><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><published>2012-10-12T21:04:00-03:00</published><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:None,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu&amp;nbsp;relembrar.&lt;/p&gt;
+&lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
+Depois de instalado seu &lt;span class="caps"&gt;SGBD&lt;/span&gt; postgres, como criar seu 1° usuário?
+Qual a senha de root(postgres)? Qual a senha …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu&amp;nbsp;relembrar.&lt;/p&gt;
+&lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
+Depois de instalado seu &lt;span class="caps"&gt;SGBD&lt;/span&gt; postgres, como criar seu 1° usuário?
+Qual a senha de root(postgres)? Qual a senha&amp;nbsp;padrão?&lt;/p&gt;
+&lt;p&gt;Esta dica é para iniciantes.
+Simples, na máquina com o banco instalado siga os seguintes passos,
+existem varias maneiras de fazer isso, e essa foi a maneira
+mais&amp;nbsp;básica/simples que eu achei para&amp;nbsp;explicar.&lt;/p&gt;
+&lt;p&gt;Logue-se como root, digite &amp;#8220;su root&amp;#8221; ou &amp;#8220;sudo -i&amp;#8221; ou &amp;#8220;sudo su&amp;#8221; (no
+terminal a mensagem padrão deve terminar com #).
+Entre como usuário postgres com o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~# su postgres
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Conecte ao Shell do postgres (por padrão você se conecta ao &lt;span class="caps"&gt;DB&lt;/span&gt; postgres)&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ psql
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora deve aparecer uma frase de boas vindas (Bem vindo ao psql&amp;#8230;) e
+você está no terminal do posgres, note que o shell mudou antes era
+&lt;strong&gt;root&amp;#64;pc #&lt;/strong&gt; agora ficou &lt;strong&gt;postgres=#&lt;/strong&gt;
+Isso quer dizer que agora&amp;nbsp;você&amp;nbsp;está no shell do PostgreSQL conectado
+no banco &lt;em&gt;postgres&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Para criar nosso superuser, digite o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="n"&gt;SUPERUSER&lt;/span&gt; &lt;span class="k"&gt;INHERIT&lt;/span&gt; &lt;span class="n"&gt;CREATEDB&lt;/span&gt; &lt;span class="n"&gt;CREATEROLE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Depois temos que alterar a senha, então digite &amp;nbsp;o&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;senha&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Olha que maravilha! Super Usuário&amp;nbsp;criado.&lt;/p&gt;
+&lt;p&gt;Comandos&amp;nbsp;básicos, para você que está acostumado com o golfinho, o Mamute
+é&amp;nbsp;bem&amp;nbsp;diferente.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;psql&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista todos os bancos de dados.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;banco&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Conecta no banco *nome-banco*&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista as tabelas do banco de dados conectado.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;  &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Descrimina as colunas da tabela.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dg&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista usuários existentes, as permissões e grupos que o usuário pertence.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="k"&gt;password&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;usuario&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Troca a senha do usuário com segurança, ou seja você não vê a senha que foi digitada e não é possível ver através do histórico de comandos&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista o conteúdo das tabelas. (o.O)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Poderíamos usar essas opções da mesma forma, mas criando um usuário comum e colocando as permissões mais&amp;nbsp;restritivas.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;supersecret&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para conceder a permissão de executar somente Update ou Select ou Insert ou Delete ou&amp;nbsp;Role(dono)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;RULE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E para dar permissão para fazer todas as&amp;nbsp;operações.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Partindo do principio que você já está conectado com o usuário&amp;nbsp;postgres.&lt;/p&gt;
+&lt;p&gt;Para apagar um&amp;nbsp;usuário:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="n"&gt;dropuser&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras&amp;nbsp;pessoas.&lt;/p&gt;
+&lt;p&gt;Em breve estarei postando sobre gerenciar&amp;nbsp;databases.&lt;/p&gt;
+</content><category term="Banco de Dados"></category><category term="PostgreSQL"></category><category term="psql"></category><category term="postgre"></category><category term="usuario"></category><category term="gerenciar"></category><category term="aprender"></category><category term="db"></category></entry></feed>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesue Junior - Heroku, Django, Web, app, Deploy, PostgreSQL</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/heroku-django-web-app-deploy-postgresql.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2016-12-12T00:00:00-02:00</updated><entry><title>Migrando Django app para o heroku (Tips and Tricks)</title><link href="jesuejunior.com/deploy-app-into-heroku-the-good-way" rel="alternate"></link><published>2016-12-12T00:00:00-02:00</published><updated>2016-12-12T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:None,2016-12-12:jesuejunior.com/deploy-app-into-heroku-the-good-way</id><summary type="html">&lt;div class="section" id="cenario"&gt;
+&lt;h2&gt;Cenário&lt;/h2&gt;
+&lt;p&gt;Faz um bom tempo que tenho alguns servidores na &lt;a class="reference external" href="http://www.digitalocean.com"&gt;Digital Ocean&lt;/a&gt; , tenho um em específico que está
+com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
+docker e sem docker.&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;Percebi que tinham algumas apps nesse servidor que …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="section" id="cenario"&gt;
+&lt;h2&gt;Cenário&lt;/h2&gt;
+&lt;p&gt;Faz um bom tempo que tenho alguns servidores na &lt;a class="reference external" href="http://www.digitalocean.com"&gt;Digital Ocean&lt;/a&gt; , tenho um em específico que está
+com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
+docker e sem docker.&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;Percebi que tinham algumas apps nesse servidor que eu poderia migrar para um serviço &lt;em&gt;gratuito&lt;/em&gt;
+ou até mesmo desligar. Um forte candidato para as migrações seria o heroku, &lt;span class="caps"&gt;AWS&lt;/span&gt; Free Tier ou &lt;span class="caps"&gt;GCP&lt;/span&gt; Free.
+Eu já havia trabalhado há um tempo atrás com o heroku e sabia que seria bem simples fazer essa migração,
+pois as minhas aplicações já eram baseadas no &lt;a class="reference external" href="https://12factor.net"&gt;12factor&lt;/a&gt;, então seria tranquilo e
+diferente do &lt;span class="caps"&gt;AWS&lt;/span&gt; Free Tier ou &lt;span class="caps"&gt;GCP&lt;/span&gt; Free Tier, a aplicação ficará ativa sem cobranças mesmo depois de 1 ano.&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;O droplet&amp;nbsp;escolhido.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image0" class="align-middle" src="/img/heroku/do-panel-11m.png" /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="a-aplicacao"&gt;
+&lt;h2&gt;A&amp;nbsp;Aplicação&lt;/h2&gt;
+&lt;p&gt;Está aplicação web que desenvolvi para um amigo é basicamente um registro de blocos de granito
+para exportações, bem simples, vincula uma identificação de nota fiscal ao código gerado para
+o bloco a ser exportado. Uma Aplicação muito simples usando Django, PostgreSQL e&amp;nbsp;Bootstrap.&lt;/p&gt;
+&lt;p&gt;Algumas telas responsivas para utilizar via&amp;nbsp;celular.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image2" class="align-middle" src="/img/heroku/stone_app.png" /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="o-deploy"&gt;
+&lt;h2&gt;O&amp;nbsp;deploy&lt;/h2&gt;
+&lt;p&gt;Construí um docker-compose.yml que tem todas as configurações necessárias e o provisionamento da
+instância é executado via ansible, onde é instalado o Docker Engine e algumas configurações&amp;nbsp;adicionais.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;docker-compose.yml&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;stone&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;jesuejunior/stone&lt;/span&gt;
+&lt;span class="nt"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;MEMCACHED_HOST&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached&lt;/span&gt;
+    &lt;span class="nt"&gt;DATABASE_HOST&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres&lt;/span&gt;
+&lt;span class="nt"&gt;env_file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
+&lt;span class="nt"&gt;links&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached:memcached&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres:postgres&lt;/span&gt;
+
+&lt;span class="nt"&gt;nginx&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;jesuejunior/nginx:latest&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;80:80&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;expose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80&lt;/span&gt;
+&lt;span class="nt"&gt;links&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone:app&lt;/span&gt;
+&lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/stone/static/collect:/app/static:rw&lt;/span&gt;
+
+&lt;span class="nt"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres:9&lt;/span&gt;
+&lt;span class="nt"&gt;env_file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;5432:5432&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/opt/postgresql/data:/var/lib/postgresql/data:rw&lt;/span&gt;
+
+&lt;span class="nt"&gt;memcached&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;11211:11211&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;expose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;11211&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="resultado"&gt;
+&lt;h3&gt;Resultado&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="image1" class="align-middle" src="/img/heroku/docker-compose-do.png" /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="porque-heroku"&gt;
+&lt;h2&gt;Porque&amp;nbsp;Heroku?&lt;/h2&gt;
+&lt;p&gt;Heroku é uma plataforma bastante madura que chegou apenas para resolver um problema específico,
+conseguir fazer deploy de aplicações Ruby de forma simples e permiti-las escalar de forma&amp;nbsp;simples.&lt;/p&gt;
+&lt;p&gt;Mas a plataforma evoluiu muito! Para saber mais como funciona hoje recomendo a leitura de &lt;a href="https://devcenter.heroku.com/articles/how-heroku-works" target="_blank"&gt; How Heroku Works &lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Com a constante criação e evolução de startups muito pequenas que muitas vezes têm apenas 1
+desenvolverdor, a velocidade e simplicidade do Heroku se mostra a frente de um leve custo
+adicional.
+Se você precisa fazer um deploy para demonstrar algo novo, ou se você não quer perder tempo configurando
+a infraestrutura, eliminar a necessidade de equipe de&amp;nbsp;infraestrututra.&lt;/p&gt;
+&lt;p&gt;É possivel fazer a maioria das ações via web, acompanhar sua aplicação com métricas, logs e etc.
+A facilidade para conseguir fazer um deploy e/ou escalar uma aplicação ou um banco de dados, é
+surpreendente, alguns detalhes mudaram bastante, como a forma de &lt;em&gt;ligar&lt;/em&gt; a aplicação ao banco de
+dados(&lt;span class="caps"&gt;PGSQL&lt;/span&gt;) ou ao&amp;nbsp;cache(Redis).&lt;/p&gt;
+&lt;p&gt;A plataforma é executada dentro sobre a &lt;span class="caps"&gt;AWS&lt;/span&gt; e você acaba pagando alguns centavos a mais pela
+comodidade, nada mais justo,&amp;nbsp;certo?&lt;/p&gt;
+&lt;p&gt;Então você pode criar sua conta sem precisar adicionar o cartão de crédito diretamente no site do
+&lt;a class="reference external" href="https://www.heroku.com/"&gt;heroku&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Vamos por a mão na&amp;nbsp;massa!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="instalando-o-heroku-toolbelt"&gt;
+&lt;h2&gt;Instalando o heroku&amp;nbsp;toolbelt&lt;/h2&gt;
+&lt;p&gt;O que é o &lt;a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli"&gt;toolbelt&lt;/a&gt;&amp;nbsp;?&lt;/p&gt;
+&lt;p&gt;Simples, é o gerenciador do heroku via command-line, com ele você conseguirá gerenciar toda a suas
+aplicações, serviços e opções que podem ou não estar disponíveis na versão web, de forma que com o
+&lt;span class="caps"&gt;CLI&lt;/span&gt; você consegue automatizar tarefas de deploy, auto-scaling e&amp;nbsp;etc.&lt;/p&gt;
+&lt;p&gt;Instalar no macOS é tão simples quanto no linux se você usa o &lt;em&gt;brew&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; brew install heroku
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E pronto! Agora é só efetuar o login com sua conta previamente criada e seguir o&amp;nbsp;step-by-step.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku login
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="escolher-a-versao-do-python"&gt;
+&lt;h2&gt;Escolher a versão do&amp;nbsp;python&lt;/h2&gt;
+&lt;p&gt;O Heroku tem disponibilidade em usar as duas versões do Python, que são 2 e&amp;nbsp;3.&lt;/p&gt;
+&lt;p&gt;Para definir a versão é necessário adicionar o arquivo &lt;em&gt;runtime.txt&lt;/em&gt; com o seguinte conteúdo e
+no mesmo diretório que seu &lt;em&gt;Procfile&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; cat runtime.txt
+python-3.6.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Por default o Heroku assume o python 2, mas se quiser usar  Python 3 basta trocar a versão no
+arquivo &lt;em&gt;runtime.txt&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configurar-as-variaveis-de-ambiente"&gt;
+&lt;h2&gt;Configurar as variaveis de&amp;nbsp;ambiente&lt;/h2&gt;
+&lt;p&gt;Conforme mostrado no docker-compose eu já tinha um arquivo de variáveis de ambiente. Então via
+terminal consegui configurar com o seguinte&amp;nbsp;comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat stone.env &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print}&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;ORS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; xargs heroku config:set
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;Resultado&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="image3" class="align-middle" src="/img/heroku/config-env.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Mas se você preferir, existe a possibilidade de ser configurado via painel conforme imagem acima.
+E ao executar uma alteração via painel imediatamente será refletida na sua&amp;nbsp;aplicação.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fazendo-o-sync-do-banco"&gt;
+&lt;h2&gt;Fazendo o sync do&amp;nbsp;banco&lt;/h2&gt;
+&lt;p&gt;Essa parte eu fiz um pouco diferente, mas gostaria de deixar a dica para casos que precisamos
+colocar a aplicação do zero e executar o primeiro &lt;em&gt;migrate&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Como sabemos o &lt;em&gt;Django&lt;/em&gt; tem uma &lt;em&gt;feature&lt;/em&gt; de migração de banco de dados muito precisa e concisa,
+sempre que mudamos nosso &lt;em&gt;model&lt;/em&gt;, precisamos gerar o que chamamos de &lt;em&gt;migration&lt;/em&gt;, dessa forma
+faremos nosso banco de dados refletir as novas alterações que&amp;nbsp;precisamos.&lt;/p&gt;
+&lt;p&gt;No meu caso como tenho apenas uma aplicação, não precisei passar o nome como parâmetro, ou seja, o
+comando a ser executado é o&amp;nbsp;seguinte:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ heroku run python manage.py syncdb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Running python manage.py syncdb on ⬢ stoneblock... up, run.7008 &lt;span class="o"&gt;(&lt;/span&gt;Free&lt;span class="o"&gt;)&lt;/span&gt;
+...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E pronto, suas tabelas e colunas estão criadas de acordo com sua&amp;nbsp;aplicação.&lt;/p&gt;
+&lt;p&gt;Nota: &lt;em&gt;No meu caso eu simplesmente fiz dump e restore, falo um pouco de como conectar no PostgreSQL do
+Heroku a partir do computador local final deste&amp;nbsp;post.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Agora vamos criar um superuser&amp;nbsp;inicial.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;You have installed Django&lt;span class="s1"&gt;&amp;#39;s auth system, and don&amp;#39;&lt;/span&gt;t have any superusers defined.
+Would you like to create one now? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: yes
+Username &lt;span class="o"&gt;(&lt;/span&gt;leave blank to use &lt;span class="s1"&gt;&amp;#39;u13302&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: joaozinho
+Email address: stone@gmail.com
+Password:
+Password &lt;span class="o"&gt;(&lt;/span&gt;again&lt;span class="o"&gt;)&lt;/span&gt;:
+Superuser created successfully.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;É muito simples, não muda muito de quando se está trabalhando localmente e é isso que&amp;nbsp;impresiona.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="adicionando-dominio-customizado"&gt;
+&lt;h2&gt;Adicionando domínio&amp;nbsp;customizado.&lt;/h2&gt;
+&lt;p&gt;Claro que queremos uma url própria! Mas nesse ponto o Heroku exige que configuremos o cartão de
+crédito, então entramos no painel e adicionamos o cartão, eles vão verificar se o cartão é valido
+cobrando $1, mas pode ficar tranquilo, pois eles estornam o valor.&amp;nbsp;:D&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku &lt;span class="nb"&gt;help&lt;/span&gt; domains:add
+Usage: heroku domains:add HOSTNAME
+
+add domain to an app
+
+-a, --app APP       &lt;span class="c1"&gt;# app to run command against&lt;/span&gt;
+-r, --remote REMOTE &lt;span class="c1"&gt;# git remote of app to run command against&lt;/span&gt;
+--wait
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A mensagem é igual tanto no terminal quanto via web, não tem para onde&amp;nbsp;correr.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:add stone.sixcodes.com
+Adding stone.sixcodes.com to ⬢ stoneblock... !
+▸    Please verify your account in order to add domains &lt;span class="o"&gt;(&lt;/span&gt;please enter a credit card&lt;span class="o"&gt;)&lt;/span&gt; For more information,
+see https://devcenter.heroku.com/categories/billing Verify now at https://heroku.com/verify
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Aqui você pode visualizar quando eles exigem &lt;a href="https://devcenter.heroku.com/articles/account-verification#when-is-verification-required" target="_blank"&gt; cartão de crédito &lt;/a&gt;.
+Após adicionar o cartão de&amp;nbsp;crédito&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:add stone.sixcodes.com
+Adding stone.sixcodes.com to ⬢ stoneblock... &lt;span class="k"&gt;done&lt;/span&gt;
+▸    Configure your app&lt;span class="s1"&gt;&amp;#39;s DNS provider to point to the DNS Target stone.sixcodes.com.herokudns.com.&lt;/span&gt;
+&lt;span class="s1"&gt;▸    For help, see https://devcenter.heroku.com/articles/custom-domains&lt;/span&gt;
+
+&lt;span class="s1"&gt;The domain stone.sixcodes.com has been enqueued for addition&lt;/span&gt;
+&lt;span class="s1"&gt;▸    Run heroku domains:wait &amp;#39;&lt;/span&gt;stone.sixcodes.com&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; to &lt;span class="nb"&gt;wait&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; completion
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;E então seu domínio estará&amp;nbsp;pronto&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:wait stone.sixcodes.com                                                                                                                                          master &lt;span class="o"&gt;[&lt;/span&gt;+       &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;9c9eb1e&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;!&lt;span class="o"&gt;)&lt;/span&gt;
+Waiting &lt;span class="k"&gt;for&lt;/span&gt; stone.sixcodes.com... &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conectando-no-postgresql-de-fora-do-heroku"&gt;
+&lt;h2&gt;Conectando no PostgreSQL de fora do&amp;nbsp;Heroku&lt;/h2&gt;
+&lt;p&gt;Como havia falado anteriormente, precisei acessar o PostgreSQL diretamente do meu notebook, eis
+que temos uma parte chata que ninguém te conta. Para conseguir conectar no PostgreSQL(heroku),
+você precisa adicionar a seguinte querystring a sua string de conexão, desta forma permitindo a&amp;nbsp;conexão:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;?ssl&lt;span class="o"&gt;=&lt;/span&gt;true&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;sslfactory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;org.postgresql.ssl.NonValidatingFactory
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bom é isso que gostaria de compartilhar. Dúvidas e sugestões, estou a&amp;nbsp;disposição.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Heroku"></category><category term="Django"></category><category term="Web"></category><category term="DevOps"></category><category term="PostgreSQL"></category><category term="Deploy"></category></entry></feed>

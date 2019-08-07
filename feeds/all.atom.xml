@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesué Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2016-12-12T00:00:00-02:00</updated><entry><title>Migrando Django app para o heroku (Tips and Tricks)</title><link href="jesuejunior.com/deploy-app-into-heroku-the-good-way" rel="alternate"></link><updated>2016-12-12T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2016-12-12:jesuejunior.com/deploy-app-into-heroku-the-good-way</id><summary type="html">&lt;div class="section" id="cenario"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jesue Junior</title><link href="jesuejunior.com/" rel="alternate"></link><link href="jesuejunior.com/feeds/all.atom.xml" rel="self"></link><id>jesuejunior.com/</id><updated>2016-12-12T00:00:00-02:00</updated><entry><title>Migrando Django app para o heroku (Tips and Tricks)</title><link href="jesuejunior.com/deploy-app-into-heroku-the-good-way" rel="alternate"></link><published>2016-12-12T00:00:00-02:00</published><updated>2016-12-12T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:None,2016-12-12:jesuejunior.com/deploy-app-into-heroku-the-good-way</id><summary type="html">&lt;div class="section" id="cenario"&gt;
+&lt;h2&gt;Cenário&lt;/h2&gt;
+&lt;p&gt;Faz um bom tempo que tenho alguns servidores na &lt;a class="reference external" href="http://www.digitalocean.com"&gt;Digital Ocean&lt;/a&gt; , tenho um em específico que está
+com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
+docker e sem docker.&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;Percebi que tinham algumas apps nesse servidor que …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="section" id="cenario"&gt;
 &lt;h2&gt;Cenário&lt;/h2&gt;
 &lt;p&gt;Faz um bom tempo que tenho alguns servidores na &lt;a class="reference external" href="http://www.digitalocean.com"&gt;Digital Ocean&lt;/a&gt; , tenho um em específico que está
 com pouco mais de 1 ano de uptime com alguns serviços(sites, blogs e webapps) meus e de clientes, com
@@ -25,43 +30,43 @@ o bloco a ser exportado. Uma Aplicação muito simples usando Django, PostgreSQL
 &lt;p&gt;Construí um docker-compose.yml que tem todas as configurações necessárias e o provisionamento da
 instância é executado via ansible, onde é instalado o Docker Engine e algumas configurações&amp;nbsp;adicionais.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;docker-compose.yml&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;stone&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;jesuejunior/stone&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;environment&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="l-Scalar-Plain"&gt;MEMCACHED_HOST&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;memcached&lt;/span&gt;
-    &lt;span class="l-Scalar-Plain"&gt;DATABASE_HOST&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;postgres&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;env_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;links&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;memcached:memcached&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;postgres:postgres&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;stone&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;jesuejunior/stone&lt;/span&gt;
+&lt;span class="nt"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;MEMCACHED_HOST&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached&lt;/span&gt;
+    &lt;span class="nt"&gt;DATABASE_HOST&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres&lt;/span&gt;
+&lt;span class="nt"&gt;env_file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
+&lt;span class="nt"&gt;links&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached:memcached&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres:postgres&lt;/span&gt;
 
-&lt;span class="l-Scalar-Plain"&gt;nginx&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;jesuejunior/nginx:latest&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;80:80&amp;quot;&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;expose&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;80&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;links&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;stone:app&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/stone/static/collect:/app/static:rw&lt;/span&gt;
+&lt;span class="nt"&gt;nginx&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;jesuejunior/nginx:latest&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;80:80&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;expose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80&lt;/span&gt;
+&lt;span class="nt"&gt;links&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone:app&lt;/span&gt;
+&lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/stone/static/collect:/app/static:rw&lt;/span&gt;
 
-&lt;span class="l-Scalar-Plain"&gt;postgres&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;postgres:9&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;env_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;5432:5432&amp;quot;&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/opt/postgresql/data:/var/lib/postgresql/data:rw&lt;/span&gt;
+&lt;span class="nt"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres:9&lt;/span&gt;
+&lt;span class="nt"&gt;env_file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;stone.env&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;5432:5432&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/opt/postgresql/data:/var/lib/postgresql/data:rw&lt;/span&gt;
 
-&lt;span class="l-Scalar-Plain"&gt;memcached&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;memcached&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;11211:11211&amp;quot;&lt;/span&gt;
-&lt;span class="l-Scalar-Plain"&gt;expose&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
-    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;11211&lt;/span&gt;
+&lt;span class="nt"&gt;memcached&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;memcached&lt;/span&gt;
+&lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;11211:11211&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;expose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;11211&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="resultado"&gt;
 &lt;h3&gt;Resultado&lt;/h3&gt;
@@ -95,10 +100,10 @@ comodidade, nada mais justo,&amp;nbsp;certo?&lt;/p&gt;
 aplicações, serviços e opções que podem ou não estar disponíveis na versão web, de forma que com o
 &lt;span class="caps"&gt;CLI&lt;/span&gt; você consegue automatizar tarefas de deploy, auto-scaling e&amp;nbsp;etc.&lt;/p&gt;
 &lt;p&gt;Instalar no macOS é tão simples quanto no linux se você usa o &lt;em&gt;brew&lt;/em&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; brew install heroku
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; brew install heroku
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E pronto! Agora é só efetuar o login com sua conta previamente criada e seguir o&amp;nbsp;step-by-step.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; heroku login
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku login
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="escolher-a-versao-do-python"&gt;
@@ -106,7 +111,7 @@ aplicações, serviços e opções que podem ou não estar disponíveis na vers�
 &lt;p&gt;O Heroku tem disponibilidade em usar as duas versões do Python, que são 2 e&amp;nbsp;3.&lt;/p&gt;
 &lt;p&gt;Para definir a versão é necessário adicionar o arquivo &lt;em&gt;runtime.txt&lt;/em&gt; com o seguinte conteúdo e
 no mesmo diretório que seu &lt;em&gt;Procfile&lt;/em&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; cat runtime.txt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; cat runtime.txt
 python-3.6.1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Por default o Heroku assume o python 2, mas se quiser usar  Python 3 basta trocar a versão no
@@ -116,7 +121,7 @@ arquivo &lt;em&gt;runtime.txt&lt;/em&gt;.&lt;/p&gt;
 &lt;h2&gt;Configurar as variaveis de&amp;nbsp;ambiente&lt;/h2&gt;
 &lt;p&gt;Conforme mostrado no docker-compose eu já tinha um arquivo de variáveis de ambiente. Então via
 terminal consegui configurar com o seguinte&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cat stone.env &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print}&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;ORS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; xargs heroku config:set
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat stone.env &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print}&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;ORS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; xargs heroku config:set
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h3&gt;Resultado&lt;/h3&gt;
@@ -134,17 +139,17 @@ sempre que mudamos nosso &lt;em&gt;model&lt;/em&gt;, precisamos gerar o que cham
 faremos nosso banco de dados refletir as novas alterações que&amp;nbsp;precisamos.&lt;/p&gt;
 &lt;p&gt;No meu caso como tenho apenas uma aplicação, não precisei passar o nome como parâmetro, ou seja, o
 comando a ser executado é o&amp;nbsp;seguinte:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;heroku run python manage.py syncdb
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ heroku run python manage.py syncdb
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Running python manage.py syncdb on ⬢ stoneblock... up, run.7008 &lt;span class="o"&gt;(&lt;/span&gt;Free&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Running python manage.py syncdb on ⬢ stoneblock... up, run.7008 &lt;span class="o"&gt;(&lt;/span&gt;Free&lt;span class="o"&gt;)&lt;/span&gt;
 ...
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E pronto, suas tabelas e colunas estão criadas de acordo com sua&amp;nbsp;aplicação.&lt;/p&gt;
 &lt;p&gt;Nota: &lt;em&gt;No meu caso eu simplesmente fiz dump e restore, falo um pouco de como conectar no PostgreSQL do
 Heroku a partir do computador local final deste&amp;nbsp;post.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Agora vamos criar um superuser&amp;nbsp;inicial.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;You have installed Django&lt;span class="s1"&gt;&amp;#39;s auth system, and don&amp;#39;&lt;/span&gt;t have any superusers defined.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;You have installed Django&lt;span class="s1"&gt;&amp;#39;s auth system, and don&amp;#39;&lt;/span&gt;t have any superusers defined.
 Would you like to create one now? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: yes
 Username &lt;span class="o"&gt;(&lt;/span&gt;leave blank to use &lt;span class="s1"&gt;&amp;#39;u13302&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: joaozinho
 Email address: stone@gmail.com
@@ -159,33 +164,33 @@ Superuser created successfully.
 &lt;p&gt;Claro que queremos uma url própria! Mas nesse ponto o Heroku exige que configuremos o cartão de
 crédito, então entramos no painel e adicionamos o cartão, eles vão verificar se o cartão é valido
 cobrando $1, mas pode ficar tranquilo, pois eles estornam o valor.&amp;nbsp;:D&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; heroku &lt;span class="nb"&gt;help &lt;/span&gt;domains:add
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku &lt;span class="nb"&gt;help&lt;/span&gt; domains:add
 Usage: heroku domains:add HOSTNAME
 
 add domain to an app
 
--a, --app APP       &lt;span class="c"&gt;# app to run command against&lt;/span&gt;
--r, --remote REMOTE &lt;span class="c"&gt;# git remote of app to run command against&lt;/span&gt;
+-a, --app APP       &lt;span class="c1"&gt;# app to run command against&lt;/span&gt;
+-r, --remote REMOTE &lt;span class="c1"&gt;# git remote of app to run command against&lt;/span&gt;
 --wait
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A mensagem é igual tanto no terminal quanto via web, não tem para onde&amp;nbsp;correr.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; heroku domains:add stone.sixcodes.com
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:add stone.sixcodes.com
 Adding stone.sixcodes.com to ⬢ stoneblock... !
 ▸    Please verify your account in order to add domains &lt;span class="o"&gt;(&lt;/span&gt;please enter a credit card&lt;span class="o"&gt;)&lt;/span&gt; For more information,
 see https://devcenter.heroku.com/categories/billing Verify now at https://heroku.com/verify
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Aqui você pode visualizar quando eles exigem &lt;a href="https://devcenter.heroku.com/articles/account-verification#when-is-verification-required" target="_blank"&gt; cartão de crédito &lt;/a&gt;.
 Após adicionar o cartão de&amp;nbsp;crédito&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; heroku domains:add stone.sixcodes.com
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:add stone.sixcodes.com
 Adding stone.sixcodes.com to ⬢ stoneblock... &lt;span class="k"&gt;done&lt;/span&gt;
 ▸    Configure your app&lt;span class="s1"&gt;&amp;#39;s DNS provider to point to the DNS Target stone.sixcodes.com.herokudns.com.&lt;/span&gt;
 &lt;span class="s1"&gt;▸    For help, see https://devcenter.heroku.com/articles/custom-domains&lt;/span&gt;
 
 &lt;span class="s1"&gt;The domain stone.sixcodes.com has been enqueued for addition&lt;/span&gt;
-&lt;span class="s1"&gt;▸    Run heroku domains:wait &amp;#39;&lt;/span&gt;stone.sixcodes.com&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; to &lt;span class="nb"&gt;wait &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; completion
+&lt;span class="s1"&gt;▸    Run heroku domains:wait &amp;#39;&lt;/span&gt;stone.sixcodes.com&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; to &lt;span class="nb"&gt;wait&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; completion
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E então seu domínio estará&amp;nbsp;pronto&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; heroku domains:wait stone.sixcodes.com                                                                                                                                          master &lt;span class="o"&gt;[&lt;/span&gt;+       5&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;9c9eb1e&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;!&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; heroku domains:wait stone.sixcodes.com                                                                                                                                          master &lt;span class="o"&gt;[&lt;/span&gt;+       &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;9c9eb1e&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;!&lt;span class="o"&gt;)&lt;/span&gt;
 Waiting &lt;span class="k"&gt;for&lt;/span&gt; stone.sixcodes.com... &lt;span class="k"&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -194,234 +199,15 @@ Waiting &lt;span class="k"&gt;for&lt;/span&gt; stone.sixcodes.com... &lt;span cl
 &lt;p&gt;Como havia falado anteriormente, precisei acessar o PostgreSQL diretamente do meu notebook, eis
 que temos uma parte chata que ninguém te conta. Para conseguir conectar no PostgreSQL(heroku),
 você precisa adicionar a seguinte querystring a sua string de conexão, desta forma permitindo a&amp;nbsp;conexão:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;?ssl&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;sslfactory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;org.postgresql.ssl.NonValidatingFactory
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;?ssl&lt;span class="o"&gt;=&lt;/span&gt;true&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;sslfactory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;org.postgresql.ssl.NonValidatingFactory
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom é isso que gostaria de compartilhar. Dúvidas e sugestões, estou a&amp;nbsp;disposição.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="Heroku"></category><category term="Django"></category><category term="Web"></category><category term="DevOps"></category><category term="PostgreSQL"></category><category term="Deploy"></category></entry><entry><title>Instalando e configurando Chef Client(knife)</title><link href="jesuejunior.com/configurando-chef-client" rel="alternate"></link><updated>2014-02-25T00:08:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2014-02-25:jesuejunior.com/configurando-chef-client</id><summary type="html">&lt;p&gt;O Chef, resolvi  escrever o post que havia&amp;nbsp;prometido.&lt;/p&gt;
-&lt;p&gt;Acreditando fortemente que você já passou por
-&lt;a class="reference external" href="http://jesuejunior.com/instalando-chef-server"&gt;aqui&lt;/a&gt; e já tem o Chef Server&amp;nbsp;instalado.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Sugestão 1:&lt;/strong&gt; Instale o&amp;nbsp;tmux vim curl wget com o comando abaixo ou equivalente a sua&amp;nbsp;distribuição.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;apt-get install tmux vim curl wget
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Instalando e configurando sua&amp;nbsp;workstation.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Embora uso Macbook(&lt;span class="caps"&gt;OSX&lt;/span&gt;) estarei fazendo toda a configuração de um
-Ubuntu, peço que fiquem atento aos paths caso seu equipamento de
-trabalho seja um&amp;nbsp;Mac.&lt;/p&gt;
-&lt;p&gt;Download do &lt;em&gt;Chef Omnibus installer&lt;/em&gt; e já passando no pipeline para a&amp;nbsp;instalação:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;curl -O -L http://www.opscode.com/chef/install.sh &lt;span class="p"&gt;|&lt;/span&gt; sudo sh install.sh
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A parte legal do comando acima é que ele descobre sua distribuição e
-instala o &lt;em&gt;chef-client&lt;/em&gt; de acordo com o gerenciador de pacotes (&lt;span class="caps"&gt;RPM&lt;/span&gt; -
-&lt;span class="caps"&gt;RHEL&lt;/span&gt; e &lt;span class="caps"&gt;DEB&lt;/span&gt;&amp;nbsp;-Debian).&lt;/p&gt;
-&lt;p&gt;Criei uma pasta chamada &lt;em&gt;code&lt;/em&gt; e depois trabalho de dentro da mesma, ou&amp;nbsp;seja:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir code &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd &lt;/span&gt;code
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora vamos clonar o repositório base do &lt;em&gt;Chef&lt;/em&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone https://github.com/opscode/chef-repo.git chef
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora podemos ir acessar nosso &lt;em&gt;Chef Server&lt;/em&gt; no browser, com o endereço
-&lt;span class="caps"&gt;FQDN&lt;/span&gt; que você já tem configurado, no meu caso ficou
-[&lt;span class="caps"&gt;STRIKEOUT&lt;/span&gt;:https://chef2.cloudfish.in.]&lt;/p&gt;
-&lt;p&gt;Agora precisamos re-gerar as chave privada&amp;nbsp;&lt;em&gt;chef-validator.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;No menu, vá em &amp;nbsp;&lt;strong&gt;Clients &amp;gt; chef-validator &amp;gt; Edit,&lt;/strong&gt; Marque a
-opção&lt;strong&gt;&amp;nbsp;Regenerate Private Key&lt;/strong&gt;, e clique em &lt;strong&gt;Save Client.&lt;/strong&gt;&amp;nbsp;Agora
-copie a nova chave privada para &lt;em&gt;~/code/chef/.chef/chef-validator.pem&lt;/em&gt;
-na sua&amp;nbsp;maquina.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Sugestão 2:&lt;/strong&gt; Não colocar suas permissões de de acesso/execução
-(knife.rb e *.pem) no &lt;em&gt;repositório, geralmente o que eu faço e todos
-amigos que trabalham comigo é, cada um coloca na sua home ~/.chef/,&lt;/em&gt; mas
-isso fica a&amp;nbsp;critério&amp;nbsp;de organização, e não esqueça que fazendo isso as
-configurações dentro do seu&amp;nbsp;knife.rb mudaram&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Agora vamos criar um usuário que fará o gerenciamento do&amp;nbsp;chef.&lt;/p&gt;
-&lt;p&gt;Clique na Aba&amp;nbsp;&lt;strong&gt;Users &amp;gt; Create,&lt;/strong&gt; marque a opção &lt;strong&gt;Admin,&lt;/strong&gt; preencha
-&lt;em&gt;username&lt;/em&gt; e &lt;em&gt;senha&lt;/em&gt; eu estou criando um usuário chamado &lt;strong&gt;*jj*&lt;/strong&gt;&amp;nbsp;para o
-exemplo, fique atento a isso e depois&amp;nbsp;clique em &lt;strong&gt;Create&amp;nbsp;User.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Vamos copiar a chave privada do nosso novo usuário, clique &amp;nbsp;em Users &amp;gt;
-edit &amp;gt; do usuário &lt;strong&gt;*jj*&lt;/strong&gt;, irá aparecer &amp;nbsp;a sua chave publica e privada,
-copie a privada para&amp;nbsp;~/code/chef/.chef/jj.pem.&lt;/p&gt;
-&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Note que você é advertido, pois a chave privada só pode ser acessada uma única vez, like &lt;span class="caps"&gt;AWS&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Finalmente, abra seu terminal e vamos rodar o &lt;strong&gt;*knife
-configure.*&lt;/strong&gt;&amp;nbsp;Preencha os campos a seguir conforme sua necessidade,
-segue uma imagem para ilustrar e tirar supostas duvidas que possa&amp;nbsp;surgir.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;knife configure
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a class="reference external" href="/img/chef/command_knife_configure.jpg"&gt;&lt;img alt="image0" src="/img/chef/command_knife_configure.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Neste ponto que e a configuração do knife conecta com a interface do
-nosso servidor Chef Open Source que você já tem instalado anteriormente.
-Para testar vamos rodar um comandos basicos para listar a lista de
-clientes cadastrados e a lista de&amp;nbsp;nodes(servidores).&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/img/chef/knife-list.png"&gt;&lt;img alt="image2" src="/img/chef/knife-list.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Não se esqueça que você precisa está no seu repositório para quando for
-usar o comando &lt;em&gt;knife&lt;/em&gt; para conectar no seu Chef server. ë planamente
-possível se conectar em vários Chef server, pois o que manda é onde está
-o seu &lt;em&gt;.chef/knife.rb&lt;/em&gt; e suas chaves. A principio seria necessário
-apenas ter outro clone do repositório base e gerar os arquivos de
-configuração, assim quando fosse executar os comandos você entraria no
-diretório/repositório responsável por cuidar de tal&amp;nbsp;servidor.&lt;/p&gt;
-&lt;p&gt;Referência
-&lt;a class="reference external" href="http://docs.opscode.com/chef/install_workstation.html"&gt;Install Chef 11.x on a&amp;nbsp;Workstation&lt;/a&gt;&lt;/p&gt;
-</summary><category term="chef"></category><category term="chef-client"></category><category term="chef-server"></category><category term="Continuos Deploy"></category></entry><entry><title>Instalando Chef Server Opensource</title><link href="jesuejunior.com/instalando-chef-server" rel="alternate"></link><updated>2013-12-31T19:54:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-31:jesuejunior.com/instalando-chef-server</id><summary type="html">&lt;p&gt;Instalando o Chef server opensource (&lt;a class="reference external" href="http://www.getchef.com/"&gt;OpsCode&lt;/a&gt;)
-Estarei criando um servidor do chef para gerenciar deploy do cloudfish(link) e com isso estou escrevendo esse&amp;nbsp;tutorial.&lt;/p&gt;
-&lt;div class="section" id="cenario"&gt;
-&lt;h2&gt;&lt;em&gt;Cenário&lt;/em&gt;&lt;/h2&gt;
-&lt;p&gt;Estou usando uma instancia de &lt;span class="caps"&gt;512MB&lt;/span&gt; com Ubuntu 12.04 do Digital&amp;nbsp;Ocean.&lt;/p&gt;
-&lt;p&gt;Ainda não criei usuários, então estou executando como root, depois todas as configurações serão feitas pelo&amp;nbsp;chef.&lt;/p&gt;
-&lt;p&gt;Primeiro passo é baixar o arquivo para a distribuição que no caso é ubuntu, no presente momento a versão mais atual é a&amp;nbsp;11.0.10-1.&lt;/p&gt;
-&lt;p&gt;Logo o arquivo a ser baixado&amp;nbsp;será:&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb"&gt;chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Você pode sempre encontrar a versão mais atual na aba &lt;em&gt;server&lt;/em&gt;&amp;nbsp;do&amp;nbsp;link:&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.getchef.com/chef/install/"&gt;http://www.getchef.com/chef/install/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Baixando o arquivo com todas as configurações do&amp;nbsp;chef-server.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora vamos executar a&amp;nbsp;instalação.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dpkg -i chef-server_11.0.10-1.ubuntu.12.04_amd64.deb&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pronto seu Chef server está instalado, vamos&amp;nbsp;configura-lo.&lt;/p&gt;
-&lt;p&gt;Mas primeiro, &lt;em&gt;o grande segredo que me fez escrever esse post&lt;/em&gt;&amp;nbsp;para uma instalação bem&amp;nbsp;sucedida.&lt;/p&gt;
-&lt;p&gt;Para o Chef server é necessário que o hostname e hosts seja o seu &lt;span class="caps"&gt;FQDN&lt;/span&gt; ou&amp;nbsp;seja:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# vim /etc/hosts&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Deixe as linhas de seu arquivo parecida com&amp;nbsp;essas.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;127.0.0.1 localhost chef
-127.0.0.2 chef.jesuejunior.com chef
-
-&lt;span class="c"&gt;# The following lines are desirable for IPv6 capable hosts&lt;/span&gt;
-::1 ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E mudaremos o hostname da mesma&amp;nbsp;forma.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# vim /etc/hostname&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Verifique o nome do seu servidor e/ou altere, caso seja&amp;nbsp;necessário.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;chef.jesuejunior.com
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Após a instalação ser concluída com sucesso e ter feito o &lt;em&gt;segredo do sucesso&lt;/em&gt;, precisamos executar o comando para
-instalar/configurar as dependências do&amp;nbsp;chef-server.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# chef-server-ctl reconfigure&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Essa instalação precisa de muita memória, na primeira tentativa apareceu esse&amp;nbsp;erro:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s2"&gt;&amp;quot;FATAL: Errno::ENOMEM: Cannot allocate memory - fork(2)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Mas não se desespere, no meu caso precisei usar uma instancia com poucos recursos e esse erro se da por falta de memória, por padrão as instancias do
-&lt;em&gt;Digital Ocean&lt;/em&gt;  não vem com o &lt;span class="caps"&gt;SWAP&lt;/span&gt; habilitada, então siga esse tutorial (&lt;a class="reference external" href="http://www.jesuejunior.com/criando-um-arquivo-como-memoria-swap"&gt;aqui&lt;/a&gt;)
-para habilitar um swap dentro de um arquivo em&amp;nbsp;disco.&lt;/p&gt;
-&lt;p&gt;Depois de ter criado um pouco mais de &lt;em&gt;memória&lt;/em&gt; para o processo,  execute o comando novamente, sua instalação vai exibir a seguinte&amp;nbsp;mensagem:&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="/img/chef/prompt-install-chef-server.png"&gt;&lt;img alt="image1" src="/img/chef/prompt-install-chef-server.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Já comecei a redigir o próximo post que será a parte da configuração de repositório para adicionar cookbooks, roles e sua chave para acessar o
-server, configurar seu knife.rb, ou seja a configuração para quem vai trabalhar com o&amp;nbsp;chef.&lt;/p&gt;
-&lt;p&gt;Espero que possa ser útil, qualquer duvida não deixe de&amp;nbsp;perguntar.&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="chef"></category><category term="Linux"></category><category term="opensource"></category><category term="opscode"></category><category term="ubuntu"></category></entry><entry><title>Criando um arquivo como memória SWAP</title><link href="jesuejunior.com/criando-um-arquivo-como-memoria-swap" rel="alternate"></link><updated>2013-12-19T00:00:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-19:jesuejunior.com/criando-um-arquivo-como-memoria-swap</id><summary type="html">&lt;p&gt;Esse post é mais uma dica rápida do que um post super completo, mas recentemente precisei criar um arquivo como swap,
-pois o servidor já estava em produção e não tinha mais partição&amp;nbsp;disponível.&lt;/p&gt;
-&lt;p&gt;No exemplo, criaremos um arquivo em /mnt chamado&amp;nbsp;mem.swap:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4096
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;4096 é o tamanho do&amp;nbsp;arquivo/partição.&lt;/p&gt;
-&lt;p&gt;Daí seguiremos com a criação do sistema de arquivos no arquivo&amp;nbsp;alvo:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkswap /mnt/mem.swap
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E ativamos a nova &lt;span class="caps"&gt;SWAP&lt;/span&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo swapon /mnt/mem.swap
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No ultimo comando ativamos a partição e já está funcionando, então para tornar as mudanças definitivas, ou seja,
-para que essa &lt;span class="caps"&gt;SWAP&lt;/span&gt; esteja disponível para uso do sistema a cada reinicialização, adicionaremos uma entrada no arquivo /etc/fstab&amp;nbsp;assim:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo vim /etc/fstab
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/mnt/mem.swap swap swap defaults &lt;span class="m"&gt;0&lt;/span&gt; 0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Feito isto basta reiniciar o sistema e testar com o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;free -m
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modo&amp;nbsp;hardcore?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt/mem.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-sudo mkswap /mnt/mem.swap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-sudo swapon /mnt/mem.swap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-sudo &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/mnt/mem.swap swap swap defaults 0 0&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E pronto já vai estar tudo pronto, mas de qualquer forma sugiro ler todo o post para entender oq eu foi feito,
-caso queira desfazer no&amp;nbsp;futuro.&lt;/p&gt;
-</summary><category term="swap"></category><category term="memoria"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>Colocando Upstart para gerenciar o Supervisor</title><link href="jesuejunior.com/colocando-upstart-gerenciar-supervisor" rel="alternate"></link><updated>2013-12-14T03:22:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2013-12-14:jesuejunior.com/colocando-upstart-gerenciar-supervisor</id><summary type="html">&lt;p&gt;Depois de um tempo afastado do Blog, estou &amp;nbsp;organizando melhor o uso do
-meu tempo, ou seja, em breve estarei criando mais posts que inclusive já
-tenho alguns em&amp;nbsp;rascunho.&lt;/p&gt;
-&lt;p&gt;Hoje faço parte de uma equipe de devOps. Então cada vez utilizo mais
-desenvolvimento para resolver problemas de deploy, escalabilidade entre
-outros. Baseado nisso, recentemente implementei na receita do Chef para
-o &lt;a class="reference external" href="http://upstart.ubuntu.com/"&gt;Upstart&lt;/a&gt; controlar o &lt;a class="reference external" href="http://supervisord.org/"&gt;Supervisord&lt;/a&gt;.&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&amp;nbsp;Mas o que é o&amp;nbsp;Supervisord?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Supervisor é um sistema client /server que permite que seus usuários
-possam monitorar e controlar um número de processos que podem ser grupos
-de&amp;nbsp;processos.&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Mas o que é o&amp;nbsp;Upstart?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Upstart é daemon de&amp;nbsp;substituição ao /sbin/init &amp;nbsp;que lida com a
-inicialização de tarefas e serviços durante o boot, impedindo-os durante
-o desligamento e supervisionando-os enquanto o sistema está funcionando.
-E como ele está no nível init (embutido no kernel), seu processo
-dificilmente ficará desligado. Por exemplo, caso seu processo apresente
-erro e feche o upstart vai tentar reinicia-lo e caso não consiga, vai
-continuar tentando no intervalo de tempo&amp;nbsp;pré-configurado.&lt;/p&gt;
-&lt;p&gt;Pois bem, aqui vou mostrar como implementar manualmente o que já é de
-muita ajuda se você precisar de algo controlando um grupo de processos e
-não deixando-os&amp;nbsp;morrerem.&lt;/p&gt;
-&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Estou assumindo que o sistema operacional é baseado em&amp;nbsp;Debian&lt;/p&gt;
-&lt;div class="section" id="parando-e-removendo-o-supervisord-do-boot"&gt;
-&lt;h2&gt;Parando e removendo o supervisorD do&amp;nbsp;boot&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/supervisord stop
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-rc.d -f supervisor remove
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Este ultimo comando remove o arquivo &lt;strong&gt;/etc/init.d/supervisord&lt;/strong&gt; e caso
-queira voltar ao modo antigo de troque o &lt;em&gt;remove&lt;/em&gt; por &lt;em&gt;enable.&lt;/em&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="criando-um-script-upstart"&gt;
-&lt;h2&gt;Criando um script&amp;nbsp;Upstart&lt;/h2&gt;
-&lt;p&gt;Crie um arquivo &amp;nbsp;&lt;strong&gt;/etc/init/supervisor.conf&lt;/strong&gt;. &amp;nbsp;Com o seguinte&amp;nbsp;conteudo:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;description &lt;span class="s2"&gt;&amp;quot;supervisor&amp;quot;&lt;/span&gt;
-
-start on runlevel &lt;span class="o"&gt;[&lt;/span&gt;2345&lt;span class="o"&gt;]&lt;/span&gt;
-
-stop on runlevel &lt;span class="o"&gt;[&lt;/span&gt;!2345&lt;span class="o"&gt;]&lt;/span&gt;
-
-respawn
-
-&lt;span class="nb"&gt;exec&lt;/span&gt; /usr/local/bin/supervisord --nodaemon --configuration /etc/supervisord.conf
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Perceba que nós estamos usando o mesmo &lt;em&gt;supervisord&lt;/em&gt;, logo não há nada
-para mudar aqui.&amp;nbsp;hehehe&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="usando-supervisord-com-upstart"&gt;
-&lt;h2&gt;usando supervisord com&amp;nbsp;upstart&lt;/h2&gt;
-&lt;p&gt;Nós podemos iniciar e parar o &lt;strong&gt;supervisord&lt;/strong&gt; com os comandos padrões do
-&lt;strong&gt;Upstart&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo stop supervisor
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo start supervisor
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Para verificar o status do&amp;nbsp;&lt;em&gt;supervisor,&amp;nbsp;faça:&lt;/em&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;initctl list
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;initctl status supervisor
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="here-we-go"&gt;
-&lt;h2&gt;&lt;span class="caps"&gt;HERE&lt;/span&gt; &lt;span class="caps"&gt;WE&lt;/span&gt; &lt;span class="caps"&gt;GO&lt;/span&gt;!&lt;/h2&gt;
-&lt;p&gt;Confirmando que o supervisor está sendo executado, os comandos para
-gerencia-lo não mudam em nada, continuamos a ter o &amp;nbsp;&lt;strong&gt;supervisorctl&lt;/strong&gt;&amp;nbsp; e
-podemos ver os processos que ele está controlando, pois continuamos
-usando o mesmo arquivo de configuração padrão que fica em
-&lt;em&gt;/etc/supervisord.conf.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Então é isso, qualquer duvida não deixe de postar nos comentários, será
-um prazer&amp;nbsp;ajudar.&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="Linux"></category><category term="supervisord"></category><category term="ubuntu"></category><category term="upstart"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+</content><category term="Heroku"></category><category term="Django"></category><category term="Web"></category><category term="DevOps"></category><category term="PostgreSQL"></category><category term="Deploy"></category></entry><entry><title>Aprendendo a criar e gerenciar usuários no PostgreSQL (Primeiros Passos)</title><link href="jesuejunior.com/aprendendo-gerenciar-usuarios-postgres" rel="alternate"></link><published>2012-10-12T21:04:00-03:00</published><updated>2012-10-12T21:04:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:None,2012-10-12:jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</id><summary type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
+meio perdido (usava MySQL), então estou escrevendo essa dica para eu&amp;nbsp;relembrar.&lt;/p&gt;
+&lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
+Depois de instalado seu &lt;span class="caps"&gt;SGBD&lt;/span&gt; postgres, como criar seu 1° usuário?
+Qual a senha de root(postgres)? Qual a senha …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Confesso que logo de cara quando comecei a usar &lt;span class="caps"&gt;PSQL&lt;/span&gt; fiquei
 meio perdido (usava MySQL), então estou escrevendo essa dica para eu&amp;nbsp;relembrar.&lt;/p&gt;
 &lt;p&gt;Criando seu 1° super usuário no PostgreSQL.
 Depois de instalado seu &lt;span class="caps"&gt;SGBD&lt;/span&gt; postgres, como criar seu 1° usuário?
@@ -430,13 +216,13 @@ Qual a senha de root(postgres)? Qual a senha&amp;nbsp;padrão?&lt;/p&gt;
 Simples, na máquina com o banco instalado siga os seguintes passos,
 existem varias maneiras de fazer isso, e essa foi a maneira
 mais&amp;nbsp;básica/simples que eu achei para&amp;nbsp;explicar.&lt;/p&gt;
-&lt;p&gt;Logue-se como root, digite &amp;quot;su root&amp;quot; ou &amp;quot;sudo -i&amp;quot; ou &amp;quot;sudo su&amp;quot; (no
+&lt;p&gt;Logue-se como root, digite &amp;#8220;su root&amp;#8221; ou &amp;#8220;sudo -i&amp;#8221; ou &amp;#8220;sudo su&amp;#8221; (no
 terminal a mensagem padrão deve terminar com #).
 Entre como usuário postgres com o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# su postgres
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~# su postgres
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Conecte ao Shell do postgres (por padrão você se conecta ao &lt;span class="caps"&gt;DB&lt;/span&gt; postgres)&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;psql
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ psql
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Agora deve aparecer uma frase de boas vindas (Bem vindo ao psql&amp;#8230;) e
 você está no terminal do posgres, note que o shell mudou antes era
@@ -444,195 +230,62 @@ você está no terminal do posgres, note que o shell mudou antes era
 Isso quer dizer que agora&amp;nbsp;você&amp;nbsp;está no shell do PostgreSQL conectado
 no banco &lt;em&gt;postgres&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Para criar nosso superuser, digite o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="n"&gt;SUPERUSER&lt;/span&gt; &lt;span class="k"&gt;INHERIT&lt;/span&gt; &lt;span class="n"&gt;CREATEDB&lt;/span&gt; &lt;span class="n"&gt;CREATEROLE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="n"&gt;SUPERUSER&lt;/span&gt; &lt;span class="k"&gt;INHERIT&lt;/span&gt; &lt;span class="n"&gt;CREATEDB&lt;/span&gt; &lt;span class="n"&gt;CREATEROLE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Depois temos que alterar a senha, então digite &amp;nbsp;o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;senha&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;nomedousuario&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;senha&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Olha que maravilha! Super Usuário&amp;nbsp;criado.&lt;/p&gt;
 &lt;p&gt;Comandos&amp;nbsp;básicos, para você que está acostumado com o golfinho, o Mamute
 é&amp;nbsp;bem&amp;nbsp;diferente.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;psql&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Lista todos os bancos de dados.&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;banco&lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Conecta no banco *nome-banco*&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Lista as tabelas do banco de dados conectado.&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt;&lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Descrimina as colunas da tabela.&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dg&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Lista usuários existentes, as permissões e grupos que o usuário pertence.&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="k"&gt;password&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;usuario&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Troca a senha do usuário com segurança, ou seja você não vê a senha que foi digitada e não é possível ver através do histórico de comandos&amp;quot;&lt;/span&gt;
-&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt; &lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s-Name"&gt;&amp;quot;Lista o conteúdo das tabelas. (o.O)&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;psql&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista todos os bancos de dados.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;banco&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Conecta no banco *nome-banco*&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista as tabelas do banco de dados conectado.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;  &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Descrimina as colunas da tabela.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;dg&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista usuários existentes, as permissões e grupos que o usuário pertence.&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="k"&gt;password&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;usuario&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Troca a senha do usuário com segurança, ou seja você não vê a senha que foi digitada e não é possível ver através do histórico de comandos&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s s-Name"&gt;&amp;quot;Lista o conteúdo das tabelas. (o.O)&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Poderíamos usar essas opções da mesma forma, mas criando um usuário comum e colocando as permissões mais&amp;nbsp;restritivas.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;supersecret&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;supersecret&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Para conceder a permissão de executar somente Update ou Select ou Insert ou Delete ou&amp;nbsp;Role(dono)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;RULE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;RULE&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;E para dar permissão para fazer todas as&amp;nbsp;operações.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;nomedatabela&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Partindo do principio que você já está conectado com o usuário&amp;nbsp;postgres.&lt;/p&gt;
 &lt;p&gt;Para apagar um&amp;nbsp;usuário:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="n"&gt;dropuser&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt; &lt;span class="n"&gt;dropuser&lt;/span&gt; &lt;span class="n"&gt;jesuejunior&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bom isso já me ajudou a ganhar muito tempo, e espero que ajude outras&amp;nbsp;pessoas.&lt;/p&gt;
 &lt;p&gt;Em breve estarei postando sobre gerenciar&amp;nbsp;databases.&lt;/p&gt;
-</summary><category term="Banco de Dados"></category><category term="PostgreSQL"></category><category term="psql"></category><category term="postgre"></category><category term="usuario"></category><category term="gerenciar"></category><category term="aprender"></category><category term="db"></category></entry><entry><title>GIT: Usando git stash (Começando a trabalhar em equipe)</title><link href="jesuejunior.com/git-usando-git-stash" rel="alternate"></link><updated>2012-10-12T15:42:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-10-12:jesuejunior.com/git-usando-git-stash</id><summary type="html">&lt;p&gt;O motivo desse post é mostrar a utilidade do&lt;strong&gt;&amp;nbsp;git stash&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Breve relato: Estou desenvolvendo uma ferramenta chamada
-&lt;a class="reference external" href="https://github.com/jesuejunior/m2tool"&gt;m2tool&lt;/a&gt;&amp;nbsp;junto com o &lt;a class="reference external" href="http://www.daltonmatos.com"&gt;Dalton Matos&lt;/a&gt;,
-então em um fim de semana,&amp;nbsp;estávamos&amp;nbsp; conversando e desenvolvendo, como o projeto está bem no começo,&amp;nbsp;o que eu estava
-fazendo ele já precisava e vice-e-versa. Ele fez&amp;nbsp;&lt;em&gt;&amp;nbsp;push&lt;/em&gt;&amp;nbsp;de um novo recurso para a &lt;strong&gt;*branch develop*&lt;/strong&gt;&amp;nbsp;que
-eu precisava para continuar desenvolvendo uma funcionalidade, porem eu não tinha feito &lt;em&gt;commit&lt;/em&gt;&amp;nbsp;das minhas
-alterações até o momento e não poderia fazer , pois estava incompleto e dependia do que eu iria aplicar
-para rodar os&amp;nbsp;testes..&lt;/p&gt;
-&lt;p&gt;O que foi preciso&amp;nbsp;fazer?&lt;/p&gt;
-&lt;p&gt;Usar o git stash para salvar minhas alterações até o momento (tipo
-temp), peguei as alterações que estavam disponiveis na branch develop
-fiz rebase na minha branch e depois voltei de onde havia parado sem
-perder nada e já podendo usar as coisas novas. Isso foi o máximo.&amp;nbsp;hahahaha&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;The Stash&lt;/em&gt;, quando você precisa guardar mudanças que ainda não foi
-feito &lt;em&gt;commit&lt;/em&gt;, mas você precisa voltar para ultima revisão da sua
-branch o chamado &amp;quot;&lt;span class="caps"&gt;HEAD&lt;/span&gt;&amp;quot;.&lt;/p&gt;
-&lt;p&gt;E quando você restaura o seu &lt;em&gt;stash&lt;/em&gt;, você consegue continuar
-trabalhando em seu código de onde parou&amp;nbsp;anteriormente.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;*Fazendo o Stash*&amp;nbsp;de suas modificações atuais e que ainda não &amp;nbsp;foram&amp;nbsp;comitadas.&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash save
-Saved &lt;span class="s2"&gt;&amp;quot;WIP on master: ed1a10e...&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Listando *stashes*&amp;nbsp;atuais.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Sim, você pode salvar mais do que um. &lt;em&gt;Stash&lt;/em&gt; funciona como uma pilha e
-a qualquer momento você pode salvar o novo stash e será colocado como
-ultimo na pilha. (Espero que conheça o conceito de&amp;nbsp;pilha)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash list
-stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;: WIP on master: 151f1ab...&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;stash@{1}: WIP on master: ed1a10e...&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Perceba a parte &lt;strong&gt;stash&amp;#64;{0}.&lt;/strong&gt; Este é seu &lt;span class="caps"&gt;ID&lt;/span&gt; &lt;em&gt;stash&lt;/em&gt;, é o que você
-precisa saber para restaura-lo posteriormente. Note que temos 2 stashes
-e que o &lt;a class="reference external" href="mailto:stash&amp;#64;{1"&gt;stash&amp;#64;{1&lt;/a&gt;} contem as suas modificações mais&amp;nbsp;recentes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Aplicando um&amp;nbsp;*&amp;quot;stash&amp;quot;*&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;Existe duas formas que eu conheço de aplicar um &lt;em&gt;stash&lt;/em&gt;.&lt;/div&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;1º. Simples e facil de entender para quem saca de pilhas.&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ou simplesmente assim já que se trata de pilha ele pega o ultimo da
-pilha e&amp;nbsp;aplica.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;2º. Facil, porem pode ficar o &lt;em&gt;stash&lt;/em&gt; na listagem mesmo depois de&amp;nbsp;aplicado.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash apply stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Como disse antes, usando o &lt;em&gt;apply&lt;/em&gt; o &lt;em&gt;stash&lt;/em&gt; pode continuar salvo, então
-o que podemos fazer para limpar &lt;em&gt;stashes&lt;/em&gt; que já usamos ou não
-precisaremos mais&amp;nbsp;é:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash drop stash@&lt;span class="o"&gt;{&lt;/span&gt;0&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E para limpar todos os &lt;em&gt;stashes&lt;/em&gt; basta&amp;nbsp;executar:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash clear
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Se você quer apenas fazer de forma&amp;nbsp;rápida&amp;nbsp;um &lt;em&gt;stash&lt;/em&gt; e que logo apos um
-&lt;em&gt;rebase&lt;/em&gt; ou &lt;em&gt;merge&lt;/em&gt; já o restaurará, pode usar&amp;nbsp;simplesmente:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git stash
-&lt;span class="nv"&gt;$ &lt;/span&gt;git rebase develop
-&lt;span class="nv"&gt;$ &lt;/span&gt;git stash pop
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;O que fizemos foi guardar nossas alterações, &lt;em&gt;rebase&lt;/em&gt; em nossa &lt;em&gt;branch&lt;/em&gt;
-com base na &lt;em&gt;develop&lt;/em&gt; e em seguida aplicamos nosso stash para continuar&amp;nbsp;desenvolvendo.&lt;/p&gt;
-&lt;p&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt;: Existem&amp;nbsp;inúmeras&amp;nbsp;maneiras de usar o &lt;em&gt;git stash&lt;/em&gt;, tentei mostrar a
-maneira que me&amp;nbsp;ajudou.&lt;/p&gt;
-&lt;p&gt;A melhor coisa à ser feita é testar bastante e entender o funcionamento
-para só depois colocar em pratica em um trabalho de&amp;nbsp;verdade.&lt;/p&gt;
-&lt;p&gt;Espero que ajude.&amp;nbsp;Obrigado.&lt;/p&gt;
-</summary><category term="Git"></category><category term="Linux"></category></entry><entry><title>Empacotando e desempacotando parâmetros em funções Python</title><link href="jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python" rel="alternate"></link><updated>2012-07-07T02:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-07:jesuejunior.com/empacotando-desempacotando-parametros-funcoes-python</id><summary type="html">&lt;p&gt;Atualmente estou trabalhando com Python e Django, logo
-quero/preciso me aprofundar na linguagem e conhecer esse universo está
-sendo&amp;nbsp;fantástico&amp;nbsp;e hoje estava lendo e aprendendo sobre como empacotar
-e desempacotar parâmetros, coisa que u não sabia que existia, então
-gostaria de mostrar o funcionamento. :D
-Uma flexibilidade&amp;nbsp;incrivel!&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;strong&gt;#Empacotar parâmetros&amp;nbsp;&lt;/strong&gt;
-&lt;span class="caps"&gt;EX&lt;/span&gt;:&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
-
-&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Então estamos usando o &amp;quot;*&amp;quot; para indicar que queremos desempacotar &amp;nbsp;a
-lista &lt;strong&gt;*K*&lt;/strong&gt; utilizando seus valores como parametro para a função
-&lt;strong&gt;*soma*&lt;/strong&gt;, no exemplo, K[0] será atribuido a &lt;strong&gt;*a*&lt;/strong&gt; e K[1] a &lt;strong&gt;*b*&lt;/strong&gt;.
-Esse recurso nos permite armazenar nossos parâmetros em listas e evita
-construções estranhas do tipo &lt;strong&gt;*soma(K[0],&amp;nbsp;K[1])*&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Vou &amp;nbsp;descrever um exemplo para mostrar &lt;strong&gt;*lista*&lt;/strong&gt; de &lt;strong&gt;*lista*&lt;/strong&gt; para
-realizar varias chamadas dentro de um &lt;strong&gt;*for*&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;barra&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
-
-&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;-&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;barra&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Observe que mesmo usando o empacotamento de&amp;nbsp;parâmetros, recursos
-como&amp;nbsp;parâmetros&amp;nbsp;opcionais ainda foram&amp;nbsp;possíveis&amp;nbsp;quando &lt;strong&gt;*a*&lt;/strong&gt; contem
-apenas um&amp;nbsp;elemento.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;#Desempacotar&amp;nbsp;parâmetros&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Podemos criar funções que recebem um numero indeterminado de parâmetros
-utilizando listas de&amp;nbsp;parâmetros.&lt;/p&gt;
-&lt;p&gt;&lt;span class="caps"&gt;EX&lt;/span&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
-
-&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;soma&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Descobri&amp;nbsp;também&amp;nbsp;que podemos usar funções que combinem parâmetros
-obrigatorios e uma lista de&amp;nbsp;parâmetros.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;numeros&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;numeros&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-             &lt;span class="n"&gt;maior&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maior&lt;/span&gt;
-
-&lt;span class="n"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Maior: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;imprime_maior&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Max: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Observe que o primeiro parâmetro é &lt;strong&gt;*msg*&lt;/strong&gt;, tornando-o&amp;nbsp;obrigatório.
-Assim &lt;strong&gt;*imprime_maior()*&lt;/strong&gt; retorna erro, pois o parâmetro &lt;strong&gt;*msg*&lt;/strong&gt;
-não foi passado, mas &lt;strong&gt;*imprime_maior(&amp;quot;Max: &amp;quot;)*&lt;/strong&gt; escreve &lt;strong&gt;*None*&lt;/strong&gt;.
-Isso porque numeros é recebida como uma lista, podendo inclusive estar&amp;nbsp;vazia.&lt;/p&gt;
-&lt;p&gt;Bom essa foi a tentativa, espero que ajude&amp;nbsp;alguem.&lt;/p&gt;
-&lt;p&gt;Python é muito&amp;nbsp;muito&amp;nbsp;fantástico!&lt;/p&gt;
-</summary><category term="Python"></category></entry><entry><title>Ativando conexões remotas ao PostgreSQL</title><link href="jesuejunior.com/ativando-conexoes-remotas-postgresql" rel="alternate"></link><updated>2012-07-06T22:19:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-07-06:jesuejunior.com/ativando-conexoes-remotas-postgresql</id><summary type="html">&lt;p&gt;Neste tópico vou &lt;em&gt;tentar&lt;/em&gt; explicar como liberar&amp;nbsp;conexões&amp;nbsp;remotas pela rede a uma base de dados PostgreSQL&amp;nbsp;(9.1).&lt;/p&gt;
+</content><category term="Banco de Dados"></category><category term="PostgreSQL"></category><category term="psql"></category><category term="postgre"></category><category term="usuario"></category><category term="gerenciar"></category><category term="aprender"></category><category term="db"></category></entry><entry><title>Ativando conexões remotas ao PostgreSQL</title><link href="jesuejunior.com/ativando-conexoes-remotas-postgresql" rel="alternate"></link><published>2012-07-06T22:19:00-03:00</published><updated>2012-07-06T22:19:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:None,2012-07-06:jesuejunior.com/ativando-conexoes-remotas-postgresql</id><summary type="html">&lt;p&gt;Neste tópico vou &lt;em&gt;tentar&lt;/em&gt; explicar como liberar&amp;nbsp;conexões&amp;nbsp;remotas pela rede a uma base de dados PostgreSQL&amp;nbsp;(9.1).&lt;/p&gt;
+&lt;p&gt;Por padrão o PostgreSQL vem configurado para receber apenas conexões locais (localhost ou 127.0.0.1). Para conectar de outra máquina
+na&amp;nbsp;rede&amp;nbsp;é preciso alterar algumas configurações básicas em …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Neste tópico vou &lt;em&gt;tentar&lt;/em&gt; explicar como liberar&amp;nbsp;conexões&amp;nbsp;remotas pela rede a uma base de dados PostgreSQL&amp;nbsp;(9.1).&lt;/p&gt;
 &lt;p&gt;Por padrão o PostgreSQL vem configurado para receber apenas conexões locais (localhost ou 127.0.0.1). Para conectar de outra máquina
 na&amp;nbsp;rede&amp;nbsp;é preciso alterar algumas configurações básicas em 2&amp;nbsp;arquivos.&lt;/p&gt;
 &lt;p&gt;(Linux)&lt;/p&gt;
 &lt;p&gt;São eles:&amp;nbsp; &lt;strong&gt;postgresql.conf&lt;/strong&gt;&amp;nbsp;e&amp;nbsp;&lt;strong&gt;pg_hba.conf&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;No&amp;nbsp; &lt;strong&gt;postgresql.conf&lt;/strong&gt;&amp;nbsp;vamos editar a seguinte&amp;nbsp;linha:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#listen_addresses = ‘localhost’ # what IP address(es) to listen on&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#listen_addresses = ‘localhost’ # what IP address(es) to listen on&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Como em todo arquivo de configuração em programas linux, o # na frente
 da linha significa um comentário e com isso desabilita o parâmetro
 seguinte, tomando seu valor default, que no caso é localhost. Descomente
 essa linha e substitua seu valor por *. Assim seu PostgreSQL estará
 apto a ouvir conexões de qualquer &lt;span class="caps"&gt;IP&lt;/span&gt;.Então essa linha ficará da seguinte&amp;nbsp;forma:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;listen_addresses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;# what IP address(es) to listen on&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;listen_addresses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# what IP address(es) to listen on&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Isso não quer dizer que ele estará aberto para qualquer &lt;span class="caps"&gt;IP&lt;/span&gt; da rede. É
 possível criar políticas de&amp;nbsp;acesso&amp;nbsp;através de outro arquivo que
@@ -644,11 +297,11 @@ hosts e bancos de dados. Nele é possível dizer qual usuário de qual ip
 para conectar a qualquer banco, mas esta é uma regra cautelosa a ser
 seguida pois pode comprometer a segurança do seu&amp;nbsp;servidor&amp;nbsp;de bases de&amp;nbsp;dados.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Por padrão o arquivo vem com a seguinte&amp;nbsp;configuração:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#“local” is for Unix domain socket connections only&lt;/span&gt;
-&lt;span class="nb"&gt;local &lt;/span&gt;all all trust
-&lt;span class="c"&gt;# IPv4 local connections:&lt;/span&gt;
-host all all 127.0.0.1/32 trust
-&lt;span class="c"&gt;# IPv6 local connections:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#“local” is for Unix domain socket connections only&lt;/span&gt;
+&lt;span class="nb"&gt;local&lt;/span&gt; all all trust
+&lt;span class="c1"&gt;# IPv4 local connections:&lt;/span&gt;
+host all all &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1/32 trust
+&lt;span class="c1"&gt;# IPv6 local connections:&lt;/span&gt;
 host all all ::1/128 trust
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pode haver alguma variação das configurações padrões de acordo com a
@@ -657,7 +310,7 @@ informações. Basicamente elas querem dizer que todas as conexões locais
 podem ser realizadas por qualquer usuário do banco a qualquer banco de&amp;nbsp;dados.&lt;/p&gt;
 &lt;p&gt;Para liberar o acesso remoto basta criar uma nova regra seguindo o
 seguinte&amp;nbsp;padrão:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;host all all 0.0.0.0/0 trust
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;host all all &lt;span class="m"&gt;0&lt;/span&gt;.0.0.0/0 trust
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Com essa regra qualquer usuário de qualquer &lt;span class="caps"&gt;IP&lt;/span&gt; poderá se conectar a
 qualquer&amp;nbsp;database.&lt;/p&gt;
@@ -673,22 +326,25 @@ operacional). Então você se conecta e reseta a senha do usuário. Logo em
 seguida, altere o parâmetro para md5. Assim, uma senha será solicitada
 ao tentar conectar-se ao servidor&amp;nbsp;Postgre.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Assim ficará a regra de&amp;nbsp;liberação:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;host all all 0.0.0.0/0 md5
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;host all all &lt;span class="m"&gt;0&lt;/span&gt;.0.0.0/0 md5
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;É possível também liberar o acesso apenas a uma rede&amp;nbsp;específica:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;host all all 192.168.0.0/32 md5
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;host all all &lt;span class="m"&gt;192&lt;/span&gt;.168.0.0/32 md5
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Ou também, informar qual usuário poderá&amp;nbsp;conectar:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;host all usuariodobanco 192.168.0.0/32 md5
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;host all usuariodobanco &lt;span class="m"&gt;192&lt;/span&gt;.168.0.0/32 md5
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Também informar qual o banco de dados a ser conectar por este&amp;nbsp;usuário:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;host db userdb 192.168.0.0/32 md5
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;host db userdb &lt;span class="m"&gt;192&lt;/span&gt;.168.0.0/32 md5
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Na regra acima, o usuário&amp;nbsp;&lt;em&gt;userdb&lt;/em&gt; do banco &amp;nbsp;poderá conectar-se apenas
 ao banco db apenas se estiver dentro da rede&amp;nbsp;192.168.0.0.&lt;/p&gt;
 &lt;p&gt;Essa é a dica, precisei muito disso e quebrei a cabeça um pouco então
 fica guardado agora, espero que possa&amp;nbsp;ajudar&amp;nbsp;alguém.&lt;/p&gt;
-</summary><category term="PostgreSQL"></category></entry><entry><title>Aprendendo a usar o GitHub (Primeiros passos)</title><link href="jesuejunior.com/aprendendo-github-primeiros-passos" rel="alternate"></link><updated>2012-06-06T20:18:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-06:jesuejunior.com/aprendendo-github-primeiros-passos</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
+</content><category term="PostgreSQL"></category></entry><entry><title>Aprendendo a usar o GitHub (Primeiros passos)</title><link href="jesuejunior.com/aprendendo-github-primeiros-passos" rel="alternate"></link><published>2012-06-06T20:18:00-03:00</published><updated>2012-06-06T20:18:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:None,2012-06-06:jesuejunior.com/aprendendo-github-primeiros-passos</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
+guardar seus&amp;nbsp;códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.
+Me interessei sobre o assunto e uso hoje em dia, então resolvi escrever esse post, primeiro para não
+esquecer e depois para …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; é uma rede social para&amp;nbsp;códigos, muito interessante,&amp;nbsp;você&amp;nbsp;consegue
 guardar seus&amp;nbsp;códigos, conhecer outros devs, recebe ajuda em seus projetos, divulga os seus, entre outras coisas.
 Me interessei sobre o assunto e uso hoje em dia, então resolvi escrever esse post, primeiro para não
 esquecer e depois para ajudar quem estiver começando e precisar ter uma ajuda para aprender sobre versionamento de código e guarda-los.
@@ -697,60 +353,60 @@ no meu caso como é para aprendizagem e projetos pessoais não vejo problemas us
 &lt;p&gt;&lt;strong&gt;1º Passo&lt;/strong&gt; é criar uma conta no &lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;2º Passo&lt;/strong&gt; é instalar o &lt;span class="caps"&gt;GIT&lt;/span&gt; em sua maquina Linux, que depende muito da sua&amp;nbsp;distribuição.&lt;/p&gt;
 &lt;p&gt;Para baseados em&amp;nbsp;Debian/Ubuntu.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Para&amp;nbsp;Archlinux.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo pacman -S git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pacman -S git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Para baseados em Red&amp;nbsp;Hat&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo yum install git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Configurar o cliente &lt;span class="caps"&gt;GIT&lt;/span&gt;, para vincular os commits para o autor&amp;nbsp;correto&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;SEU NOME AQUI&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;SEU NOME AQUI&amp;quot;&lt;/span&gt;
 git config --global user.email email@gmail.com
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Para inicializar o repositório &lt;span class="caps"&gt;GIT&lt;/span&gt; vazio existe duas formas [1]&amp;nbsp;[2]&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;*[1]*&lt;/strong&gt; - Executando o comando abaixo, que o git vai criar a pasta, caso ela não existir e inicializará como&amp;nbsp;repositório&amp;nbsp;&lt;span class="caps"&gt;GIT&lt;/span&gt;.&amp;nbsp;Ex:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git init python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git init python
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;[2] Criar a pasta e depois entrar na pasta e depois inicializar o repositório, ficaria&amp;nbsp;assim:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir python
-~&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;python
-~&lt;span class="nv"&gt;$ &lt;/span&gt;git init
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ mkdir python
+~$ &lt;span class="nb"&gt;cd&lt;/span&gt; python
+~$ git init
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Entre em seu repositório e crie o arquivo &lt;span class="caps"&gt;README&lt;/span&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;python/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; python/
 vim README
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Escreva um texto inicial, como por exemplo “First commit” e salve o arquivo&amp;nbsp;(:wq)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git status
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Aparecerá a os dados conforme imagem abaixo, mas o que isso quer dizer?
 Bom, a parte importante dessa tela é &lt;em&gt;Untracked files&lt;/em&gt; que mostra os arquivos que o &lt;span class="caps"&gt;GIT&lt;/span&gt;&amp;nbsp;ainda&amp;nbsp;não está gerenciando, ou seja, o &lt;span class="caps"&gt;GIT&lt;/span&gt; não sabe o
 que fazer com ele e não registra nenhuma modificação no&amp;nbsp;arquivo.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus/"&gt;&lt;img alt="image1" src="/img/git/gitstatus.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Então temos que adicionar o(os) arquivo(os) que queremos que o &lt;span class="caps"&gt;GIT&lt;/span&gt; gerencie para&amp;nbsp;nos.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git add README
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git add README
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Veremos agora o que mudou depois de mandar o &lt;span class="caps"&gt;GIT&lt;/span&gt; gerenciar nosso arquivo &lt;em&gt;&lt;span class="caps"&gt;README&lt;/span&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git status
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Agora percebemos que o status do nosso arquivo mudou de &lt;strong&gt;Untracked files&lt;/strong&gt; como na imagem anterior para &lt;strong&gt;Changes to be committed&lt;/strong&gt;,
 isso quer dizer que a partir de agora o &lt;span class="caps"&gt;GIT&lt;/span&gt; vai gerenciar o nosso arquivo,&amp;nbsp;ele mostra que voce não fez o &lt;em&gt;commit&lt;/em&gt; para essa modificações entrarem em&amp;nbsp;vigor.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitstatus2/"&gt;&lt;img alt="image2" src="/img/git/gitstatus2.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Fazendo o &lt;em&gt;commit&lt;/em&gt; existem duas maneiras para fazer isso. [3]&amp;nbsp;[4]&lt;/p&gt;
 &lt;p&gt;[3] Podemos apenas digitar o comando e o nosso editor de textos padrão abrirá para voce poder escrever a mensagem que identificará o &lt;em&gt;commit&lt;/em&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git commit
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git commit
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;[4] Podemos fazer tudo isso em apenas uma etapa da seguinte forma. O &lt;strong&gt;*-m*&lt;/strong&gt; informa para esperar a mensagem de &lt;em&gt;commit&lt;/em&gt; entre aspas por ser uma&amp;nbsp;string.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git commit -m &lt;span class="s1"&gt;&amp;#39;Adicionando arquivo README&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git commit -m &lt;span class="s1"&gt;&amp;#39;Adicionando arquivo README&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;No fim se tudo ocorrer certo, será mostrada uma mensagem conforme&amp;nbsp;imagem.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/gitcommit/"&gt;&lt;img alt="image3" src="/img/git/gitcommit.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Temos como ver o&amp;nbsp;histórico&amp;nbsp;de &lt;em&gt;commit,*existem&amp;nbsp;inúmeras&amp;nbsp;formas de customizar a&amp;nbsp;visualização&amp;nbsp;do&amp;nbsp;histórico, duas sugestões rápidas
 **&lt;/em&gt;-n* &lt;em&gt;[5]*&lt;/em&gt; e o&amp;nbsp; &lt;strong&gt;*&amp;#8212;committer=&amp;lt;nomedocara&amp;gt;*&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[6]&lt;/strong&gt;, para saber todas as possibilidades pode utilizar o comando de ajuda &lt;em&gt;git log&amp;nbsp;&amp;#8212;help&lt;/em&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git log
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;[5]&lt;/strong&gt; - Limita o numero de linhas a ser&amp;nbsp;mostrado&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[6]&lt;/strong&gt; - Mostra apenas os &lt;em&gt;commits&lt;/em&gt; da pessoa que&amp;nbsp;você&amp;nbsp;precisa ver, muito&amp;nbsp;útil&amp;nbsp;para quando se tem mais de um dev fazendo &lt;em&gt;commit&lt;/em&gt;&amp;nbsp;no&amp;nbsp;mesmo&amp;nbsp;projeto.&lt;/p&gt;
@@ -759,21 +415,21 @@ que o github.com oferece, alem de ter nosso&amp;nbsp;código&amp;nbsp;guardado e
 &lt;p&gt;Onde&amp;nbsp; &lt;strong&gt;jesuejunior&lt;/strong&gt;&amp;nbsp;deve ser o nome de usuario que voce criou no site do github e&amp;nbsp; &lt;strong&gt;python&lt;/strong&gt;&amp;nbsp;é o&amp;nbsp;repositório&amp;nbsp;de
 seu projeto criado, assim&amp;nbsp;você&amp;nbsp;estando dentro de seu&amp;nbsp;repositório&amp;nbsp;local ele vai direcionar seus arquivos&amp;nbsp;devidamente
 commitados&amp;nbsp;através&amp;nbsp;do comando&amp;nbsp; &lt;em&gt;push&lt;/em&gt;&amp;nbsp;que veremos em&amp;nbsp;instantes.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote add origin git@github.com:jesuejunior/python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git remote add origin git@github.com:jesuejunior/python
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Para ver seu repositório remoto, utilize o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git remote
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Se tem para adicionar tem que ter como remover, certo? Então para
 remover um repositório remoto, voce precisa saber qual repositório voce
 quer remover, após executar o comando &lt;em&gt;git remote&lt;/em&gt; temos o resultado
 &lt;em&gt;origin&lt;/em&gt;, então para remover é simples, utilize o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote rm origin
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git remote rm origin
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pronto foi removido seu&amp;nbsp;repositório&amp;nbsp;remoto (redirecionamento para o&amp;nbsp;github).&lt;/p&gt;
 &lt;p&gt;Ao tentar verificar seu&amp;nbsp;repositório, com o seguinte comando, voce
 receberá uma menssagem de erro, pois não tem sua chave &lt;span class="caps"&gt;SSH&lt;/span&gt;/&lt;span class="caps"&gt;RSA&lt;/span&gt;&amp;nbsp;configurada.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote show origin
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git remote show origin
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Então vamos configura-la.&lt;/div&gt;
@@ -781,20 +437,20 @@ receberá uma menssagem de erro, pois não tem sua chave &lt;span class="caps"&g
 &lt;div class="line"&gt;Primeiro entre &amp;nbsp;na pasta onde fica gravado suas chaves &lt;span class="caps"&gt;SSH&lt;/span&gt; (rsa)&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/.ssh/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/.ssh/
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Agora vamos gerar sua chave &lt;span class="caps"&gt;SSH&lt;/span&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh-keygen -t rsa -b &lt;span class="m"&gt;2048&lt;/span&gt; -f github
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-keygen -t rsa -b &lt;span class="m"&gt;2048&lt;/span&gt; -f github
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa/"&gt;&lt;img alt="image4" src="/img/git/chave-rsa.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Vai pedir uma senha para sua chave por duas vezes, sugiro &lt;strong&gt;não&lt;/strong&gt;
 colocar a mesma senha do site. Pronto sua chave foi gerada com&amp;nbsp;sucesso.&lt;/p&gt;
 &lt;p&gt;Precisamos agora editar nosso arquivo &lt;em&gt;config&lt;/em&gt;&amp;nbsp; que deve conter o
 seguinte&amp;nbsp;conteúdo.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vim ~/.ssh/config
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vim ~/.ssh/config
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Host github.com
-Port 443
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Host github.com
+Port &lt;span class="m"&gt;443&lt;/span&gt;
 HostName ssh.github.com
 IdentityFile ~/.ssh/github
 User git
@@ -802,283 +458,26 @@ User git
 &lt;p&gt;Agora copie o conteúdo do&amp;nbsp;github.pub&lt;/p&gt;
 &lt;p&gt;Para exibir o&amp;nbsp;conteúdo&amp;nbsp;da chave em seu terminal execute o comando
 abaixo, nada impede de abrir no seu editor de texto&amp;nbsp;preferido.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cat ~/.ssh/github.pub
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat ~/.ssh/github.pub
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Esse é o&amp;nbsp;conteúdo&amp;nbsp;que deve ser copiado para&amp;nbsp;&amp;nbsp;sua pagina do Github &amp;gt;
 Account Settings &amp;gt; &lt;span class="caps"&gt;SSH&lt;/span&gt; Public Keys &amp;gt; Add &lt;span class="caps"&gt;SSH&lt;/span&gt; Key&lt;a class="reference external" href="http://jesuejunior.com/aprendendo-github-primeiros-passos/chave-rsa2/"&gt;&lt;img alt="image5" src="/img/git/chave-rsa2.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Vamos verificar se conseguimos acessar nosso repositório no GitHub.com e
 ver se está redirecionado&amp;nbsp;corretamente.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git remote show origin
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git remote show origin
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://.jesuejunior.com/aprendendo-github-primeiros-passos/remote-show/"&gt;&lt;img alt="image6" src="/img/git/remote-show.png" /&gt;&lt;/a&gt;Agora vamos fazer nosso primeiro envio de arquivos para o
 GitHub&amp;nbsp;através&amp;nbsp;do&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git push origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git push origin master
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A partir de agora sempre que fizer modificações nos arquivos,&amp;nbsp;você&amp;nbsp;segue
 a&amp;nbsp;sequencia&amp;nbsp;de comandos &lt;em&gt;status&lt;/em&gt;,&amp;nbsp;&lt;em&gt;add, &amp;nbsp;commit e&amp;nbsp;push.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Para enviar as alterações para o repositório do GitHub a partir da
 segunda vez, use&amp;nbsp;apenas:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~&lt;span class="nv"&gt;$ &lt;/span&gt;git push
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~$ git push
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Se este post te ajudou, comente, agradeça e se ainda &amp;nbsp;tem duvida entre
 em&amp;nbsp;contato.&lt;/p&gt;
 &lt;p&gt;Em breve estarei fazendo um post bem legal sobre como trabalhar com
 &lt;strong&gt;*branch*&lt;/strong&gt; utilizando os comandos &lt;strong&gt;*rebase, merge*&lt;/strong&gt; entre&amp;nbsp;outros&lt;/p&gt;
-</summary><category term="Git"></category></entry><entry><title>Instalando e configurando : PHP 5.3.6 no Debian</title><link href="jesuejunior.com/instalando-configurando-php-debian" rel="alternate"></link><updated>2012-06-03T21:44:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-03:jesuejunior.com/instalando-configurando-php-debian</id><summary type="html">&lt;p&gt;Fala pessoal,&amp;nbsp;certa vez tive a missão de instalar o Moodle (&lt;a class="reference external" href="http://moodle.org"&gt;http://moodle.org&lt;/a&gt;), o qual tem um requisito que me complicou um pouco,
-mas consegui resolve e estou aqui passando a&amp;nbsp;informação.&lt;/p&gt;
-&lt;p&gt;Requisitos para instalação do moodle: &lt;em&gt;&lt;span class="caps"&gt;PHP&lt;/span&gt; 5.3.2, MySQL 5.0.25 or Postgres 8.3 or &lt;span class="caps"&gt;MSSQL&lt;/span&gt; 2005 or Oracle&amp;nbsp;10.2.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Um dos nossos servidores roda Debian 6 e nos repositórios padrões(Debian) o &lt;span class="caps"&gt;PHP&lt;/span&gt; padrão é o 5.2, então precisei fazer algumas
-pesquisas e estou escrevendo aqui a solução que tomei e para não esquecer caso eu precise novamente, nunca se&amp;nbsp;sabe.&lt;/p&gt;
-&lt;p&gt;#Adicionar os repositórios para instalar o &lt;span class="caps"&gt;PHP5&lt;/span&gt;.3&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vim /etc/apt/sources.list
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Adicione as linhas abaixo referente aos&amp;nbsp;repositórios:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;deb http://php53.dotdeb.org oldstable all
-deb-src http://php53.dotdeb.org oldstable all
-deb http://ftp.br.debian.org/debian/ oldstable main
-deb-src http://ftp.br.debian.org/debian/ oldstable main
-deb http://security.debian.org/ oldstable/updates main
-deb-src http://security.debian.org/ oldstable/updates main
-deb http://volatile.debian.org/debian-volatile oldstable/volatile main
-deb-src http://volatile.debian.org/debian-volatile oldstable/volatile main
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Instalando as&amp;nbsp;chaves&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;wget http://www.dotdeb.org/dotdeb.gpg &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; cat dotdeb.gpg &lt;span class="p"&gt;|&lt;/span&gt; apt-key add -
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Atualizando o Debian Lenny com os novos&amp;nbsp;repositorios&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get upgrade
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Configurando o locale do &lt;span class="caps"&gt;DEBIAN&lt;/span&gt; para&amp;nbsp;Latin1&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vim /etc/default/locale
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#deixe igual&amp;nbsp;a:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pt_BR&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pt_BR:pt:en&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Execute o seguinte&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pt_BR pt_BR.ISO-8859-1&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/locale.alias
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Verificando os locales&amp;nbsp;definido&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;locale -a
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Deve ficar&amp;nbsp;assim:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;C
-POSIX
-pt_BR
-pt_BR.iso88591
-pt_BR.utf8
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;#Instalando &lt;span class="caps"&gt;PHP5&lt;/span&gt; com suporte ao MySQL e&amp;nbsp;Apache2&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;apt-get install apache2 php5-mysql php5 libapache2-mod-php5 php5-cli php5-common
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Espero que possa ajudar&amp;nbsp;alguém, qualquer duvida não deixe de entrar em contato que tentarei&amp;nbsp;ajudar.&lt;/p&gt;
-</summary><category term="Debian"></category><category term="PHP"></category><category term="ubuntu"></category></entry><entry><title>Administrar serviços no Debian/Ubuntu</title><link href="jesuejunior.com/administrar-servicos-no-debian-pt.html" rel="alternate"></link><updated>2012-06-02T20:40:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-06-02:jesuejunior.com/administrar-servicos-no-debian-pt.html</id><summary type="html">&lt;p&gt;Estou sempre precisando gerenciar alguns serviços no Debian/Ubuntu e percebi que havia esquecido, então aqui vai a&amp;nbsp;dica.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;nome do serviço&lt;/strong&gt; é o nome_do_servico que quer iniciar no boot (apache2 por&amp;nbsp;exemplo).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;span class="caps"&gt;NN&lt;/span&gt;&lt;/strong&gt; é o número da sequencia na qual o serviço será inicializado (por exemplo, 1, 10, 20 ou&amp;nbsp;99).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;runlevel&lt;/strong&gt; é em qual runlevel deseja que este serviço seja inicializado (aqui você pode colocar em todos os &lt;em&gt;runlevel&lt;/em&gt;
-de boot ou em apenas o que desejar) e não esqueça do ponto (&lt;strong&gt;.&lt;/strong&gt;) no final do&amp;nbsp;comando.&lt;/p&gt;
-&lt;p&gt;Administração dos serviços no boot,&amp;nbsp;use:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d nome_do_servico start NN runlevel runlevel
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;E esse aqui para os runlevel de saída (desligar ou reiniciar por&amp;nbsp;exemplo):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d nome_do_serviço stop NN runlevel runlevel
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Para retirar um serviço do boot o comando&amp;nbsp;é:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d -f nome_do_serviço remove
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Adicionado serviços na inicialização.
-Para colocar um serviço na inicialização do Linux podemos utilizar uma ferramenta
-chamada ntsysv, porém é interessante saber como funciona executar esta tarefa manualmente.
-Os serviços do Linux ficam no diretório &lt;strong&gt;/etc/rc.d/init.d&lt;/strong&gt;. Na inicialização os serviços localizados no diretório
-&lt;strong&gt;/etc/rc.d/rc[n].d&lt;/strong&gt; são inicializados ou parados. O &lt;strong&gt;[n]&lt;/strong&gt; é o número correspondente ao run level, ou seja, é só
-adicionar um link do serviço para este diretório com a seguinte&amp;nbsp;nomenclatura:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;S¦K&lt;span class="o"&gt;]&lt;/span&gt;56&lt;span class="o"&gt;[&lt;/span&gt;nomedoserviço&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sendo: [&lt;span class="caps"&gt;SN&lt;/span&gt;]:
-Isto quer dizer se o serviço ou programa deve ser iniciado ou&amp;nbsp;não;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;S&lt;/strong&gt;: start&amp;nbsp;(iniciar);&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;K&lt;/strong&gt;: kill (matar,&amp;nbsp;parar).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;56&lt;/strong&gt;: É o número da fila em que ele deverá ser executado, se o número for menor ele será executado antes que os outros&amp;nbsp;serviços;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[nomedoserviço]&lt;/strong&gt;: somente para identificação humana, não interfere em&amp;nbsp;nada.&lt;/p&gt;
-&lt;p&gt;Pronto, para inicializar um script primeiro você copia este script para o &lt;strong&gt;/etc/init.d&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# cp /root/rotina.sh /etc/init.d
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Depois crie um link simbólico para o diretório &lt;strong&gt;/etc/rc.d/rc.[n]d&lt;/strong&gt; (para qual run level você&amp;nbsp;quiser):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# ln -s /etc/rc.d/init.d /etc/rd.c/rc3.d/S24rotina
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pronto, na inicialização em run level 3 o script rotina será&amp;nbsp;executado.&lt;/p&gt;
-&lt;p&gt;Outro método para&amp;nbsp;fazer:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# vim /etc/init.d/meuscript
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Olá mundo&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora é só dar a permissão para&amp;nbsp;execução:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/init.d/meuscript
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Quase pronto, agora é só colocar para inicializar junto com o&amp;nbsp;sistema:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# update-rc.d meuscript defaults
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Bom é isso ai, coisa&amp;nbsp;simples.&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Instalando e configurando o no-ip no Ubuntu</title><link href="jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu" rel="alternate"></link><updated>2012-05-30T22:57:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-30:jesuejunior.com/instalando-e-configurando-o-no-ip-no-ubuntu</id><summary type="html">&lt;p&gt;A distribuição usada foi a Ubuntu 10.04 Server. Todos os comandos foram
-dados como root. Baixando e descompactando o cliente para Linux do site
-oficial do no-ip: &lt;a class="reference external" href="http://www.no-ip.com"&gt;http://www.no-ip.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Baixando o cliente no-ip com os&amp;nbsp;comandos:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Descompacte o&amp;nbsp;arquivo:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# tar -zvxf noip-duc-linux.tar.gz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Entre no diretorio onde estão os&amp;nbsp;arquivos:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# &lt;span class="nb"&gt;cd &lt;/span&gt;no-ip
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Para instalar execute o&amp;nbsp;comando:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~# make &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Após o termino da instalação, será apresentada na tela algumas&amp;nbsp;perguntas:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Please enter the login/email string &lt;span class="k"&gt;for&lt;/span&gt; no-ip.com: &lt;span class="s2"&gt;&amp;quot;login/email cadastrado no site no-ip.com.&amp;quot;&lt;/span&gt;
-Please enter the password &lt;span class="k"&gt;for&lt;/span&gt; user &lt;span class="sb"&gt;`&lt;/span&gt;seu login/email será apresentado  aqui&lt;span class="sb"&gt;`&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;digite sua senha.&amp;quot;&lt;/span&gt;
-Please enter a update interval: &lt;span class="o"&gt;[&lt;/span&gt;30&lt;span class="o"&gt;]&lt;/span&gt;: &lt;span class="s2"&gt;&amp;quot;intervalo de atualização em minutos&amp;quot;&lt;/span&gt;
-Do you wish to run something at successful update?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Colocando para carregar no&amp;nbsp;boot.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Para que o cliente no-ip seja carregado cada vez que você ligar a
-máquina, siga estes passos. Dentro da pasta noip criada anteriormente,&amp;nbsp;digite:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp noip-2.1.1/debian.noip2.sh /etc/init.d/&lt;/span&gt;
-&lt;span class="c"&gt;# chmod +x /etc/init.d/debian.noip2.sh&lt;/span&gt;
-&lt;span class="c"&gt;# ln -s /etc/init.d/debian.noip2.sh /etc/rc2.d/S20noip&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Está assim terminada a instalação e configuração do cliente no-ip.
-Espero que este guia seja útil a alguém. Aqui segue todo o os comandos
-digitados e as opções conforme saída dos&amp;nbsp;comandos:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;root@backup01:/home/ubuntu# &lt;span class="nb"&gt;cd &lt;/span&gt;noip
-root@backup01:/home/ubuntu/noip# make &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
-gcc -Wall -g -Dlinux -DPREFIX&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;/usr/local&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt; noip2.c -o noip2
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d /usr/local/bin &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; mkdir -p /usr/local/bin&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d /usr/local/etc &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; mkdir -p /usr/local/etc&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
-cp noip2 /usr/local/bin/noip2
-/usr/local/bin/noip2 -C -c /tmp/no-ip2.conf
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Auto configuration &lt;span class="k"&gt;for&lt;/span&gt; Linux client of no-ip.com. Please enter the
-login/email string &lt;span class="k"&gt;for&lt;/span&gt; no-ip.com **user@gmail.com** Please enter the
-password &lt;span class="k"&gt;for&lt;/span&gt; user &lt;span class="s1"&gt;&amp;#39;user@gmail.com&amp;#39;&lt;/span&gt; ********** &lt;span class="m"&gt;2&lt;/span&gt; hosts are registered to this account.
-Do you wish to have them all updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **N**
-Do you wish to have host &lt;span class="o"&gt;[&lt;/span&gt;backup01.no-ip.info&lt;span class="o"&gt;]&lt;/span&gt; updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **y&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;**
-Do you wish to have host &lt;span class="o"&gt;[&lt;/span&gt;server02.no-ip.info&lt;span class="o"&gt;]&lt;/span&gt; updated?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **N&lt;span class="o"&gt;[&lt;/span&gt;2&lt;span class="o"&gt;]&lt;/span&gt;**
-Please enter an update interval:&lt;span class="o"&gt;[&lt;/span&gt;30&lt;span class="o"&gt;]&lt;/span&gt; **15**
-Do you wish to run something at successful update?&lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt; **y**
-Please enter the script/program name **backup01   &lt;span class="o"&gt;[&lt;/span&gt;3&lt;span class="o"&gt;]&lt;/span&gt;**
-New configuration file &lt;span class="s1"&gt;&amp;#39;/tmp/no-ip2.conf&amp;#39;&lt;/span&gt; created.
-mv /tmp/no-ip2.conf /usr/local/etc/no-ip2.conf
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;[1]&lt;/strong&gt;&amp;nbsp;- Coloque &lt;span class="caps"&gt;YES&lt;/span&gt; para ser o dominio a ser usado por este&amp;nbsp;computador.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[2]&lt;/strong&gt;&amp;nbsp;- Deixe &lt;span class="caps"&gt;NO&lt;/span&gt; para usar apenas um dos&amp;nbsp;domínio&amp;nbsp;se&amp;nbsp;você&amp;nbsp;tiver mais faça o&amp;nbsp;mesmo&amp;nbsp;para os outros. No meu caso eu tinha mais de um host&amp;nbsp;associado&amp;nbsp;ao&amp;nbsp;mesmo&amp;nbsp;login.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[3]&lt;/strong&gt;&amp;nbsp;- Aqui é apenas o nome do script que vai ser gerado e para depois voce colocar na inicialização do &lt;span class="caps"&gt;S.O.&lt;/span&gt;&lt;/p&gt;
-</summary><category term="Debian"></category><category term="no-ip"></category></entry><entry><title>Habilitando SSH no Fedora 15/16</title><link href="jesuejunior.com/habilitando-ssh-no-fedora" rel="alternate"></link><updated>2012-05-26T21:34:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-26:jesuejunior.com/habilitando-ssh-no-fedora</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt; é um protocolo de rede que permite que dados sejam trocados
-através de um canal seguro entre dois dispositivos de rede. Partindo do
-principio que você tenha uma nova instalação do Fedora 15, com a super
-área de trabalho &lt;strong&gt;&lt;span class="caps"&gt;GNOME&lt;/span&gt; 3&lt;/strong&gt;, e precisa descobrir como ativar o &lt;strong&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt;&lt;/strong&gt;.
-Este artigo é simplesmente uma maneira de utilizar essa ferramenta
-primordial para um linux user ou sysadmin. Para executar alguns dos
-comandos que você precisa ter a senha da conta&amp;nbsp;root.&lt;/p&gt;
-&lt;p&gt;Habilitando &lt;strong&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt; Daemon&lt;/strong&gt;
-Primeiro de tudo, vamos nos certificar de que o daemon ssh está em  execução.
-Abra o terminal e&amp;nbsp;digite:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo su
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl start sshd.service&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Agora que o serviço foi iniciado, precisamos coloca-lo para iniciar
-junto ao boot do sistema, para caso reinicie a maquina o &lt;span class="caps"&gt;SSH&lt;/span&gt; funcione&amp;nbsp;normalmente.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl enable sshd.service&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Após executar o comando, aparecerá a mensagem. Isso quer dizer que&amp;nbsp;funcionou!&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;em&gt;sshd.service is not a native service, redirecting to&amp;nbsp;/sbin/chkconfig.&lt;/em&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;em&gt;Executing /sbin/chkconfig sshd&amp;nbsp;on&lt;/em&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Verificando as configurações do Firewall
-Por padrão a porta 22 vem aberta no firewall, mas é interessante verificar para não termos surpresas quando precisar-mos usar &lt;span class="caps"&gt;SSH&lt;/span&gt;.
-Abra o system-config-firewall. Você pode acessar da seguinte forma também,&amp;nbsp;acesse&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Atividades &amp;gt; Aplicativos &amp;gt;&amp;nbsp;Firewall&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="/img/firewall_fedora.png"&gt;&lt;img alt="image1" src="/img/firewall_fedora.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Testando a conexão, abra gnome-terminal e&amp;nbsp;digite:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh user@hostname
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Para conectar meu usuário é “jr” e meu computador (&lt;span class="caps"&gt;IP&lt;/span&gt;) 192.168.0.10.
-Então digitamos o seguinte comando no terminal: ssh &lt;a class="reference external" href="mailto:jr&amp;#64;192.168.0.10"&gt;jr&amp;#64;192.168.0.10&lt;/a&gt;. O
-terminal exibirá uma mensagem de&amp;nbsp;‘warning’:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;The authenticity of host ’192.168.0.10 &lt;span class="o"&gt;(&lt;/span&gt;192.168.0.10&lt;span class="o"&gt;)&lt;/span&gt;’ can’t be established.
-RSA key fingerprint is &lt;span class="o"&gt;[&lt;/span&gt;some long identification number in 2-digit sequence&lt;span class="o"&gt;]&lt;/span&gt;
-Are you sure you want to &lt;span class="k"&gt;continue&lt;/span&gt; connecting &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;?
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Digite “yes”, Após digite a senha para o usuário “jr” e você estará conectado via &lt;span class="caps"&gt;SSH&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Então é&amp;nbsp;isso.&lt;/p&gt;
-</summary><category term="fedora"></category></entry><entry><title>Instalando o Opera no Debian 6</title><link href="jesuejunior.com/instalando-o-opera-no-debian-6" rel="alternate"></link><updated>2012-05-25T23:30:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-o-opera-no-debian-6</id><summary type="html">&lt;p&gt;Certa fez precisei instalar o Opera no Debian , que é a
-distribuição que adotei &amp;nbsp;para alguns dos servidores do trabalho, &amp;nbsp;porem
-apenas um cliente usa com interface&amp;nbsp;gráfica,&amp;nbsp;então vou postar a dica
-para eu não esquecer quando precisar&amp;nbsp;novamente.&lt;/p&gt;
-&lt;p&gt;Instala através do repositório do próprio Opera para o&amp;nbsp;debian…&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo vim /etc/apt/sources.list
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Adiciona a linha no&amp;nbsp;final:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;deb http://deb.opera.com/opera/ lenny non-free
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;salva e&amp;nbsp;saia:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;wget -O - http://deb.opera.com/archive.key &lt;span class="p"&gt;|&lt;/span&gt; apt-key add -
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install opera
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pronto! Agora é só&amp;nbsp;testar.&lt;/p&gt;
-</summary><category term="Debian"></category></entry><entry><title>Instalando o Skype no Fedora 15 64 bits</title><link href="jesuejunior.com/instalando-skype-fedora" rel="alternate"></link><updated>2012-05-25T03:52:00-03:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-05-25:jesuejunior.com/instalando-skype-fedora</id><summary type="html">&lt;p&gt;Bom esse é meu primeiro post, estou migrando do Ubuntu (Unity) para o
-Fedora 15 (&lt;span class="caps"&gt;GNOME&lt;/span&gt; 3) e estou enfrentando alguns problemas basicos, já esperados.
-E nessa jornada irei postando aqui, para eu lembrar posteriormente e talvez ajudar&amp;nbsp;alguem.&lt;/p&gt;
-&lt;p&gt;Como no site do Skype não tem a versão nativa 64bits em &lt;span class="caps"&gt;RPM&lt;/span&gt;, só a 32
-bits, criei esse ‘howto’ de como instalar o comunicador no Fedora 64&amp;nbsp;bits:&lt;/p&gt;
-&lt;p&gt;1 – Instale as dependências&amp;nbsp;necessárias:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;yum install glibc.i686 alsa-lib.i686 libXv.i686 libXScrnSaver.i686
-qt.i686 qt-x11.i686 alsa-plugins-pulseaudio.i686 libv4l.i686 -y
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;2 – Baixe o pacote &lt;span class="caps"&gt;RPM&lt;/span&gt; 32bits no site do&amp;nbsp;Skype:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;wget http://download.skype.com/linux/skype-2.2.0.35-fedora.i586.rpm
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;3 – Agora instale o pacote usando o yum, com o&amp;nbsp;comando:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;yum --nogpgcheck localinstall skype-2.2.0.35-fedora.i586.rpm
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Para utilizar é só ir ao menu &lt;span class="caps"&gt;ATIVIDADES&lt;/span&gt; &amp;gt; &lt;span class="caps"&gt;APLICATIVOS&lt;/span&gt; &amp;gt; &lt;span class="caps"&gt;SKYPE&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Espero que possa&amp;nbsp;ajudar!&lt;/p&gt;
-</summary><category term="fedora"></category></entry><entry><title>Formatação de string Python</title><link href="jesuejunior.com/formatacao-de-string-python" rel="alternate"></link><updated>2012-01-26T16:31:00-02:00</updated><author><name>jesuejunior</name></author><id>tag:,2012-01-26:jesuejunior.com/formatacao-de-string-python</id><summary type="html">&lt;p&gt;Estou aprendendo Python e estou gostando, aqui vai um método que um
-sábio me ensinou e eu pesquisei mais algumas&amp;nbsp;informações.&lt;/p&gt;
-&lt;p&gt;A partir da versão 2.6 o Python traz um recurso diferente para formatar&amp;nbsp;strings.&lt;/p&gt;
-&lt;p&gt;Diz o manual que a partir da versão 3.0 a formatação usando o método %
-será descontinuado, por isso resolvi criar esse post tanto para ajudar
-quem não sabe quanto para eu lembrar&amp;nbsp;posteriormente.&lt;/p&gt;
-&lt;p&gt;Se você é iniciante em Python assim como eu, tente começar a mudar logo
-para o método do str.format(). (Muito&amp;nbsp;pratico)&lt;/p&gt;
-&lt;p&gt;#A mudança é simples. Portanto, vamos aos&amp;nbsp;exemplos:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jesué&amp;#39;&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sobrenome&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Junior&amp;#39;&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;idade&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;# Campo&amp;nbsp;simples.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome é &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# &amp;#39;s&amp;#39; de string&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome é {nome}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;# 2 campos mudando o nome da substituicao (“n” e “s”). Descobri esse&amp;nbsp;recentemente.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome completo é &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sobrenome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;meu nome completo é {n} {s}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sobrenome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;# Numero com 2 algarismos e zero à&amp;nbsp;esquerda.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;minha idade é &lt;/span&gt;&lt;span class="si"&gt;%02d&lt;/span&gt;&lt;span class="s"&gt; anos&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;minha idade é {0:02d} anos&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;# Argumento&amp;nbsp;posicional.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;eu sou {0} e eu tenho {1} anos&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;idade&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Eu, comecei agora e já adotei o format, porque eu posso nomear os campos&amp;nbsp;livremente.&lt;/p&gt;
-&lt;p&gt;Lembrete: Ele só pode ser usado a partir do python&amp;nbsp;2.6.&lt;/p&gt;
-&lt;p&gt;Qualquer duvida leia maiores informações no&amp;nbsp;manual.&lt;/p&gt;
-</summary><category term="Python"></category></entry></feed>
+</content><category term="Git"></category></entry></feed>

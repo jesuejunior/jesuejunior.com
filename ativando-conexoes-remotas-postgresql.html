@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-          <title>Jesué Junior</title>
+          <title>Jesue Junior</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="icon" href="/extra/favicon.ico" type="image/x-icon"/>
-        <link rel="shortcut icon" href="/extra/favicon.ico" type="image/x-icon"/>
-        <link type="text/css" rel="stylesheet" href="/theme/css/pure/pure-min.css" />
-        <link type="text/css" rel="stylesheet" href="/theme/css/pygments.css" />
+        <link rel="icon" href="jesuejunior.com/extra/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="jesuejunior.com/extra/favicon.ico" type="image/x-icon"/>
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/pure-min.css" />
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pygments.css" />
 
         <!-- import grid responsive -->
         <!--[if lte IE 8]>
@@ -16,20 +16,21 @@
         <![endif]-->
         <!--[if gt IE 8]><!-->
 
-        <link type="text/css" rel="stylesheet" href="/theme/css/pure/grids-responsive-min.css">
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/grids-responsive-min.css">
 
         <!--<![endif]-->
         <!--[if gt IE 8]><!-->
 
         <!--[if lte IE 8]>
-        <link type="text/css" rel="stylesheet" href="/theme/css/pure/blog-old-ie.css">
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/blog-old-ie.css">
         <![endif]-->
         <!--[if gt IE 8]><!-->
-        <link type="text/css" rel="stylesheet" href="/theme/css/pure/blog.css">
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/blog.css">
         <!--<![endif]-->
-        <link type="text/css" rel="stylesheet" href="/theme/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/style.css" />
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600,600italic,700italic' rel='stylesheet' type='text/css'>
+        <link href="jesuejunior.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jesue Junior Full Atom Feed" />
+        <link href="jesuejunior.com/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Jesue Junior Categories Atom Feed" />
 
 
 
@@ -40,26 +41,20 @@
 <body>
     <div id="layout" class="pure-g">
         <div class="sidebar pure-u-1 pure-u-md-1-5">
-            <a href="/" class="logo"></a>
+            <a href="jesuejunior.com/" class="logo"></a>
             <div class="header">
                 <nav id="nav">
                     <ul class="nav-list" >
-                        <li class="nav-item"><a class="pure-button" href="/">Artigos</a></li>
-                        <li class="nav-item"> <a class=" pure-button" href="/pages/sobre-pt.html">Sobre</a></li>
-                        <li class="nav-item"> <a class=" pure-button" href="/pages/projetos-pt.html">Projetos</a></li>
+                        <li class="nav-item"><a class="pure-button" href="/">Home</a></li>
                     </ul>
                 </nav>
 
                 <div class="pure-u-1 pure-u-md-1-1">
                     <div class="social">
                         <div class="pure-u-1 pure-u-md-1-1">
-                            <a target="_blank" href="https://twitter.com/jesuejunior" class="social-link twitter"></a>
                             <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
-                            <a target="_blank" href="https://plus.google.com/u/0/110593412520623457385/posts" class="social-link googleplus"></a>
-
+                            <a target="_blank" href="https://hackerrank.com/jesuejunior" class="social-link hackerrank"></a>
                             <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
-                            <a target="_blank" href="https://delicious.com/jesuejunior" class="social-link delicious"></a>
-                            <a target="_blank" href="https://www.codeschool.com/users/jesuejunior" class="social-link codeschool"></a>
                         </div>
                     </div>
                 </div>
@@ -69,7 +64,7 @@
     <div class="">
       <header>
         <h2 class="">
-          <a href="/ativando-conexoes-remotas-postgresql" rel="bookmark"
+          <a href="jesuejunior.com/ativando-conexoes-remotas-postgresql" rel="bookmark"
              title="Permalink to Ativando conexões remotas ao PostgreSQL">Ativando conexões remotas ao&nbsp;PostgreSQL</a></h2>
      
       </header>
@@ -78,7 +73,7 @@
           Fri 06 July 2012
         </abbr>
         <address class="">
-          By               <a class="url fn" href="/author/jesuejunior.html">jesuejunior</a>
+          By               <a class="url fn" href="jesuejunior.com/author/jesuejunior.html">jesuejunior</a>
         </address>
       </div><!-- /.post-info -->
       <div class="post-description">
@@ -88,14 +83,14 @@ na&nbsp;rede&nbsp;é preciso alterar algumas configurações básicas em 2&nbsp;
 <p>(Linux)</p>
 <p>São eles:&nbsp; <strong>postgresql.conf</strong>&nbsp;e&nbsp;<strong>pg_hba.conf</strong>.</p>
 <p>No&nbsp; <strong>postgresql.conf</strong>&nbsp;vamos editar a seguinte&nbsp;linha:</p>
-<div class="highlight"><pre><span class="c">#listen_addresses = ‘localhost’ # what IP address(es) to listen on</span>
+<div class="highlight"><pre><span></span><span class="c1">#listen_addresses = ‘localhost’ # what IP address(es) to listen on</span>
 </pre></div>
 <p>Como em todo arquivo de configuração em programas linux, o # na frente
 da linha significa um comentário e com isso desabilita o parâmetro
 seguinte, tomando seu valor default, que no caso é localhost. Descomente
 essa linha e substitua seu valor por *. Assim seu PostgreSQL estará
 apto a ouvir conexões de qualquer <span class="caps">IP</span>.Então essa linha ficará da seguinte&nbsp;forma:</p>
-<div class="highlight"><pre><span class="nv">listen_addresses</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="c"># what IP address(es) to listen on</span>
+<div class="highlight"><pre><span></span><span class="nv">listen_addresses</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="c1"># what IP address(es) to listen on</span>
 </pre></div>
 <p>Isso não quer dizer que ele estará aberto para qualquer <span class="caps">IP</span> da rede. É
 possível criar políticas de&nbsp;acesso&nbsp;através de outro arquivo que
@@ -107,11 +102,11 @@ hosts e bancos de dados. Nele é possível dizer qual usuário de qual ip
 para conectar a qualquer banco, mas esta é uma regra cautelosa a ser
 seguida pois pode comprometer a segurança do seu&nbsp;servidor&nbsp;de bases de&nbsp;dados.</p>
 <p><strong>Por padrão o arquivo vem com a seguinte&nbsp;configuração:</strong></p>
-<div class="highlight"><pre><span class="c">#“local” is for Unix domain socket connections only</span>
-<span class="nb">local </span>all all trust
-<span class="c"># IPv4 local connections:</span>
-host all all 127.0.0.1/32 trust
-<span class="c"># IPv6 local connections:</span>
+<div class="highlight"><pre><span></span><span class="c1">#“local” is for Unix domain socket connections only</span>
+<span class="nb">local</span> all all trust
+<span class="c1"># IPv4 local connections:</span>
+host all all <span class="m">127</span>.0.0.1/32 trust
+<span class="c1"># IPv6 local connections:</span>
 host all all ::1/128 trust
 </pre></div>
 <p>Pode haver alguma variação das configurações padrões de acordo com a
@@ -120,7 +115,7 @@ informações. Basicamente elas querem dizer que todas as conexões locais
 podem ser realizadas por qualquer usuário do banco a qualquer banco de&nbsp;dados.</p>
 <p>Para liberar o acesso remoto basta criar uma nova regra seguindo o
 seguinte&nbsp;padrão:</p>
-<div class="highlight"><pre>host all all 0.0.0.0/0 trust
+<div class="highlight"><pre><span></span>host all all <span class="m">0</span>.0.0.0/0 trust
 </pre></div>
 <p>Com essa regra qualquer usuário de qualquer <span class="caps">IP</span> poderá se conectar a
 qualquer&nbsp;database.</p>
@@ -136,16 +131,16 @@ operacional). Então você se conecta e reseta a senha do usuário. Logo em
 seguida, altere o parâmetro para md5. Assim, uma senha será solicitada
 ao tentar conectar-se ao servidor&nbsp;Postgre.</p>
 <p><strong>Assim ficará a regra de&nbsp;liberação:</strong></p>
-<div class="highlight"><pre>host all all 0.0.0.0/0 md5
+<div class="highlight"><pre><span></span>host all all <span class="m">0</span>.0.0.0/0 md5
 </pre></div>
 <p><strong>É possível também liberar o acesso apenas a uma rede&nbsp;específica:</strong></p>
-<div class="highlight"><pre>host all all 192.168.0.0/32 md5
+<div class="highlight"><pre><span></span>host all all <span class="m">192</span>.168.0.0/32 md5
 </pre></div>
 <p><strong>Ou também, informar qual usuário poderá&nbsp;conectar:</strong></p>
-<div class="highlight"><pre>host all usuariodobanco 192.168.0.0/32 md5
+<div class="highlight"><pre><span></span>host all usuariodobanco <span class="m">192</span>.168.0.0/32 md5
 </pre></div>
 <p><strong>Também informar qual o banco de dados a ser conectar por este&nbsp;usuário:</strong></p>
-<div class="highlight"><pre>host db userdb 192.168.0.0/32 md5
+<div class="highlight"><pre><span></span>host db userdb <span class="m">192</span>.168.0.0/32 md5
 </pre></div>
 <p>Na regra acima, o usuário&nbsp;<em>userdb</em> do banco &nbsp;poderá conectar-se apenas
 ao banco db apenas se estiver dentro da rede&nbsp;192.168.0.0.</p>
@@ -155,6 +150,7 @@ fica guardado agora, espero que possa&nbsp;ajudar&nbsp;alguém.</p>
       </div><!-- /.entry-content -->
     </div>
 </div>
+
         <div class="footer">
             <span>Desenvolvido por JJ</span>
         </div>

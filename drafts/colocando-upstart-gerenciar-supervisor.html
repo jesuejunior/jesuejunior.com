@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+          <title>Jesue Junior</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" href="jesuejunior.com/extra/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="jesuejunior.com/extra/favicon.ico" type="image/x-icon"/>
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/pure-min.css" />
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pygments.css" />
+
+        <!-- import grid responsive -->
+        <!--[if lte IE 8]>
+
+        <link rel="stylesheet" href="{SITEURL}}/theme/css/pure/grids-responsive-old-ie-min.css">
+
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/grids-responsive-min.css">
+
+        <!--<![endif]-->
+        <!--[if gt IE 8]><!-->
+
+        <!--[if lte IE 8]>
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/blog-old-ie.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/pure/blog.css">
+        <!--<![endif]-->
+        <link type="text/css" rel="stylesheet" href="jesuejunior.com/theme/css/style.css" />
+
+        <link href="jesuejunior.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jesue Junior Full Atom Feed" />
+        <link href="jesuejunior.com/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Jesue Junior Categories Atom Feed" />
+
+
+
+    <meta name="tags" content="Linux" />
+    <meta name="tags" content="supervisord" />
+    <meta name="tags" content="ubuntu" />
+    <meta name="tags" content="upstart" />
+
+</head>
+
+<body>
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-5">
+            <a href="jesuejunior.com/" class="logo"></a>
+            <div class="header">
+                <nav id="nav">
+                    <ul class="nav-list" >
+                        <li class="nav-item"><a class="pure-button" href="/">Home</a></li>
+                    </ul>
+                </nav>
+
+                <div class="pure-u-1 pure-u-md-1-1">
+                    <div class="social">
+                        <div class="pure-u-1 pure-u-md-1-1">
+                            <a target="_blank" href="http://www.linkedin.com/in/jesuejunior" class="social-link linkedin"></a>
+                            <a target="_blank" href="https://hackerrank.com/jesuejunior" class="social-link hackerrank"></a>
+                            <a target="_blank" href="https://github.com/jesuejunior" class="social-link github"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="content pure-u-1 pure-u-md-3-4">
+    <div class="">
+      <header>
+        <h2 class="">
+          <a href="jesuejunior.com/drafts/colocando-upstart-gerenciar-supervisor.html" rel="bookmark"
+             title="Permalink to Colocando Upstart para gerenciar o Supervisor">Colocando Upstart para gerenciar o&nbsp;Supervisor</a></h2>
+     
+      </header>
+      <div class="">
+        <abbr class="" title="2013-12-14T03:22:00-02:00">
+          Sat 14 December 2013
+        </abbr>
+        <address class="">
+          By               <a class="url fn" href="jesuejunior.com/author/jesuejunior.html">jesuejunior</a>
+        </address>
+      </div><!-- /.post-info -->
+      <div class="post-description">
+        <p>Depois de um tempo afastado do Blog, estou &nbsp;organizando melhor o uso do
+meu tempo, ou seja, em breve estarei criando mais posts que inclusive já
+tenho alguns em&nbsp;rascunho.</p>
+<p>Hoje faço parte de uma equipe de devOps. Então cada vez utilizo mais
+desenvolvimento para resolver problemas de deploy, escalabilidade entre
+outros. Baseado nisso, recentemente implementei na receita do Chef para
+o <a class="reference external" href="http://upstart.ubuntu.com/">Upstart</a> controlar o <a class="reference external" href="http://supervisord.org/">Supervisord</a>.</p>
+<ul class="simple">
+<li>&nbsp;Mas o que é o&nbsp;Supervisord?</li>
+</ul>
+<p>Supervisor é um sistema client /server que permite que seus usuários
+possam monitorar e controlar um número de processos que podem ser grupos
+de&nbsp;processos.</p>
+<ul class="simple">
+<li>Mas o que é o&nbsp;Upstart?</li>
+</ul>
+<p>Upstart é daemon de&nbsp;substituição ao /sbin/init &nbsp;que lida com a
+inicialização de tarefas e serviços durante o boot, impedindo-os durante
+o desligamento e supervisionando-os enquanto o sistema está funcionando.
+E como ele está no nível init (embutido no kernel), seu processo
+dificilmente ficará desligado. Por exemplo, caso seu processo apresente
+erro e feche o upstart vai tentar reinicia-lo e caso não consiga, vai
+continuar tentando no intervalo de tempo&nbsp;pré-configurado.</p>
+<p>Pois bem, aqui vou mostrar como implementar manualmente o que já é de
+muita ajuda se você precisar de algo controlando um grupo de processos e
+não deixando-os&nbsp;morrerem.</p>
+<p><span class="caps">OBS</span>: Estou assumindo que o sistema operacional é baseado em&nbsp;Debian</p>
+<div class="section" id="parando-e-removendo-o-supervisord-do-boot">
+<h2>Parando e removendo o supervisorD do&nbsp;boot</h2>
+<div class="highlight"><pre><span></span>$ sudo /etc/init.d/supervisord stop
+</pre></div>
+<div class="highlight"><pre><span></span>$ sudo update-rc.d -f supervisor remove
+</pre></div>
+<p>Este ultimo comando remove o arquivo <strong>/etc/init.d/supervisord</strong> e caso
+queira voltar ao modo antigo de troque o <em>remove</em> por <em>enable.</em></p>
+</div>
+<div class="section" id="criando-um-script-upstart">
+<h2>Criando um script&nbsp;Upstart</h2>
+<p>Crie um arquivo &nbsp;<strong>/etc/init/supervisor.conf</strong>. &nbsp;Com o seguinte&nbsp;conteudo:</p>
+<div class="highlight"><pre><span></span>description <span class="s2">&quot;supervisor&quot;</span>
+
+start on runlevel <span class="o">[</span><span class="m">2345</span><span class="o">]</span>
+
+stop on runlevel <span class="o">[</span>!2345<span class="o">]</span>
+
+respawn
+
+<span class="nb">exec</span> /usr/local/bin/supervisord --nodaemon --configuration /etc/supervisord.conf
+</pre></div>
+<p>Perceba que nós estamos usando o mesmo <em>supervisord</em>, logo não há nada
+para mudar aqui.&nbsp;hehehe</p>
+</div>
+<div class="section" id="usando-supervisord-com-upstart">
+<h2>usando supervisord com&nbsp;upstart</h2>
+<p>Nós podemos iniciar e parar o <strong>supervisord</strong> com os comandos padrões do
+<strong>Upstart</strong>:</p>
+<div class="highlight"><pre><span></span>$ sudo stop supervisor
+</pre></div>
+<div class="highlight"><pre><span></span>$ sudo start supervisor
+</pre></div>
+<p>Para verificar o status do&nbsp;<em>supervisor,&nbsp;faça:</em></p>
+<div class="highlight"><pre><span></span>$ initctl list
+</pre></div>
+<div class="highlight"><pre><span></span>$ initctl status supervisor
+</pre></div>
+</div>
+<div class="section" id="here-we-go">
+<h2><span class="caps">HERE</span> <span class="caps">WE</span> <span class="caps">GO</span>!</h2>
+<p>Confirmando que o supervisor está sendo executado, os comandos para
+gerencia-lo não mudam em nada, continuamos a ter o &nbsp;<strong>supervisorctl</strong>&nbsp; e
+podemos ver os processos que ele está controlando, pois continuamos
+usando o mesmo arquivo de configuração padrão que fica em
+<em>/etc/supervisord.conf.</em></p>
+<p>Então é isso, qualquer duvida não deixe de postar nos comentários, será
+um prazer&nbsp;ajudar.</p>
+</div>
+
+      </div><!-- /.entry-content -->
+    </div>
+</div>
+
+        <div class="footer">
+            <span>Desenvolvido por JJ</span>
+        </div>
+        </div>
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-31167248-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
