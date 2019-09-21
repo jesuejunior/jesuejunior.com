@@ -4,196 +4,196 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>jesuejunior.com/</loc>
-<lastmod>2019-08-07T12:25:58-00:00</lastmod>
+<loc>https://jesuejunior.com/</loc>
+<lastmod>2019-09-21T12:19:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/archives.html</loc>
-<lastmod>2019-08-07T12:25:58-00:00</lastmod>
+<loc>https://jesuejunior.com/archives.html</loc>
+<lastmod>2019-09-21T12:19:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tags.html</loc>
-<lastmod>2019-08-07T12:25:58-00:00</lastmod>
+<loc>https://jesuejunior.com/tags.html</loc>
+<lastmod>2019-09-21T12:19:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/categories.html</loc>
-<lastmod>2019-08-07T12:25:58-00:00</lastmod>
+<loc>https://jesuejunior.com/categories.html</loc>
+<lastmod>2019-09-21T12:19:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/pages/sobre.html</loc>
-<lastmod>2019-08-07T12:25:58-00:00</lastmod>
+<loc>https://jesuejunior.com/pages/sobre.html</loc>
+<lastmod>2019-09-21T12:19:51-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/deploy-app-into-heroku-the-good-way</loc>
+<loc>https://jesuejunior.com/deploy-app-into-heroku-the-good-way</loc>
 <lastmod>2016-12-12T00:00:00-02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</loc>
+<loc>https://jesuejunior.com/aprendendo-gerenciar-usuarios-postgres</loc>
 <lastmod>2012-10-12T21:04:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/ativando-conexoes-remotas-postgresql</loc>
+<loc>https://jesuejunior.com/ativando-conexoes-remotas-postgresql</loc>
 <lastmod>2012-07-06T22:19:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/aprendendo-github-primeiros-passos</loc>
+<loc>https://jesuejunior.com/aprendendo-github-primeiros-passos</loc>
 <lastmod>2012-06-06T20:18:00-03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/banco-de-dados-linux-postgresql.html</loc>
+<loc>https://jesuejunior.com/category/banco-de-dados-linux-postgresql.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/banco-de-dados-postgresql.html</loc>
+<loc>https://jesuejunior.com/category/banco-de-dados-postgresql.html</loc>
 <lastmod>2012-07-06T22:19:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/heroku-django-web-app-deploy-postgresql.html</loc>
+<loc>https://jesuejunior.com/category/heroku-django-web-app-deploy-postgresql.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/category/linux.html</loc>
+<loc>https://jesuejunior.com/category/linux.html</loc>
 <lastmod>2012-06-06T20:18:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/heroku.html</loc>
+<loc>https://jesuejunior.com/tag/heroku.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/django.html</loc>
+<loc>https://jesuejunior.com/tag/django.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/web.html</loc>
+<loc>https://jesuejunior.com/tag/web.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/devops.html</loc>
+<loc>https://jesuejunior.com/tag/devops.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/postgresql.html</loc>
+<loc>https://jesuejunior.com/tag/postgresql.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/deploy.html</loc>
+<loc>https://jesuejunior.com/tag/deploy.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/banco-de-dados.html</loc>
+<loc>https://jesuejunior.com/tag/banco-de-dados.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/psql.html</loc>
+<loc>https://jesuejunior.com/tag/psql.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/postgre.html</loc>
+<loc>https://jesuejunior.com/tag/postgre.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/usuario.html</loc>
+<loc>https://jesuejunior.com/tag/usuario.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/gerenciar.html</loc>
+<loc>https://jesuejunior.com/tag/gerenciar.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/aprender.html</loc>
+<loc>https://jesuejunior.com/tag/aprender.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/db.html</loc>
+<loc>https://jesuejunior.com/tag/db.html</loc>
 <lastmod>2012-10-12T21:04:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/tag/git.html</loc>
+<loc>https://jesuejunior.com/tag/git.html</loc>
 <lastmod>2012-06-06T20:18:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>jesuejunior.com/author/jesuejunior.html</loc>
+<loc>https://jesuejunior.com/author/jesuejunior.html</loc>
 <lastmod>2016-12-12T00:00:00-03:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
